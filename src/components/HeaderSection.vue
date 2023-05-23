@@ -1,9 +1,16 @@
 <template>
   <header class="header">
     <img class="logo" :src="logoPath" alt="Nescom RD" />
-    <button class="nav__button">
+    <button @click="toggleNav" class="nav__button" :class="{ x: navOpen }">
       <span></span>
     </button>
+    <nav class="nav" :class="{ show: navOpen }">
+      <li>¿Quiénes somos?</li>
+      <li>Servicios</li>
+      <li>Clientes</li>
+      <li>Néstor Estévez</li>
+      <li>Publicaciones</li>
+    </nav>
   </header>
 </template>
 
@@ -15,7 +22,13 @@ export default {
   data() {
     return {
       logoPath: logo,
+      navOpen: false,
     };
+  },
+  methods: {
+    toggleNav() {
+      this.navOpen = !this.navOpen;
+    },
   },
 };
 </script>
@@ -32,31 +45,81 @@ export default {
   max-width: 50px;
 }
 
+.nav {
+  position: fixed;
+  opacity: 0;
+  flex-direction: column;
+  background-color: var(--red);
+  color: var(--white);
+  top: 82px;
+  left: 0;
+  width: 100%;
+  padding: 2rem;
+  margin: 0;
+  transition: all ease-out 0.1s;
+  transform: translateY(-10px);
+}
+
+.nav.show {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.nav > li {
+  list-style: none;
+  border-bottom: 1px solid var(--gray);
+  padding: 1rem 0;
+}
+
+.nav__button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
 .nav__button > span {
   width: 25px;
-  height: 4px;
-  background-color: var(--black);
+  height: 2px;
+  background-color: var(--white);
   display: block;
   position: relative;
+  transition: all ease-out 0.2s;
 }
 
 .nav__button > span::before {
   content: "";
   width: 100%;
   height: 100%;
-  background-color: inherit;
+  background-color: var(--white);
   display: inherit;
   position: absolute;
   top: -8px;
+  transition: inherit;
 }
 
 .nav__button > span::after {
   content: "";
   width: 100%;
   height: 100%;
-  background-color: inherit;
+  background-color: var(--white);
   display: inherit;
   position: absolute;
   top: 8px;
+  transition: inherit;
+}
+
+.nav__button.x > span {
+  transform: translateX(5px);
+  background-color: rgba(255, 0, 0, 0);
+}
+
+.nav__button.x > span::before {
+  transform: translate(-5px, 8px) rotate(45deg);
+}
+
+.nav__button.x > span::after {
+  transform: translate(-5px, -8px) rotate(-45deg);
 }
 </style>
