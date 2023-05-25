@@ -66,7 +66,7 @@ export default {
 }
 
 .nav > li {
-  font-size: calc(var(--font-size) * 0.8);
+  font-size: calc(var(--font-size) * 0.9);
   font-weight: var(--font-bold);
   list-style: none;
   border-bottom: 1px solid var(--gray);
