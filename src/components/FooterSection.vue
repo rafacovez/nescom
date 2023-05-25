@@ -36,7 +36,7 @@ export default {
   font-size: calc(var(--font-size) * 0.8);
   background-color: var(--white);
   color: var(--gray);
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
 }
 </style>

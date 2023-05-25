@@ -13,21 +13,24 @@
       <div class="nav__social-media">
         <button
           class="social-media-icon"
-          aria-label="Go to Nescom RD Instagram profile"
+          aria-label="Visit Nescom RD Instagram profile"
         >
           <InstagramLogo />
         </button>
         <button
           class="social-media-icon"
-          aria-label="Go to Nescom RD Facebook profile"
+          aria-label="Visit Nescom RD Facebook page"
         >
           <FacebookLogo />
         </button>
         <button
           class="social-media-icon"
-          aria-label="Go to Nescom RD Twitter profile"
+          aria-label="Visit Nescom RD Twitter profile"
         >
           <TwitterLogo />
+        </button>
+        <button class="social-media-icon" aria-label="Visit Nescom RD Youtube">
+          <YoutubeLogo />
         </button>
       </div>
     </nav>
@@ -39,19 +42,21 @@ import logo from "../assets/logo.png";
 import InstagramLogo from "@/assets/icons/InstagramLogo.vue";
 import FacebookLogo from "@/assets/icons/FacebookLogo.vue";
 import TwitterLogo from "@/assets/icons/TwitterLogo.vue";
+import YoutubeLogo from "@/assets/icons/YoutubeLogo.vue";
 
 export default {
   name: "HeaderSection",
   data() {
     return {
       logoPath: logo,
-      navOpen: true,
+      navOpen: false,
     };
   },
   components: {
     InstagramLogo,
     FacebookLogo,
     TwitterLogo,
+    YoutubeLogo,
   },
   methods: {
     toggleNav() {
@@ -66,7 +71,6 @@ export default {
   display: flex;
   justify-content: space-between;
   padding: 1rem 2rem;
-  border-bottom: 1px solid var(--gray);
 }
 
 .logo {
@@ -109,7 +113,7 @@ export default {
   align-items: center;
   justify-content: center;
   margin: 3rem 0 0 0;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 .nav__social-media > .social-media-icon {
