@@ -10,20 +10,48 @@
       <li>Clientes</li>
       <li>Néstor Estévez</li>
       <li>Publicaciones</li>
+      <div class="nav__social-media">
+        <button
+          class="social-media-icon"
+          aria-label="Go to Nescom RD Instagram profile"
+        >
+          <InstagramLogo />
+        </button>
+        <button
+          class="social-media-icon"
+          aria-label="Go to Nescom RD Facebook profile"
+        >
+          <FacebookLogo />
+        </button>
+        <button
+          class="social-media-icon"
+          aria-label="Go to Nescom RD Twitter profile"
+        >
+          <TwitterLogo />
+        </button>
+      </div>
     </nav>
   </header>
 </template>
 
 <script>
 import logo from "../assets/logo.png";
+import InstagramLogo from "@/assets/icons/InstagramLogo.vue";
+import FacebookLogo from "@/assets/icons/FacebookLogo.vue";
+import TwitterLogo from "@/assets/icons/TwitterLogo.vue";
 
 export default {
   name: "HeaderSection",
   data() {
     return {
       logoPath: logo,
-      navOpen: false,
+      navOpen: true,
     };
+  },
+  components: {
+    InstagramLogo,
+    FacebookLogo,
+    TwitterLogo,
   },
   methods: {
     toggleNav() {
@@ -37,8 +65,8 @@ export default {
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 1rem;
-  background-color: var(--red);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--gray);
 }
 
 .logo {
@@ -46,14 +74,15 @@ export default {
 }
 
 .nav {
+  background-color: var(--white);
+  color: var(--black);
   position: fixed;
   flex-direction: column;
-  background-color: var(--red);
-  color: var(--white);
   top: 62px;
   left: 0;
+  min-height: 100%;
   width: 100%;
-  padding: 2rem;
+  padding: 2rem 3rem;
   margin: 0;
   visibility: hidden;
   opacity: 0;
@@ -69,10 +98,29 @@ export default {
 
 .nav > li {
   font-size: calc(var(--font-size) * 0.9);
-  font-weight: var(--font-bold);
+  font-weight: var(--font-regular);
   list-style: none;
   border-bottom: 1px solid var(--gray);
   padding: 1rem 0;
+}
+
+.nav__social-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 3rem 0 0 0;
+  gap: 2rem;
+}
+
+.nav__social-media > .social-media-icon {
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.nav__social-media > .social-media-icon:hover {
+  opacity: 1;
 }
 
 .nav__button {
@@ -86,7 +134,7 @@ export default {
 .nav__button > span {
   width: 20px;
   height: 2px;
-  background-color: var(--white);
+  background-color: var(--black);
   display: block;
   position: relative;
   transition: all ease-out 0.2s;
@@ -96,7 +144,7 @@ export default {
   content: "";
   width: 100%;
   height: 100%;
-  background-color: var(--white);
+  background-color: var(--black);
   display: inherit;
   position: absolute;
   top: -8px;
@@ -107,7 +155,7 @@ export default {
   content: "";
   width: 100%;
   height: 100%;
-  background-color: var(--white);
+  background-color: var(--black);
   display: inherit;
   position: absolute;
   top: 8px;

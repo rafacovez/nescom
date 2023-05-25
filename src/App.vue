@@ -21,7 +21,7 @@ export default {
   --font-family: "Poppins", sans-serif;
   --black: rgba(33, 33, 33);
   --gray: rgba(158, 152, 170);
-  --dark-gray: rgb(129, 129, 129);
+  --dark-gray: rgb(50, 50, 50);
   --white: rgba(242, 242, 242);
   --red: rgba(237, 57, 56);
 }
@@ -37,6 +37,8 @@ html {
 }
 
 body {
+  background-color: var(--white);
+  color: var(--black);
   font-family: var(--font-family);
   font-size: var(--font-size);
   margin: 0;

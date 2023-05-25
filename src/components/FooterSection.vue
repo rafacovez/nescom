@@ -19,7 +19,7 @@ export default {
 
 <style>
 .footer {
-  background-color: var(--dark-gray);
+  background-color: var(--gray);
   color: var(--white);
 }
 
@@ -34,7 +34,7 @@ export default {
 
 .sub-footer {
   font-size: calc(var(--font-size) * 0.8);
-  background-color: var(--black);
+  background-color: var(--white);
   color: var(--gray);
   padding: 2rem;
   text-align: center;
