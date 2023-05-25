@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       logoPath: logo,
-      navOpen: false,
+      navOpen: true,
     };
   },
   methods: {
@@ -66,6 +66,8 @@ export default {
 }
 
 .nav > li {
+  font-size: calc(var(--font-size) * 0.8);
+  font-weight: var(--font-bold);
   list-style: none;
   border-bottom: 1px solid var(--gray);
   padding: 1rem 0;
@@ -111,15 +113,15 @@ export default {
 }
 
 .nav__button.x > span {
-  transform: translateX(5px);
+  transform: translateX(10px);
   background-color: rgba(255, 0, 0, 0);
 }
 
 .nav__button.x > span::before {
-  transform: translate(-5px, 8px) rotate(45deg);
+  transform: translate(-10px, 8px) rotate(45deg);
 }
 
 .nav__button.x > span::after {
-  transform: translate(-5px, -8px) rotate(-45deg);
+  transform: translate(-10px, -8px) rotate(-45deg);
 }
 </style>
