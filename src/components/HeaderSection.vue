@@ -42,25 +42,27 @@ export default {
 }
 
 .logo {
-  max-width: 50px;
+  max-width: 30px;
 }
 
 .nav {
   position: fixed;
-  opacity: 0;
   flex-direction: column;
   background-color: var(--red);
   color: var(--white);
-  top: 82px;
+  top: 62px;
   left: 0;
   width: 100%;
   padding: 2rem;
   margin: 0;
-  transition: all ease-out 0.1s;
-  transform: translateY(-10px);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-25px);
+  transition: all ease-out 0.2s;
 }
 
 .nav.show {
+  visibility: visible;
   opacity: 1;
   transform: translateY(0px);
 }
@@ -82,7 +84,7 @@ export default {
 }
 
 .nav__button > span {
-  width: 25px;
+  width: 20px;
   height: 2px;
   background-color: var(--white);
   display: block;
