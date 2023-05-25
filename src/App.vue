@@ -16,10 +16,12 @@ export default {
 <style>
 :root {
   --font-size: 1em;
-  --font-medium: 400;
+  --font-regular: 400;
   --font-bold: 700;
-  --font-family: "Arial", sans-serif;
+  --font-family: "Poppins", sans-serif;
   --black: rgba(33, 33, 33);
+  --gray: rgba(158, 152, 170);
+  --dark-gray: rgb(129, 129, 129);
   --white: rgba(242, 242, 242);
   --red: rgba(237, 57, 56);
 }
