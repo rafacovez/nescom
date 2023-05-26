@@ -134,7 +134,7 @@ export default {
 }
 
 .clients-wrapper__client > img {
-  max-width: 150px;
+  width: 100%;
   margin: 0 auto;
 }
 </style>
