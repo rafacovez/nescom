@@ -92,6 +92,7 @@ export default {
   opacity: 0;
   transform: translateY(-25px);
   transition: all ease-out 0.2s;
+  z-index: 50;
 }
 
 .nav.show {
