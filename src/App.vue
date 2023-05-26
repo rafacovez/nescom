@@ -45,6 +45,10 @@ body {
   padding: 0;
 }
 
+body.no-scroll {
+  overflow: hidden;
+}
+
 h1,
 h2,
 h3,
