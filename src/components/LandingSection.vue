@@ -6,22 +6,17 @@
     </h1>
     <PrimaryButton>Contáctanos</PrimaryButton>
   </ComponentLayout>
-  <ComponentLayout>
-    <ClientsSection />
-  </ComponentLayout>
 </template>
 
 <script>
 import PrimaryButton from "./PrimaryButton.vue";
 import ComponentLayout from "@/layouts/ComponentLayout.vue";
-import ClientsSection from "./ClientsSection.vue";
 
 export default {
   name: "LandingSection",
   components: {
     PrimaryButton,
     ComponentLayout,
-    ClientsSection,
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="clients-section">
+  <ComponentLayout class="clients-section">
     <h3 class="clients-section__heading">Nuestros clientes</h3>
     <div class="clients-wrapper">
       <button
@@ -69,10 +69,11 @@
         <p>Tu entidad aquí</p>
       </button>
     </div>
-  </div>
+  </ComponentLayout>
 </template>
 
 <script>
+import ComponentLayout from "@/layouts/ComponentLayout.vue";
 import anpard from "../assets/anpa.png";
 import bancoMundial from "../assets/banco-mundial.png";
 import interAmericanBank from "../assets/inter-american-bank.png";
@@ -101,6 +102,9 @@ export default {
       unicaribeLogo: unicaribe,
       presidenciaLogo: presidencia,
     };
+  },
+  components: {
+    ComponentLayout,
   },
 };
 </script>
