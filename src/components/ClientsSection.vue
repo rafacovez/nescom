@@ -122,6 +122,7 @@ export default {
 
 .clients-wrapper__client {
   background-color: var(--gray);
+  color: var(--black);
   border: 1px solid var(--gray);
   height: 100px;
   padding: 1rem;
@@ -135,6 +136,10 @@ export default {
 .clients-wrapper__client:hover {
   background-color: var(--white);
   filter: grayscale(0%);
+}
+
+.clients-wrapper__client:focus {
+  color: var(--black);
 }
 
 .clients-wrapper__client > img {

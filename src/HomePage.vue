@@ -1,24 +1,27 @@
 <template>
   <PrimaryLayout>
     <LandingSection />
-    <ClientsSection />
+    <ServicesSection />
     <PhilosophySection />
+    <ClientsSection />
   </PrimaryLayout>
 </template>
 
 <script>
 import PrimaryLayout from "./layouts/PrimaryLayout.vue";
 import LandingSection from "./components/LandingSection.vue";
-import ClientsSection from "./components/ClientsSection.vue";
+import ServicesSection from "./components/ServicesSection.vue";
 import PhilosophySection from "./components/PhilosophySection.vue";
+import ClientsSection from "./components/ClientsSection.vue";
 
 export default {
   name: "HomePage",
   components: {
     PrimaryLayout,
     LandingSection,
-    ClientsSection,
+    ServicesSection,
     PhilosophySection,
+    ClientsSection,
   },
 };
 </script>
