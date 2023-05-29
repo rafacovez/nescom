@@ -1,7 +1,7 @@
 <template>
   <ComponentLayout class="services-section">
+    <h3>Nuestros servicios</h3>
     <article class="services-wrapper">
-      <h3>Nuestros servicios</h3>
       <section class="service">
         <h4>Lorem, ipsum dolor.</h4>
         <p>
@@ -53,6 +53,10 @@ export default {
 </script>
 
 <style>
+.services-section > h3 {
+  margin-bottom: 2rem;
+}
+
 .services-wrapper {
   display: grid;
   gap: 2rem;
@@ -69,7 +73,7 @@ export default {
   color: var(--white);
   padding: 1rem;
   cursor: pointer;
-  z-index: -50;
+  z-index: 25;
 }
 
 .service::after {
@@ -82,11 +86,22 @@ export default {
   border-radius: inherit;
   background-color: var(--black);
   opacity: 0.8;
+  transition: all ease-out 0.2s;
   z-index: -25;
 }
 
-.service > p {
-  margin: 1rem 0;
+.service > * {
+  margin: 0 0 1rem 0;
+  transition: all ease-out 0.2s;
   z-index: 50;
+}
+
+.service:hover::after {
+  opacity: 0;
+}
+
+.service:hover > * {
+  opacity: 0;
+  visibility: hidden;
 }
 </style>
