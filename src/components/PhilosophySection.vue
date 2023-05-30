@@ -1,24 +1,27 @@
 <template>
   <article id="philosophySection" class="philosophy-section">
     <section class="mission">
-      <h3>Lorem.</h3>
+      <h3>Misión</h3>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
-        recusandae nam ex! Recusandae, sed esse.
+        Somos una empresa dedicada a hacer más efectivas las
+        <strong>relaciones</strong> entre nuestros clientes y sus asociados,
+        agregando valor a sus procesos <strong>comunicacionales</strong>.
       </p>
     </section>
     <section class="vision">
-      <h3>Lorem.</h3>
+      <h3>Visión</h3>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
-        recusandae nam ex! Recusandae, sed esse.
+        Ser una empresa referida por nuestros clientes como fuente de
+        <strong>satisfacción</strong> y en crecimiento sostenido de cara a
+        seguir agregando valor a la <strong>comunicación</strong>.
       </p>
     </section>
     <section class="values">
-      <h3>Lorem.</h3>
+      <h3>Valores</h3>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati
-        recusandae nam ex! Recusandae, sed esse.
+        servicio, <strong>eficiencia</strong>, calidad, proacción y entusiasmo
+        inspiran a cada colaborador de nuestro equipo de
+        <strong>profesionales</strong> y asociados.
       </p>
     </section>
   </article>
