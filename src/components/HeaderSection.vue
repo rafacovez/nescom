@@ -37,33 +37,60 @@
       >
         Contacto
       </li>
-      <li @click="toggleNav()">
-        <a
-          href="https://www.porlalinea.com.do/secciones/en-conexion/con-nestor-estevez/"
-          >Blog | Néstor Estévez</a
-        >
-        <ArrowUpRightIcon class="icon" />
-      </li>
+      <a
+        href="https://www.porlalinea.com.do/secciones/en-conexion/con-nestor-estevez/"
+      >
+        <li @click="toggleNav()">
+          Blog | Néstor Estévez <ArrowUpRightIcon class="icon" />
+        </li>
+      </a>
       <div class="nav__social-media">
         <button
+          @click="
+            navigateToInstagram();
+            toggleNav();
+          "
+          role="link"
+          tabindex="0"
           class="social-media-icon"
-          aria-label="Visit Nescom RD Instagram profile"
+          aria-label="Navigate to Nescom RD Instagram profile"
         >
           <InstagramLogo />
         </button>
         <button
+          @click="
+            navigateToFacebook();
+            toggleNav();
+          "
+          role="link"
+          tabindex="0"
           class="social-media-icon"
-          aria-label="Visit Nescom RD Facebook page"
+          aria-label="Navigate to Nescom RD Facebook page"
         >
           <FacebookLogo />
         </button>
         <button
+          @click="
+            navigateToTwitter();
+            toggleNav();
+          "
+          role="link"
+          tabindex="0"
           class="social-media-icon"
-          aria-label="Visit Nescom RD Twitter profile"
+          aria-label="Navigate to Nescom RD Twitter profile"
         >
           <TwitterLogo />
         </button>
-        <button class="social-media-icon" aria-label="Visit Nescom RD Youtube">
+        <button
+          @click="
+            navigateToYoutube();
+            toggleNav();
+          "
+          role="link"
+          tabindex="0"
+          class="social-media-icon"
+          aria-label="Navigate to Nescom RD Youtube"
+        >
           <YoutubeLogo />
         </button>
       </div>
@@ -107,6 +134,19 @@ export default {
       const element = document.querySelector(selector);
       element.scrollIntoView({ behavior: "smooth" });
     },
+    navigateToInstagram() {
+      window.location.href = "https://www.instagram.com/nescomrd";
+    },
+    navigateToFacebook() {
+      window.location.href = "https://www.facebook.com/nescomrd";
+    },
+    navigateToTwitter() {
+      window.location.href = "https://twitter.com/nescomrd";
+    },
+    navigateToYoutube() {
+      window.location.href =
+        "https://www.youtube.com/channel/UCK6yeR3uawJDFfUKMehdD1A";
+    },
   },
 };
 </script>
@@ -146,7 +186,8 @@ export default {
   transform: translateY(0px);
 }
 
-.nav > li {
+.nav > li,
+a > li {
   display: flex;
   gap: 0.2rem;
   font-size: calc(var(--font-size) * 0.9);
@@ -157,12 +198,13 @@ export default {
   cursor: pointer;
 }
 
-.nav > li > a {
+.nav > a {
   color: var(--black);
   text-decoration: none;
+  width: 100%;
 }
 
-.nav > li > .icon {
+.nav > a > li > .icon {
   width: 15px;
   color: var(--black);
 }
