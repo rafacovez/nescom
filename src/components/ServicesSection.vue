@@ -1,5 +1,5 @@
 <template>
-  <ComponentLayout class="services-section">
+  <ComponentLayout id="servicesSection" class="services-section">
     <h3>Nuestros servicios</h3>
     <article class="services-wrapper">
       <section class="service">

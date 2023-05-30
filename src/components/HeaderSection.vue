@@ -5,11 +5,45 @@
       <span></span>
     </button>
     <nav class="nav" :class="{ show: navOpen }">
-      <li>¿Quiénes somos?</li>
-      <li>Servicios</li>
-      <li>Clientes</li>
-      <li>Néstor Estévez</li>
-      <li>Publicaciones</li>
+      <li
+        @click="
+          scrollTo('#philosophySection');
+          toggleNav();
+        "
+      >
+        ¿Quiénes somos?
+      </li>
+      <li
+        @click="
+          scrollTo('#servicesSection');
+          toggleNav();
+        "
+      >
+        Servicios
+      </li>
+      <li
+        @click="
+          scrollTo('#clientsSection');
+          toggleNav();
+        "
+      >
+        Clientes
+      </li>
+      <li
+        @click="
+          scrollTo('#contactSection');
+          toggleNav();
+        "
+      >
+        Contacto
+      </li>
+      <li @click="toggleNav()">
+        <a
+          href="https://www.porlalinea.com.do/secciones/en-conexion/con-nestor-estevez/"
+          >Blog | Néstor Estévez</a
+        >
+        <ArrowUpRightIcon class="icon" />
+      </li>
       <div class="nav__social-media">
         <button
           class="social-media-icon"
@@ -43,6 +77,7 @@ import InstagramLogo from "@/assets/icons/InstagramLogo.vue";
 import FacebookLogo from "@/assets/icons/FacebookLogo.vue";
 import TwitterLogo from "@/assets/icons/TwitterLogo.vue";
 import YoutubeLogo from "@/assets/icons/YoutubeLogo.vue";
+import { ArrowUpRightIcon } from "@heroicons/vue/20/solid";
 
 export default {
   name: "HeaderSection",
@@ -57,6 +92,7 @@ export default {
     FacebookLogo,
     TwitterLogo,
     YoutubeLogo,
+    ArrowUpRightIcon,
   },
   methods: {
     toggleNav() {
@@ -66,6 +102,10 @@ export default {
       } else {
         document.body.classList.remove("no-scroll");
       }
+    },
+    scrollTo(selector) {
+      const element = document.querySelector(selector);
+      element.scrollIntoView({ behavior: "smooth" });
     },
   },
 };
@@ -107,11 +147,24 @@ export default {
 }
 
 .nav > li {
+  display: flex;
+  gap: 0.2rem;
   font-size: calc(var(--font-size) * 0.9);
   font-weight: var(--font-regular);
   list-style: none;
   border-bottom: 1px solid var(--gray);
   padding: 1rem 0;
+  cursor: pointer;
+}
+
+.nav > li > a {
+  color: var(--black);
+  text-decoration: none;
+}
+
+.nav > li > .icon {
+  width: 15px;
+  color: var(--black);
 }
 
 .nav__social-media {

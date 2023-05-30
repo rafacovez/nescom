@@ -1,5 +1,5 @@
 <template>
-  <article class="philosophy-section">
+  <article id="philosophySection" class="philosophy-section">
     <section class="mission">
       <h3>Lorem.</h3>
       <p>

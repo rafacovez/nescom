@@ -1,5 +1,5 @@
 <template>
-  <ComponentLayout class="clients-section">
+  <ComponentLayout id="clientsSection" class="clients-section">
     <h3 class="clients-section__heading">Nuestros clientes</h3>
     <div class="clients-wrapper">
       <button

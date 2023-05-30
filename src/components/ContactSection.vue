@@ -1,5 +1,5 @@
 <template>
-  <ComponentLayout>
+  <ComponentLayout id="contactSection">
     <h3>Envíanos un correo</h3>
     <form action="">
       <div class="form-group">
@@ -11,6 +11,7 @@
           type="text"
           id="name"
           name="name"
+          autocomplete="off"
           required
           @focus="isFocusedName = true"
           @blur="isFocusedName = false"
@@ -28,6 +29,7 @@
           type="email"
           id="email"
           name="email"
+          autocomplete="off"
           required
           @focus="isFocusedEmail = true"
           @blur="isFocusedEmail = false"
@@ -44,6 +46,7 @@
           class="input-message"
           id="message"
           name="message"
+          autocomplete="off"
           required
           @focus="isFocusedMessage = true"
           @blur="isFocusedMessage = false"
@@ -111,6 +114,7 @@ textarea {
   border: 1px solid var(--gray);
   background-color: var(--white);
   border-radius: 2px;
+  touch-action: manipulation;
 }
 
 .form-group > input:focus,
