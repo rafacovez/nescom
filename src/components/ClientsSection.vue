@@ -3,69 +3,109 @@
     <h3 class="clients-section__heading">Nuestros clientes</h3>
     <div class="clients-wrapper">
       <button
+        @click="navigateToCoopsano"
+        role="link"
+        tabindex="0"
         aria-label="Visit Coopsano website"
         class="clients-wrapper__client"
       >
         <img :src="coopsanoLogo" alt="Coopsano logo" />
       </button>
       <button
+        @click="navigateToPresidencia"
+        role="link"
+        tabindex="0"
         aria-label="Visit Presidencia website"
         class="clients-wrapper__client"
       >
         <img :src="presidenciaLogo" alt="Presidencia logo" />
       </button>
-      <button aria-label="Visit Intec website" class="clients-wrapper__client">
+      <button
+        @click="navigateToIntec"
+        role="link"
+        tabindex="0"
+        aria-label="Visit Intec website"
+        class="clients-wrapper__client"
+      >
         <img :src="intecLogo" alt="Intec logo" />
       </button>
       <button
+        @click="navigateToGermanCooperation"
+        role="link"
+        tabindex="0"
         aria-label="Visit German Cooperation website"
         class="clients-wrapper__client"
       >
         <img :src="germanCooperationLogo" alt="German Cooperation logo" />
       </button>
       <button
+        @click="navigateToAnpa"
+        role="link"
+        tabindex="0"
         aria-label="Visit Anpa RD website"
         class="clients-wrapper__client"
       >
         <img :src="anpardLogo" alt="Anpa logo" />
       </button>
       <button
+        @click="navigateToWorldBank"
+        role="link"
+        tabindex="0"
         aria-label="Visit Banco Mundial website"
         class="clients-wrapper__client"
       >
         <img :src="bancoMundialLogo" alt="Banco Mundial logo" />
       </button>
       <button
+        @click="navigateToInfotep"
+        role="link"
+        tabindex="0"
         aria-label="Visit Infotep website"
         class="clients-wrapper__client"
       >
         <img :src="infotepLogo" alt="Infotep logo" />
       </button>
       <button
+        @click="navigateToInterAmericanBank"
+        role="link"
+        tabindex="0"
         aria-label="Visit Inter American Bank website"
         class="clients-wrapper__client"
       >
         <img :src="interAmericanBankLogo" alt="Inter American Bank logo" />
       </button>
       <button
+        @click="navigateToIsfodosu"
+        role="link"
+        tabindex="0"
         aria-label="Visit Isfodosu website"
         class="clients-wrapper__client"
       >
         <img :src="isfodosuLogo" alt="Isfodosu logo" />
       </button>
       <button
+        @click="navigateToTropical"
+        role="link"
+        tabindex="0"
         aria-label="Visit Tropical website"
         class="clients-wrapper__client"
       >
         <img :src="tropicalLogo" alt="Tropical logo" />
       </button>
       <button
+        @click="navigateToUnicaribe"
+        role="link"
+        tabindex="0"
         aria-label="Visit Unicaribe website"
         class="clients-wrapper__client"
       >
         <img :src="unicaribeLogo" alt="Unicaribe logo" />
       </button>
-      <button aria-label="Go to contact page" class="clients-wrapper__client">
+      <button
+        @click="scrollTo('#contactSection')"
+        aria-label="Go to contact page"
+        class="clients-wrapper__client"
+      >
         <p>Tu entidad aquí</p>
       </button>
     </div>
@@ -105,6 +145,45 @@ export default {
   },
   components: {
     ComponentLayout,
+  },
+  methods: {
+    scrollTo(selector) {
+      const element = document.querySelector(selector);
+      element.scrollIntoView({ behavior: "smooth" });
+    },
+    navigateToCoopsano() {
+      window.open("https://coopsano.com/", "_blank");
+    },
+    navigateToPresidencia() {
+      window.open("https://presidencia.gob.do/", "_blank");
+    },
+    navigateToIntec() {
+      window.open("https://www.intec.edu.do/", "_blank");
+    },
+    navigateToGermanCooperation() {
+      window.open("https://www.giz.de/en/html/index.html", "_blank");
+    },
+    navigateToAnpa() {
+      window.open("http://www.anpard.com/", "_blank");
+    },
+    navigateToWorldBank() {
+      window.open("https://www.worldbank.org/en/home", "_blank");
+    },
+    navigateToInfotep() {
+      window.open("https://www.infotep.gob.do/", "_blank");
+    },
+    navigateToInterAmericanBank() {
+      window.open("https://www.iadb.org/en", "_blank");
+    },
+    navigateToIsfodosu() {
+      window.open("https://isfodosu.edu.do/", "_blank");
+    },
+    navigateToTropical() {
+      window.open("http://www.pinturastropical.com.do/site/", "_blank");
+    },
+    navigateToUnicaribe() {
+      window.open("https://unicaribe.edu.do/", "_blank");
+    },
   },
 };
 </script>
