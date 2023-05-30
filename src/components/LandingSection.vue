@@ -4,7 +4,9 @@
       Hacemos más efectivas las relaciones entre nuestros clientes y sus
       asociados.
     </h1>
-    <PrimaryButton>Contáctanos</PrimaryButton>
+    <PrimaryButton @click="scrollTo('#contactSection')"
+      >Contáctanos</PrimaryButton
+    >
   </ComponentLayout>
 </template>
 
@@ -17,6 +19,12 @@ export default {
   components: {
     PrimaryButton,
     ComponentLayout,
+  },
+  methods: {
+    scrollTo(selector) {
+      const element = document.querySelector(selector);
+      element.scrollIntoView({ behavior: "smooth" });
+    },
   },
 };
 </script>
