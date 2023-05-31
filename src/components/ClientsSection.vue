@@ -9,7 +9,7 @@
         aria-label="Visit Coopsano website"
         class="clients-wrapper__client"
       >
-        <img :src="coopsanoLogo" alt="Coopsano logo" />
+        <img v-lazy="coopsanoLogo" alt="Coopsano logo" />
       </button>
       <button
         @click="navigateToPresidencia"
@@ -18,7 +18,7 @@
         aria-label="Visit Presidencia website"
         class="clients-wrapper__client"
       >
-        <img :src="presidenciaLogo" alt="Presidencia logo" />
+        <img v-lazy="presidenciaLogo" alt="Presidencia logo" />
       </button>
       <button
         @click="navigateToIntec"
@@ -27,7 +27,7 @@
         aria-label="Visit Intec website"
         class="clients-wrapper__client"
       >
-        <img :src="intecLogo" alt="Intec logo" />
+        <img v-lazy="intecLogo" alt="Intec logo" />
       </button>
       <button
         @click="navigateToGermanCooperation"
@@ -36,7 +36,7 @@
         aria-label="Visit German Cooperation website"
         class="clients-wrapper__client"
       >
-        <img :src="germanCooperationLogo" alt="German Cooperation logo" />
+        <img v-lazy="germanCooperationLogo" alt="German Cooperation logo" />
       </button>
       <button
         @click="navigateToAnpa"
@@ -45,7 +45,7 @@
         aria-label="Visit Anpa RD website"
         class="clients-wrapper__client"
       >
-        <img :src="anpardLogo" alt="Anpa logo" />
+        <img v-lazy="anpardLogo" alt="Anpa logo" />
       </button>
       <button
         @click="navigateToWorldBank"
@@ -54,7 +54,7 @@
         aria-label="Visit Banco Mundial website"
         class="clients-wrapper__client"
       >
-        <img :src="bancoMundialLogo" alt="Banco Mundial logo" />
+        <img v-lazy="bancoMundialLogo" alt="Banco Mundial logo" />
       </button>
       <button
         @click="navigateToInfotep"
@@ -63,7 +63,7 @@
         aria-label="Visit Infotep website"
         class="clients-wrapper__client"
       >
-        <img :src="infotepLogo" alt="Infotep logo" />
+        <img v-lazy="infotepLogo" alt="Infotep logo" />
       </button>
       <button
         @click="navigateToInterAmericanBank"
@@ -72,7 +72,7 @@
         aria-label="Visit Inter American Bank website"
         class="clients-wrapper__client"
       >
-        <img :src="interAmericanBankLogo" alt="Inter American Bank logo" />
+        <img v-lazy="interAmericanBankLogo" alt="Inter American Bank logo" />
       </button>
       <button
         @click="navigateToIsfodosu"
@@ -81,7 +81,7 @@
         aria-label="Visit Isfodosu website"
         class="clients-wrapper__client"
       >
-        <img :src="isfodosuLogo" alt="Isfodosu logo" />
+        <img v-lazy="isfodosuLogo" alt="Isfodosu logo" />
       </button>
       <button
         @click="navigateToTropical"
@@ -90,7 +90,7 @@
         aria-label="Visit Tropical website"
         class="clients-wrapper__client"
       >
-        <img :src="tropicalLogo" alt="Tropical logo" />
+        <img v-lazy="tropicalLogo" alt="Tropical logo" />
       </button>
       <button
         @click="navigateToUnicaribe"
@@ -99,7 +99,7 @@
         aria-label="Visit Unicaribe website"
         class="clients-wrapper__client"
       >
-        <img :src="unicaribeLogo" alt="Unicaribe logo" />
+        <img v-lazy="unicaribeLogo" alt="Unicaribe logo" />
       </button>
       <button
         @click="scrollTo('#contactSection')"
@@ -114,17 +114,17 @@
 
 <script>
 import ComponentLayout from "@/layouts/ComponentLayout.vue";
-import anpard from "../assets/anpa.png";
-import bancoMundial from "../assets/banco-mundial.png";
-import interAmericanBank from "../assets/inter-american-bank.png";
-import coopsano from "../assets/coopsano.png";
-import germanCooperation from "../assets/german-cooperation.png";
-import infotep from "../assets/infotep.png";
-import intec from "../assets/intec.png";
-import isfodosu from "../assets/isfodosu.png";
-import tropical from "../assets/tropical.png";
-import unicaribe from "../assets/unicaribe.png";
-import presidencia from "../assets/presidencia.png";
+import anpard from "../assets/clients/anpa.png";
+import bancoMundial from "../assets/clients/banco-mundial.png";
+import interAmericanBank from "../assets/clients/inter-american-bank.png";
+import coopsano from "../assets/clients/coopsano.png";
+import germanCooperation from "../assets/clients/german-cooperation.png";
+import infotep from "../assets/clients/infotep.png";
+import intec from "../assets/clients/intec.png";
+import isfodosu from "../assets/clients/isfodosu.png";
+import tropical from "../assets/clients/tropical.png";
+import unicaribe from "../assets/clients/unicaribe.png";
+import presidencia from "../assets/clients/presidencia.png";
 
 export default {
   name: "ClientsSection",
