@@ -2,39 +2,42 @@
   <ComponentLayout id="servicesSection" class="services-section">
     <h3>Nuestros servicios</h3>
     <article class="services-wrapper">
-      <section class="service">
-        <h4>Lorem, ipsum dolor.</h4>
+      <section class="service master-of-ceremony">
+        <h4>Maestría de ceremonias</h4>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil fugit,
-          labore id in laudantium vel.
+          Cuando organizas una actividad, el papel de quien conduce se vuelve
+          determinante para el éxito o el fracaso de la misma.
         </p>
       </section>
-      <section class="service">
-        <h4>Lorem, ipsum dolor.</h4>
+      <section class="service communication">
+        <h4>Consultoría en comunicación</h4>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil fugit,
-          labore id in laudantium vel.
+          Siempre necesitaremos comunicarnos. ¿Cómo te comunicas? ¿Lo quieres
+          mejorar? Nosotros podemos ayudarte.
         </p>
       </section>
-      <section class="service">
-        <h4>Lorem, ipsum dolor.</h4>
+      <section class="service commercial-voice">
+        <h4>Voz comercial</h4>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil fugit,
-          labore id in laudantium vel.
+          Cada mensaje ha iniciado como idea que pasa por diversos procesos.
+          Nosotros disponemos de la capacidad para hacer más impactante tu
+          mensaje.
         </p>
       </section>
-      <section class="service">
-        <h4>Lorem, ipsum dolor.</h4>
+      <section class="service public-relations">
+        <h4>Relaciones públicas</h4>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil fugit,
-          labore id in laudantium vel.
+          En un mundo tan cambiante, el esfuerzo planeado para influenciar la
+          opinión es determinante para iniciar, mantener o mejorar fructíferas
+          relaciones.
         </p>
       </section>
-      <section class="service">
-        <h4>Lorem, ipsum dolor.</h4>
+      <section class="service voiceover">
+        <h4>Oratoria y locución</h4>
         <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil fugit,
-          labore id in laudantium vel.
+          El adecuado manejo de la palabra marca la diferencia. Para quienes
+          tienen sueños o ideas por realizar, la oratoria se vuelve una especie
+          de llave maestra.
         </p>
       </section>
     </article>
@@ -64,7 +67,6 @@ export default {
 
 .service {
   position: relative;
-  background-image: url("../assets/services1.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -72,7 +74,7 @@ export default {
   border-radius: 4px;
   color: var(--white);
   padding: 1rem;
-  cursor: pointer;
+  height: 250px;
   z-index: 25;
 }
 
@@ -88,6 +90,26 @@ export default {
   opacity: 0.8;
   transition: all ease-out 0.2s;
   z-index: -25;
+}
+
+.service.master-of-ceremony {
+  background-image: url("../assets/services/master-of-ceremony.jpg");
+}
+
+.service.communication {
+  background-image: url("../assets/services/communication.jpg");
+}
+
+.service.commercial-voice {
+  background-image: url("../assets/services/commercial-voice.jpg");
+}
+
+.service.public-relations {
+  background-image: url("../assets/services/public-relations.jpg");
+}
+
+.service.voiceover {
+  background-image: url("../assets/services/voiceover.jpg");
 }
 
 .service > * {
