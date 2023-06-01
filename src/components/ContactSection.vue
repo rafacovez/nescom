@@ -3,7 +3,12 @@
     <h3>Envíanos un correo</h3>
     <form action="">
       <div class="form-group">
-        <label class="label-name" for="name" :class="{ focused: isFocusedName }"
+        <template v-if="nameHasValue"></template>
+        <label
+          v-else
+          class="label-name"
+          for="name"
+          :class="{ focused: isFocusedName }"
           >Nombre:</label
         >
         <input
@@ -13,12 +18,15 @@
           name="name"
           autocomplete="off"
           required
+          v-model="inputValueName"
           @focus="isFocusedName = true"
           @blur="isFocusedName = false"
         />
       </div>
       <div class="form-group">
+        <template v-if="emailHasValue"></template>
         <label
+          v-else
           class="label-email"
           for="email"
           :class="{ focused: isFocusedEmail }"
@@ -31,12 +39,15 @@
           name="email"
           autocomplete="off"
           required
+          v-model="inputValueEmail"
           @focus="isFocusedEmail = true"
           @blur="isFocusedEmail = false"
         />
       </div>
       <div class="form-group">
+        <template v-if="messageHasValue"></template>
         <label
+          v-else
           class="label-message"
           for="message"
           :class="{ focused: isFocusedMessage }"
@@ -48,6 +59,7 @@
           name="message"
           autocomplete="off"
           required
+          v-model="inputValueMessage"
           @focus="isFocusedMessage = true"
           @blur="isFocusedMessage = false"
         ></textarea>
@@ -74,7 +86,21 @@ export default {
       isFocusedName: false,
       isFocusedEmail: false,
       isFocusedMessage: false,
+      inputValueName: "",
+      inputValueEmail: "",
+      inputValueMessage: "",
     };
+  },
+  computed: {
+    nameHasValue() {
+      return !!this.inputValueName;
+    },
+    emailHasValue() {
+      return !!this.inputValueEmail;
+    },
+    messageHasValue() {
+      return !!this.inputValueMessage;
+    },
   },
 };
 </script>
