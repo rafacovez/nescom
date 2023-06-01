@@ -114,17 +114,17 @@
 
 <script>
 import ComponentLayout from "@/layouts/ComponentLayout.vue";
-import anpard from "../assets/clients/anpa.png";
-import bancoMundial from "../assets/clients/banco-mundial.png";
-import interAmericanBank from "../assets/clients/inter-american-bank.png";
-import coopsano from "../assets/clients/coopsano.png";
-import germanCooperation from "../assets/clients/german-cooperation.png";
-import infotep from "../assets/clients/infotep.png";
-import intec from "../assets/clients/intec.png";
-import isfodosu from "../assets/clients/isfodosu.png";
-import tropical from "../assets/clients/tropical.png";
-import unicaribe from "../assets/clients/unicaribe.png";
-import presidencia from "../assets/clients/presidencia.png";
+import anpard from "../assets/clients/anpa.webp";
+import bancoMundial from "../assets/clients/banco-mundial.webp";
+import interAmericanBank from "../assets/clients/inter-american-bank.webp";
+import coopsano from "../assets/clients/coopsano.webp";
+import germanCooperation from "../assets/clients/german-cooperation.webp";
+import infotep from "../assets/clients/infotep.webp";
+import intec from "../assets/clients/intec.webp";
+import isfodosu from "../assets/clients/isfodosu.webp";
+import tropical from "../assets/clients/tropical.webp";
+import unicaribe from "../assets/clients/unicaribe.webp";
+import presidencia from "../assets/clients/presidencia.webp";
 
 export default {
   name: "ClientsSection",

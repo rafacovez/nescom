@@ -3,6 +3,7 @@
     <h3>Nuestros servicios</h3>
     <article class="services-wrapper">
       <section class="service master-of-ceremony">
+        <img v-lazy="masterOfCeremonyImg" alt="Maestría de ceremonias" />
         <h4>Maestría de ceremonias</h4>
         <p>
           Cuando organizas una actividad, el papel de quien conduce se vuelve
@@ -10,6 +11,7 @@
         </p>
       </section>
       <section class="service communication">
+        <img v-lazy="communicationImg" alt="Hand gesturing" />
         <h4>Consultoría en comunicación</h4>
         <p>
           Siempre necesitaremos comunicarnos. ¿Cómo te comunicas? ¿Lo quieres
@@ -17,6 +19,7 @@
         </p>
       </section>
       <section class="service commercial-voice">
+        <img v-lazy="commercialVoiceImg" alt="Microphone hanging up" />
         <h4>Voz comercial</h4>
         <p>
           Cada mensaje ha iniciado como idea que pasa por diversos procesos.
@@ -25,6 +28,7 @@
         </p>
       </section>
       <section class="service public-relations">
+        <img v-lazy="publicRelationsImg" alt="Hands shaking" />
         <h4>Relaciones públicas</h4>
         <p>
           En un mundo tan cambiante, el esfuerzo planeado para influenciar la
@@ -33,6 +37,7 @@
         </p>
       </section>
       <section class="service voiceover">
+        <img v-lazy="voiceoverImg" alt="Microphone on air" />
         <h4>Oratoria y locución</h4>
         <p>
           El adecuado manejo de la palabra marca la diferencia. Para quienes
@@ -46,9 +51,23 @@
 
 <script>
 import ComponentLayout from "@/layouts/ComponentLayout.vue";
+import masterOfCeremony from "../assets/services/master-of-ceremony.webp";
+import communication from "../assets/services/communication.webp";
+import commercialVoice from "../assets/services/commercial-voice.webp";
+import publicRelations from "../assets/services/public-relations.webp";
+import voiceover from "../assets/services/voiceover.webp";
 
 export default {
   name: "ServicesSection",
+  data() {
+    return {
+      masterOfCeremonyImg: masterOfCeremony,
+      communicationImg: communication,
+      commercialVoiceImg: commercialVoice,
+      publicRelationsImg: publicRelations,
+      voiceoverImg: voiceover,
+    };
+  },
   components: {
     ComponentLayout,
   },
@@ -67,62 +86,49 @@ export default {
 
 .service {
   position: relative;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   border: 2px solid var(--red);
   border-radius: 4px;
   color: var(--white);
+  margin: 0;
   padding: 1rem;
   height: 250px;
-  z-index: 25;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .service::after {
-  position: absolute;
-  inset: 0;
   content: "";
+  display: block;
   height: 100%;
   width: 100%;
-  display: block;
-  border-radius: inherit;
+  position: absolute;
+  inset: 0;
   background-color: var(--black);
   opacity: 0.8;
-  transition: all ease-out 0.2s;
   z-index: -25;
+  transition: all ease-out 0.1s;
 }
 
-.service.master-of-ceremony {
-  background-image: url("../assets/services/master-of-ceremony.jpg");
+.service > img {
+  position: absolute;
+  inset: 0;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  z-index: -50;
 }
 
-.service.communication {
-  background-image: url("../assets/services/communication.jpg");
-}
-
-.service.commercial-voice {
-  background-image: url("../assets/services/commercial-voice.jpg");
-}
-
-.service.public-relations {
-  background-image: url("../assets/services/public-relations.jpg");
-}
-
-.service.voiceover {
-  background-image: url("../assets/services/voiceover.jpg");
-}
-
-.service > * {
-  margin: 0 0 1rem 0;
-  transition: all ease-out 0.2s;
+.service > h4,
+.service > p {
   z-index: 50;
+  transition: all ease-out 0.1s;
 }
 
-.service:hover::after {
-  opacity: 0;
-}
-
-.service:hover > * {
+.service:hover::after,
+.service:hover > h4,
+.service:hover > p {
   opacity: 0;
   visibility: hidden;
 }
