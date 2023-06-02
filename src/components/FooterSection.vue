@@ -5,14 +5,15 @@
       <li @click="scrollTo('#servicesSection')">Servicios</li>
       <li @click="scrollTo('#clientsSection')">Clientes</li>
       <li @click="scrollTo('#contactSection')">Contacto</li>
-      <a
-        href="https://www.porlalinea.com.do/secciones/en-conexion/con-nestor-estevez/"
-      >
-        <li @click="toggleNav()">
+      <li @click="toggleNav()">
+        <a
+          href="https://www.porlalinea.com.do/secciones/en-conexion/con-nestor-estevez/"
+        >
           Blog | Néstor Estévez <ArrowUpRightIcon class="icon" />
-        </li>
-      </a>
+        </a>
+      </li>
     </ul>
+
     <div class="sub-footer">
       <p>&copy; {{ copyrightYear }} Nescom, R. D.</p>
       <p>
@@ -75,27 +76,29 @@ export default {
 }
 
 .footer > ul > li,
-.footer > ul > a > li {
+.footer > ul > li > a {
   font-size: calc(var(--font-size) * 0.9);
   text-decoration: underline;
   width: fit-content;
   padding: 0;
   margin: 0;
+  display: flex;
+  gap: 0.2rem;
   cursor: pointer;
 }
 
 .footer > ul > li:hover,
-.footer > ul > a > li:hover {
+.footer > ul > li > a:hover {
   text-decoration: none;
 }
 
-.footer > ul > a {
+.footer > ul > li > a {
   text-decoration: none;
   width: fit-content;
   color: var(--white);
 }
 
-.footer > ul > a > li > .icon {
+.footer > ul > li > a > .icon {
   width: 15px;
 }
 

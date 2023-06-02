@@ -1,10 +1,10 @@
 <template>
   <ComponentLayout id="servicesSection" class="services-section">
-    <h3>Nuestros servicios</h3>
+    <h2>Nuestros servicios</h2>
     <article class="services-wrapper">
       <section class="service master-of-ceremony">
         <img v-lazy="masterOfCeremonyImg" alt="Maestría de ceremonias" />
-        <h4>Maestría de ceremonias</h4>
+        <h3>Maestría de ceremonias</h3>
         <p>
           Cuando organizas una actividad, el papel de quien conduce se vuelve
           determinante para el éxito o el fracaso de la misma.
@@ -12,7 +12,7 @@
       </section>
       <section class="service communication">
         <img v-lazy="communicationImg" alt="Hand gesturing" />
-        <h4>Consultoría en comunicación</h4>
+        <h3>Consultoría en comunicación</h3>
         <p>
           Siempre necesitaremos comunicarnos. ¿Cómo te comunicas? ¿Lo quieres
           mejorar? Nosotros podemos ayudarte.
@@ -20,7 +20,7 @@
       </section>
       <section class="service commercial-voice">
         <img v-lazy="commercialVoiceImg" alt="Microphone hanging up" />
-        <h4>Voz comercial</h4>
+        <h3>Voz comercial</h3>
         <p>
           Cada mensaje ha iniciado como idea que pasa por diversos procesos.
           Nosotros disponemos de la capacidad para hacer más impactante tu
@@ -29,7 +29,7 @@
       </section>
       <section class="service public-relations">
         <img v-lazy="publicRelationsImg" alt="Hands shaking" />
-        <h4>Relaciones públicas</h4>
+        <h3>Relaciones públicas</h3>
         <p>
           En un mundo tan cambiante, el esfuerzo planeado para influenciar la
           opinión es determinante para iniciar, mantener o mejorar fructíferas
@@ -38,7 +38,7 @@
       </section>
       <section class="service voiceover">
         <img v-lazy="voiceoverImg" alt="Microphone on air" />
-        <h4>Oratoria y locución</h4>
+        <h3>Oratoria y locución</h3>
         <p>
           El adecuado manejo de la palabra marca la diferencia. Para quienes
           tienen sueños o ideas por realizar, la oratoria se vuelve una especie
@@ -75,7 +75,7 @@ export default {
 </script>
 
 <style>
-.services-section > h3 {
+.services-section > h2 {
   margin-bottom: 2rem;
 }
 
@@ -120,14 +120,14 @@ export default {
   z-index: -50;
 }
 
-.service > h4,
+.service > h3,
 .service > p {
   z-index: 50;
   transition: all ease-out 0.1s;
 }
 
 .service:hover::after,
-.service:hover > h4,
+.service:hover > h3,
 .service:hover > p {
   opacity: 0;
   visibility: hidden;

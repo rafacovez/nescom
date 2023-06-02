@@ -1,49 +1,51 @@
 <template>
   <header class="header">
     <img class="logo" :src="logoPath" alt="Nescom RD" />
-    <button @click="toggleNav" class="nav__button" :class="{ x: navOpen }">
+    <button @click="toggleNav" class="open-nav-button" :class="{ x: navOpen }">
       <span></span>
     </button>
     <nav class="nav" :class="{ show: navOpen }">
-      <li
-        @click="
-          scrollTo('#philosophySection');
-          toggleNav();
-        "
-      >
-        ¿Quiénes somos?
-      </li>
-      <li
-        @click="
-          scrollTo('#servicesSection');
-          toggleNav();
-        "
-      >
-        Servicios
-      </li>
-      <li
-        @click="
-          scrollTo('#clientsSection');
-          toggleNav();
-        "
-      >
-        Clientes
-      </li>
-      <li
-        @click="
-          scrollTo('#contactSection');
-          toggleNav();
-        "
-      >
-        Contacto
-      </li>
-      <a
-        href="https://www.porlalinea.com.do/secciones/en-conexion/con-nestor-estevez/"
-      >
-        <li @click="toggleNav()">
-          Blog | Néstor Estévez <ArrowUpRightIcon class="icon" />
+      <ul>
+        <li
+          @click="
+            scrollTo('#philosophySection');
+            toggleNav();
+          "
+        >
+          ¿Quiénes somos?
         </li>
-      </a>
+        <li
+          @click="
+            scrollTo('#servicesSection');
+            toggleNav();
+          "
+        >
+          Servicios
+        </li>
+        <li
+          @click="
+            scrollTo('#clientsSection');
+            toggleNav();
+          "
+        >
+          Clientes
+        </li>
+        <li
+          @click="
+            scrollTo('#contactSection');
+            toggleNav();
+          "
+        >
+          Contacto
+        </li>
+        <li @click="toggleNav()">
+          <a
+            href="https://www.porlalinea.com.do/secciones/en-conexion/con-nestor-estevez/"
+          >
+            Blog | Néstor Estévez <ArrowUpRightIcon class="icon" />
+          </a>
+        </li>
+      </ul>
       <div class="nav__social-media">
         <button
           @click="
@@ -111,7 +113,7 @@ export default {
   data() {
     return {
       logoPath: logo,
-      navOpen: false,
+      navOpen: true,
     };
   },
   components: {
@@ -177,7 +179,7 @@ export default {
   opacity: 0;
   transform: translateY(-25px);
   transition: all ease-out 0.2s;
-  z-index: 50;
+  z-index: 100;
 }
 
 .nav.show {
@@ -186,25 +188,30 @@ export default {
   transform: translateY(0px);
 }
 
-.nav > li,
-a > li {
-  display: flex;
-  gap: 0.2rem;
+.nav > ul {
+  margin: 0;
+  padding: 0;
+}
+
+.nav > ul > li {
+  color: var(--black);
   font-size: calc(var(--font-size) * 0.9);
   font-weight: var(--font-regular);
-  list-style: none;
   border-bottom: 1px solid var(--gray);
   padding: 1rem 0;
+  list-style: none;
   cursor: pointer;
 }
 
-.nav > a {
+.nav > ul > li > a {
+  display: flex;
+  gap: 0.2rem;
   color: var(--black);
   text-decoration: none;
   width: 100%;
 }
 
-.nav > a > li > .icon {
+.nav > ul > li > a > .icon {
   width: 15px;
   color: var(--black);
 }
@@ -228,7 +235,7 @@ a > li {
   opacity: 1;
 }
 
-.nav__button {
+.open-nav-button {
   background: none;
   border: none;
   padding: 0;
@@ -236,7 +243,7 @@ a > li {
   cursor: pointer;
 }
 
-.nav__button > span {
+.open-nav-button > span {
   width: 20px;
   height: 2px;
   background-color: var(--black);
@@ -245,7 +252,7 @@ a > li {
   transition: all ease-out 0.2s;
 }
 
-.nav__button > span::before {
+.open-nav-button > span::before {
   content: "";
   width: 100%;
   height: 100%;
@@ -256,7 +263,7 @@ a > li {
   transition: inherit;
 }
 
-.nav__button > span::after {
+.open-nav-button > span::after {
   content: "";
   width: 100%;
   height: 100%;
@@ -267,16 +274,16 @@ a > li {
   transition: inherit;
 }
 
-.nav__button.x > span {
+.open-nav-button.x > span {
   transform: translateX(10px);
   background-color: rgba(255, 0, 0, 0);
 }
 
-.nav__button.x > span::before {
+.open-nav-button.x > span::before {
   transform: translate(-10px, 8px) rotate(45deg);
 }
 
-.nav__button.x > span::after {
+.open-nav-button.x > span::after {
   transform: translate(-10px, -8px) rotate(-45deg);
 }
 </style>
