@@ -113,7 +113,7 @@ export default {
   data() {
     return {
       logoPath: logo,
-      navOpen: true,
+      navOpen: false,
     };
   },
   components: {
