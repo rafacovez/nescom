@@ -31,4 +31,10 @@ export default {
   transform: translateY(-1px);
   box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.2);
 }
+
+@media only screen and (min-width: 768px) {
+  .primary-btn {
+    width: fit-content;
+  }
+}
 </style>

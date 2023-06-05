@@ -1,12 +1,14 @@
 <template>
   <ComponentLayout class="landing-section">
-    <h1>
-      Hacemos más efectivas las relaciones entre nuestros clientes y sus
-      asociados.
-    </h1>
-    <PrimaryButton @click="scrollTo('#contactSection')"
-      >Contáctanos</PrimaryButton
-    >
+    <div class="landing-section__text">
+      <h1>
+        Hacemos más efectivas las relaciones entre nuestros clientes y sus
+        asociados.
+      </h1>
+      <PrimaryButton @click="scrollTo('#contactSection')"
+        >Contáctanos</PrimaryButton
+      >
+    </div>
   </ComponentLayout>
 </template>
 
@@ -30,9 +32,16 @@ export default {
 </script>
 
 <style>
-.landing-section {
+.landing-section__text {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .landing-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }
 </style>
