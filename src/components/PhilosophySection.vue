@@ -51,4 +51,17 @@ export default {
 .philosophy-section > section > p {
   font-size: calc(var(--font-size) * 0.9);
 }
+
+@media only screen and (min-width: 768px) {
+  .philosophy-section {
+    flex-direction: row;
+    gap: 4rem;
+    justify-content: center;
+  }
+
+  .philosophy-section > section {
+    text-align: center;
+    max-width: 300px;
+  }
+}
 </style>

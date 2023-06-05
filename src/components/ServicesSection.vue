@@ -132,4 +132,11 @@ export default {
   opacity: 0;
   visibility: hidden;
 }
+
+@media only screen and (min-width: 768px) {
+  .services-wrapper {
+    gap: 0;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
 </style>
