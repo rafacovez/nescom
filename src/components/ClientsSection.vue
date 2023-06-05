@@ -210,6 +210,7 @@ export default {
   filter: grayscale(100%);
   cursor: pointer;
   transition: all ease-out 0.2s;
+  overflow: hidden;
 }
 
 .clients-wrapper__client:hover {
@@ -222,7 +223,14 @@ export default {
 }
 
 .clients-wrapper__client > img {
+  max-width: 100px;
   width: 100%;
   margin: 0 auto;
+}
+
+@media only screen and (min-width: 768px) {
+  .clients-wrapper {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 }
 </style>
