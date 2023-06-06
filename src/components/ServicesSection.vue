@@ -92,6 +92,7 @@ export default {
   margin: 0;
   padding: 1rem;
   height: 250px;
+  width: 100%;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -106,7 +107,7 @@ export default {
   position: absolute;
   inset: 0;
   background-color: var(--black);
-  opacity: 0.8;
+  opacity: 0.9;
   z-index: -25;
   transition: all ease-out 0.1s;
 }
@@ -133,10 +134,42 @@ export default {
   visibility: hidden;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1080px) {
   .services-wrapper {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     gap: 0;
-    grid-template-columns: 1fr 1fr 1fr;
+    place-content: center;
+    margin: 4rem 0;
+  }
+
+  .service {
+    height: 400px;
+    width: 250px;
+    padding: 2rem;
+    margin: -1rem;
+    transition: all ease-out 0.2s;
+  }
+
+  .commercial-voice {
+    transform: scale(1);
+    z-index: 15;
+  }
+
+  .communication,
+  .public-relations {
+    transform: scale(0.95);
+    z-index: 10;
+  }
+
+  .master-of-ceremony,
+  .voiceover {
+    transform: scale(0.9);
+    z-index: 5;
+  }
+
+  .service:hover {
+    transform: scale(1.05);
+    z-index: 20;
   }
 }
 </style>
