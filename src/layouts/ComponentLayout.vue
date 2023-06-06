@@ -13,13 +13,14 @@ export default {
 <style>
 .component {
   border-top: 1px solid var(--gray);
-  max-width: 800px;
+  max-width: 1000px;
   margin: 2rem auto;
   padding: 2rem;
 }
 
 @media only screen and (min-width: 768px) {
   .component {
+    border-top: none;
     padding: 4rem 2rem;
   }
 }
