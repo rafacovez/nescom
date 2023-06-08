@@ -1,7 +1,12 @@
 <template>
   <header class="header">
     <img class="logo" :src="logoPath" alt="Nescom RD" />
-    <button @click="toggleNav" class="open-nav-button" :class="{ x: navOpen }">
+    <button
+      v-if="screenWidth < 768"
+      @click="toggleNav"
+      class="open-nav-button"
+      :class="{ x: navOpen }"
+    >
       <span></span>
     </button>
     <nav class="nav" :class="{ show: navOpen }">
@@ -46,7 +51,7 @@
           </a>
         </li>
       </ul>
-      <div class="nav__social-media">
+      <div v-if="screenWidth < 768" class="nav__social-media">
         <button
           @click="
             navigateToInstagram();
@@ -114,6 +119,7 @@ export default {
     return {
       logoPath: logo,
       navOpen: false,
+      screenWidth: window.innerWidth,
     };
   },
   components: {
@@ -123,18 +129,35 @@ export default {
     YoutubeLogo,
     ArrowUpRightIcon,
   },
+  mounted() {
+    this.setScreenWidth();
+    window.addEventListener("resize", this.setScreenWidth);
+    if (this.screenWidth >= 768) {
+      this.navOpen = true;
+    } else {
+      this.navOpen = false;
+    }
+  },
+  beforeUnmount() {
+    window.removeEventListener("resize", this.setScreenWidth);
+  },
   methods: {
     toggleNav() {
-      this.navOpen = !this.navOpen;
-      if (this.navOpen) {
-        document.body.classList.add("no-scroll");
-      } else {
-        document.body.classList.remove("no-scroll");
+      if (this.screenWidth < 768) {
+        this.navOpen = !this.navOpen;
+        if (this.navOpen) {
+          document.body.classList.add("no-scroll");
+        } else {
+          document.body.classList.remove("no-scroll");
+        }
       }
     },
     scrollTo(selector) {
       const element = document.querySelector(selector);
       element.scrollIntoView({ behavior: "smooth" });
+    },
+    setScreenWidth() {
+      this.screenWidth = window.innerWidth;
     },
     navigateToInstagram() {
       window.location.href = "https://www.instagram.com/nescomrd";
@@ -285,5 +308,51 @@ export default {
 
 .open-nav-button.x > span::after {
   transform: translate(-10px, -8px) rotate(-45deg);
+}
+
+@media only screen and (min-width: 768px) {
+  .header {
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 4rem;
+  }
+
+  .logo {
+    max-width: 50px;
+  }
+
+  .nav {
+    position: static;
+    width: fit-content;
+    padding: 0;
+    margin: 0;
+    z-index: 0;
+  }
+
+  .nav > ul {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .nav > ul > li {
+    padding: 0.5rem 0;
+    margin: 0 0.5rem;
+    border-bottom-width: 4px;
+    border-bottom-color: var(--red);
+    transition: all ease-out 0.2s;
+  }
+
+  .nav > ul > li:hover {
+    padding: 0.5rem;
+    margin: 0;
+    background-color: var(--red);
+    color: var(--white);
+  }
+
+  .nav > ul > li:hover > a,
+  .nav > ul > li:hover > a > li,
+  .nav > ul > li:hover > a > .icon {
+    color: var(--white);
+  }
 }
 </style>
