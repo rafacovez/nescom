@@ -120,4 +120,10 @@ export default {
 .sub-footer > p > a:hover {
   text-decoration: none;
 }
+
+@media only screen and (min-width: 768px) {
+  .footer > ul {
+    align-items: center;
+  }
+}
 </style>
