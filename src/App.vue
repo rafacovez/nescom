@@ -24,6 +24,8 @@ export default {
   --dark-gray: rgb(50, 50, 50);
   --white: rgba(242, 242, 242);
   --red: rgba(237, 57, 56);
+  --border-radius-sm: 2px;
+  --border-radius-md: 32px;
 }
 
 html {

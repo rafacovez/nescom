@@ -1,10 +1,10 @@
 <template>
   <PrimaryLayout>
-    <LandingSection />
-    <ServicesSection />
-    <PhilosophySection />
-    <ClientsSection />
-    <ContactSection />
+    <LandingSection id="landingSection" />
+    <ServicesSection id="servicesSection" />
+    <PhilosophySection id="philosophySection" />
+    <ClientsSection id="clientsSection" />
+    <ContactSection id="contactSection" />
   </PrimaryLayout>
 </template>
 
