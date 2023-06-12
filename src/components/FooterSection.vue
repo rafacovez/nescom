@@ -75,16 +75,18 @@ export default {
   margin: 0;
 }
 
-.footer > ul > li,
-.footer > ul > li > a {
-  font-size: calc(var(--font-size) * 0.9);
+.footer > ul > li {
+  font-size: calc(var(--font-size) * 0.8);
   text-decoration: underline;
   width: fit-content;
   padding: 0;
   margin: 0;
+  cursor: pointer;
+}
+
+.footer > ul > li > a {
   display: flex;
   gap: 0.2rem;
-  cursor: pointer;
 }
 
 .footer > ul > li:hover,
@@ -106,11 +108,14 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
-  font-size: calc(var(--font-size) * 0.8);
   background-color: var(--white);
-  color: var(--gray);
   padding: 1rem;
   text-align: center;
+}
+
+.sub-footer > p {
+  color: var(--gray);
+  font-size: calc(var(--font-size) * 0.7);
 }
 
 .sub-footer > p > a {

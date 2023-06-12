@@ -1,5 +1,5 @@
 <template>
-  <ComponentLayout id="clientsSection" class="clients-section">
+  <ComponentLayout class="clients-section">
     <h3 class="clients-section__heading">Nuestros clientes</h3>
     <div class="clients-wrapper">
       <button
@@ -206,7 +206,7 @@ export default {
   height: 100px;
   padding: 1rem;
   margin: 0;
-  border-radius: 2px;
+  border-radius: var(--border-radius-sm);
   filter: grayscale(100%);
   cursor: pointer;
   transition: all ease-out 0.2s;

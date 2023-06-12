@@ -20,8 +20,8 @@ export default {
   height: auto;
   width: 100%;
   margin: 0;
-  padding: 0.5rem 2rem;
-  border-radius: 4px;
+  padding: 0.5rem 4rem;
+  border-radius: var(--border-radius-md);
   box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transition: all ease-out 0.2s;

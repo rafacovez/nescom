@@ -1,5 +1,5 @@
 <template>
-  <ComponentLayout id="servicesSection" class="services-section">
+  <ComponentLayout class="services-section">
     <h2>Nuestros servicios</h2>
     <article class="services-wrapper">
       <section class="service master-of-ceremony">
@@ -87,7 +87,7 @@ export default {
 .service {
   position: relative;
   border: 2px solid var(--red);
-  border-radius: 4px;
+  border-radius: var(--border-radius-sm);
   color: var(--white);
   margin: 0;
   padding: 1rem;

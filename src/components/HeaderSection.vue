@@ -331,28 +331,16 @@ export default {
 
   .nav > ul {
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
   }
 
   .nav > ul > li {
     padding: 0.5rem 0;
-    margin: 0 0.5rem;
-    border-bottom-width: 4px;
-    border-bottom-color: var(--red);
     transition: all ease-out 0.2s;
   }
 
   .nav > ul > li:hover {
-    padding: 0.5rem;
-    margin: 0;
-    background-color: var(--red);
-    color: var(--white);
-  }
-
-  .nav > ul > li:hover > a,
-  .nav > ul > li:hover > a > li,
-  .nav > ul > li:hover > a > .icon {
-    color: var(--white);
+    border-bottom-color: var(--red);
   }
 }
 </style>
