@@ -9,7 +9,7 @@
         >Contáctanos</PrimaryButton
       >
     </div>
-    <div v-if="screenWidth >= 768" class="landing-section__illustration">
+    <div v-if="screenWidth >= 1080" class="landing-section__illustration">
       <CommunicationIllustration />
     </div>
   </ComponentLayout>
@@ -58,15 +58,20 @@ export default {
   gap: 2rem;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 1080px) {
   .landing-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    place-items: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .landing-section > div {
+    flex-basis: 50%;
   }
 
   .landing-section__text > h1 {
-    font-size: calc(var(--font-size) * 2.5);
+    font-size: calc(var(--font-size) * 3);
   }
 
   .landing-section__illustration {
