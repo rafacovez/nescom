@@ -107,9 +107,9 @@ export default {
   position: absolute;
   inset: 0;
   background-color: var(--black);
-  opacity: 0.9;
+  opacity: 0.8;
   z-index: -25;
-  transition: all ease-out 0.1s;
+  transition: all ease-out 0.2s;
 }
 
 .service > img {
@@ -121,17 +121,8 @@ export default {
   z-index: -50;
 }
 
-.service > h3,
-.service > p {
-  z-index: 50;
-  transition: all ease-out 0.1s;
-}
-
-.service:hover::after,
-.service:hover > h3,
-.service:hover > p {
-  opacity: 0;
-  visibility: hidden;
+.service:hover::after {
+  opacity: 0.9;
 }
 
 @media only screen and (min-width: 1080px) {
@@ -146,7 +137,7 @@ export default {
     height: 400px;
     width: 250px;
     padding: 2rem;
-    margin: -1rem;
+    margin: -0.75rem;
     transition: all ease-out 0.2s;
   }
 
