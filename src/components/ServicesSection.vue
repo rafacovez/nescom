@@ -112,6 +112,10 @@ export default {
   transition: all ease-out 0.2s;
 }
 
+.service > p {
+  font-size: calc(var(--font-size) * 0.9);
+}
+
 .service > img {
   position: absolute;
   inset: 0;
