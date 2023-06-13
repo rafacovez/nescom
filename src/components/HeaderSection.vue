@@ -335,12 +335,24 @@ export default {
   }
 
   .nav > ul > li {
-    padding: 0.5rem 0;
+    font-weight: var(--font-bold);
+    border-bottom-width: 2px;
+    padding: 0.2rem 0;
+    transition: all ease-out 0.2s;
+  }
+
+  .nav > ul > li > a > .icon {
+    width: 20px;
     transition: all ease-out 0.2s;
   }
 
   .nav > ul > li:hover {
     border-bottom-color: var(--red);
+  }
+
+  .nav > ul > li:hover > a > .icon {
+    color: var(--red);
+    transform: translate(2px, -2px);
   }
 }
 </style>
