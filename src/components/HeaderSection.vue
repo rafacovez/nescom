@@ -1,6 +1,14 @@
 <template>
+  <div v-if="screenWidth > 768" class="pre-header">
+    <a href="https://porlalinea.com.do">
+      Por La Línea: Un medio para defender el derecho a la información.
+      <ArrowUpRightIcon class="icon" />
+    </a>
+  </div>
   <header class="header">
-    <img class="logo" :src="logoPath" alt="Nescom RD" />
+    <a href="https://nescomrd.com"
+      ><img class="logo" :src="logoPath" alt="Nescom RD"
+    /></a>
     <button
       v-if="screenWidth < 768"
       @click="toggleNav"
@@ -11,14 +19,6 @@
     </button>
     <nav class="nav" :class="{ show: navOpen }">
       <ul>
-        <li
-          @click="
-            scrollTo('#philosophySection');
-            toggleNav();
-          "
-        >
-          ¿Quiénes somos?
-        </li>
         <li
           @click="
             scrollTo('#servicesSection');
@@ -112,6 +112,7 @@ import FacebookLogo from "@/assets/icons/FacebookLogo.vue";
 import TwitterLogo from "@/assets/icons/TwitterLogo.vue";
 import YoutubeLogo from "@/assets/icons/YoutubeLogo.vue";
 import { ArrowUpRightIcon } from "@heroicons/vue/20/solid";
+import navigateTo from "@/functions/navigateTo";
 
 export default {
   name: "HeaderSection",
@@ -130,8 +131,6 @@ export default {
     ArrowUpRightIcon,
   },
   mounted() {
-    this.setScreenWidth();
-    window.addEventListener("resize", this.setScreenWidth);
     if (this.screenWidth >= 768) {
       this.navOpen = true;
     } else {
@@ -160,17 +159,16 @@ export default {
       this.screenWidth = window.innerWidth;
     },
     navigateToInstagram() {
-      window.location.href = "https://www.instagram.com/nescomrd";
+      navigateTo.navigateToInstagram();
     },
     navigateToFacebook() {
-      window.location.href = "https://www.facebook.com/nescomrd";
+      navigateTo.navigateToFacebook();
     },
     navigateToTwitter() {
-      window.location.href = "https://twitter.com/nescomrd";
+      navigateTo.navigateToTwitter();
     },
     navigateToYoutube() {
-      window.location.href =
-        "https://www.youtube.com/channel/UCK6yeR3uawJDFfUKMehdD1A";
+      navigateTo.navigateToYoutube();
     },
   },
 };
@@ -178,6 +176,7 @@ export default {
 
 <style>
 .header {
+  background-color: var(--white);
   display: flex;
   justify-content: space-between;
   padding: 1rem 2rem;
@@ -311,14 +310,41 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
+  .pre-header {
+    background-color: var(--red);
+    margin: 0;
+    padding: 0.5rem 0;
+  }
+
+  .pre-header > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    color: var(--white);
+    font-size: calc(var(--font-size) * 0.7);
+    font-weight: var(--font-bold);
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .pre-header > a > .icon {
+    width: 15px;
+    transition: all ease-out 0.2s;
+  }
+
+  .pre-header > a:hover > .icon {
+    transform: translate(2px, -2px);
+  }
+
   .header {
+    position: sticky;
+    top: 0;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 4rem;
-  }
-
-  .logo {
-    max-width: 50px;
+    z-index: 500;
+    border-bottom: 1px solid var(--gray);
   }
 
   .nav {
@@ -335,6 +361,7 @@ export default {
   }
 
   .nav > ul > li {
+    font-size: calc(var(--font-size) * 0.8);
     font-weight: var(--font-bold);
     border-bottom-width: 2px;
     padding: 0.2rem 0;
@@ -342,7 +369,6 @@ export default {
   }
 
   .nav > ul > li > a > .icon {
-    width: 20px;
     transition: all ease-out 0.2s;
   }
 
