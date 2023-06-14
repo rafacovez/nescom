@@ -1,6 +1,5 @@
 <template>
   <SocialMediaModal />
-  <ScrollTrackingModal />
   <HeaderSection />
   <main>
     <slot></slot>
@@ -12,7 +11,6 @@
 import HeaderSection from "../components/HeaderSection.vue";
 import FooterSection from "../components/FooterSection.vue";
 import SocialMediaModal from "../components/SocialMediaModal.vue";
-import ScrollTrackingModal from "../components/ScrollTrackingModal.vue";
 
 export default {
   name: "PrimaryLayout",
@@ -20,7 +18,6 @@ export default {
     HeaderSection,
     FooterSection,
     SocialMediaModal,
-    ScrollTrackingModal,
   },
 };
 </script>
