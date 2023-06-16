@@ -1,5 +1,5 @@
 <template>
-  <div v-if="screenWidth > 768" class="pre-header">
+  <div class="pre-header">
     <a href="https://porlalinea.com.do">
       Por La Línea: Un medio para defender el derecho a la información.
       <ArrowUpRightIcon class="icon" />
@@ -9,12 +9,7 @@
     <a href="https://nescomrd.com"
       ><img class="logo" :src="logoPath" alt="Nescom RD"
     /></a>
-    <button
-      v-if="screenWidth < 768"
-      @click="toggleNav"
-      class="open-nav-button"
-      :class="{ x: navOpen }"
-    >
+    <button @click="toggleNav" class="open-nav-button" :class="{ x: navOpen }">
       <span></span>
     </button>
     <nav class="nav" :class="{ show: navOpen }">
@@ -51,7 +46,7 @@
           </a>
         </li>
       </ul>
-      <div v-if="screenWidth < 768" class="nav__social-media">
+      <div class="nav__social-media">
         <button
           @click="
             navigateToInstagram();
@@ -112,7 +107,13 @@ import FacebookLogo from "@/assets/icons/FacebookLogo.vue";
 import TwitterLogo from "@/assets/icons/TwitterLogo.vue";
 import YoutubeLogo from "@/assets/icons/YoutubeLogo.vue";
 import { ArrowUpRightIcon } from "@heroicons/vue/20/solid";
-import navigateTo from "@/functions/navigateTo";
+import {
+  navigateToInstagram,
+  navigateToFacebook,
+  navigateToTwitter,
+  navigateToYoutube,
+} from "@/utils/navigateTo";
+import { scrollTo } from "@/utils/scrollTo";
 
 export default {
   name: "HeaderSection",
@@ -131,11 +132,7 @@ export default {
     ArrowUpRightIcon,
   },
   mounted() {
-    if (this.screenWidth >= 768) {
-      this.navOpen = true;
-    } else {
-      this.navOpen = false;
-    }
+    window.addEventListener("resize", this.setScreenWidth);
   },
   beforeUnmount() {
     window.removeEventListener("resize", this.setScreenWidth);
@@ -151,30 +148,33 @@ export default {
         }
       }
     },
-    scrollTo(selector) {
-      const element = document.querySelector(selector);
-      element.scrollIntoView({ behavior: "smooth" });
-    },
     setScreenWidth() {
       this.screenWidth = window.innerWidth;
     },
+    scrollTo(selector) {
+      scrollTo(selector);
+    },
     navigateToInstagram() {
-      navigateTo.navigateToInstagram();
+      navigateToInstagram();
     },
     navigateToFacebook() {
-      navigateTo.navigateToFacebook();
+      navigateToFacebook();
     },
     navigateToTwitter() {
-      navigateTo.navigateToTwitter();
+      navigateToTwitter();
     },
     navigateToYoutube() {
-      navigateTo.navigateToYoutube();
+      navigateToYoutube();
     },
   },
 };
 </script>
 
 <style>
+.pre-header {
+  display: none;
+}
+
 .header {
   background-color: var(--white);
   display: flex;
@@ -311,12 +311,13 @@ export default {
 
 @media only screen and (min-width: 768px) {
   .pre-header {
-    background-color: var(--red);
-    margin: 0;
-    padding: 0.5rem 0;
+    display: block;
   }
 
   .pre-header > a {
+    background-color: var(--red);
+    margin: 0;
+    padding: 0.5rem 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -379,6 +380,14 @@ export default {
   .nav > ul > li:hover > a > .icon {
     color: var(--red);
     transform: translate(2px, -2px);
+  }
+
+  .nav__social-media {
+    display: none;
+  }
+
+  .open-nav-button {
+    display: none;
   }
 }
 </style>

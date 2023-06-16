@@ -9,7 +9,7 @@
         >Contáctanos</PrimaryButton
       >
     </div>
-    <div v-if="screenWidth >= 1080" class="landing-section__illustration">
+    <div class="landing-section__illustration">
       <CommunicationIllustration />
     </div>
   </ComponentLayout>
@@ -27,25 +27,10 @@ export default {
     ComponentLayout,
     CommunicationIllustration,
   },
-  data() {
-    return {
-      screenWidth: window.innerWidth,
-    };
-  },
-  mounted() {
-    this.setScreenWidth();
-    window.addEventListener("resize", this.setScreenWidth);
-  },
-  beforeUnmount() {
-    window.removeEventListener("resize", this.setScreenWidth);
-  },
   methods: {
     scrollTo(selector) {
       const element = document.querySelector(selector);
       element.scrollIntoView({ behavior: "smooth" });
-    },
-    setScreenWidth() {
-      this.screenWidth = window.innerWidth;
     },
   },
 };
@@ -56,6 +41,10 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+}
+
+.landing-section__illustration {
+  display: none;
 }
 
 @media only screen and (min-width: 1080px) {
@@ -75,6 +64,7 @@ export default {
   }
 
   .landing-section__illustration {
+    display: block;
     max-width: 250px;
   }
 }

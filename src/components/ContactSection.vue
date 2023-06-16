@@ -70,7 +70,7 @@
         </PrimaryButton>
       </form>
     </div>
-    <div v-if="screenWidth >= 1080" class="contact-section__illustration">
+    <div class="contact-section__illustration">
       <BusinessIllustration />
     </div>
   </ComponentLayout>
@@ -96,20 +96,7 @@ export default {
       inputValueName: "",
       inputValueEmail: "",
       inputValueMessage: "",
-      screenWidth: window.innerWidth,
     };
-  },
-  mounted() {
-    this.setScreenWidth();
-    window.addEventListener("resize", this.setScreenWidth);
-  },
-  beforeUnmount() {
-    window.removeEventListener("resize", this.setScreenWidth);
-  },
-  methods: {
-    setScreenWidth() {
-      this.screenWidth = window.innerWidth;
-    },
   },
   computed: {
     nameHasValue() {
@@ -186,6 +173,10 @@ textarea:focus {
   pointer-events: none;
 }
 
+.contact-section__illustration {
+  display: none;
+}
+
 @media only screen and (min-width: 1080px) {
   .contact-section {
     display: flex;
@@ -200,6 +191,7 @@ textarea:focus {
   }
 
   .contact-section__illustration {
+    display: block;
     flex-basis: 30%;
     max-width: 250px;
   }

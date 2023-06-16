@@ -1,5 +1,5 @@
 <template>
-  <div v-if="screenWidth >= 1080" class="social-media">
+  <div class="social-media">
     <button
       @click="
         navigateToInstagram();
@@ -59,33 +59,13 @@ import YoutubeLogo from "@/assets/icons/YoutubeLogo.vue";
 
 export default {
   name: "SocialMediaModal",
-  data() {
-    return {
-      screenWidth: window.innerWidth,
-    };
-  },
   components: {
     InstagramLogo,
     FacebookLogo,
     TwitterLogo,
     YoutubeLogo,
   },
-  mounted() {
-    this.setScreenWidth();
-    window.addEventListener("resize", this.setScreenWidth);
-    if (this.screenWidth >= 768) {
-      this.navOpen = true;
-    } else {
-      this.navOpen = false;
-    }
-  },
-  beforeUnmount() {
-    window.removeEventListener("resize", this.setScreenWidth);
-  },
   methods: {
-    setScreenWidth() {
-      this.screenWidth = window.innerWidth;
-    },
     navigateToInstagram() {
       window.location.href = "https://www.instagram.com/nescomrd";
     },
@@ -105,31 +85,38 @@ export default {
 
 <style>
 .social-media {
-  position: fixed;
-  top: 30%;
-  transform: translateY(-30%);
-  left: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  border: 1px solid var(--gray);
-  width: fit-content;
-  margin: 0;
-  padding: 1rem 0.5rem;
-  border-radius: var(--border-radius-md);
+  display: none;
 }
 
-.social-media__icon {
-  display: grid;
-  place-items: center;
-  background: none;
-  border: none;
-  opacity: 0.5;
-  max-width: 30px;
-  cursor: pointer;
-}
+@media only screen and (min-width: 1080px) {
+  .social-media {
+    display: block;
+    position: fixed;
+    top: 30%;
+    transform: translateY(-30%);
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border: 1px solid var(--gray);
+    width: fit-content;
+    margin: 0;
+    padding: 1rem 0.5rem;
+    border-radius: var(--border-radius-md);
+  }
 
-.social-media__icon:hover {
-  opacity: 1;
+  .social-media__icon {
+    display: grid;
+    place-items: center;
+    background: none;
+    border: none;
+    opacity: 0.5;
+    max-width: 30px;
+    cursor: pointer;
+  }
+
+  .social-media__icon:hover {
+    opacity: 1;
+  }
 }
 </style>
