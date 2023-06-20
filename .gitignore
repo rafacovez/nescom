@@ -2,6 +2,11 @@
 node_modules
 /dist
 
+# APIs
+/api
+
+# Firebase
+*/firebase
 
 # local env files
 .env.local

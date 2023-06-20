@@ -1,2 +1,2 @@
 User-agent: *
-Disallow: ./firebase
+Disallow: ../.env.local

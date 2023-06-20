@@ -132,7 +132,14 @@ export default {
     ArrowUpRightIcon,
   },
   mounted() {
+    this.setScreenWidth();
     window.addEventListener("resize", this.setScreenWidth);
+    if (this.screenWidth >= 768) {
+      this.navOpen = true;
+    } else {
+      this.navOpen = false;
+    }
+    console.log(this.screenWidth);
   },
   beforeUnmount() {
     window.removeEventListener("resize", this.setScreenWidth);
@@ -350,10 +357,9 @@ export default {
 
   .nav {
     position: static;
-    width: fit-content;
     padding: 0;
     margin: 0;
-    z-index: 0;
+    width: fit-content;
   }
 
   .nav > ul {

@@ -2,11 +2,10 @@
   <ComponentLayout class="contact-section">
     <div class="contact-section__text">
       <h3>Envíanos un correo</h3>
-      <form action="">
+      <form ref="form" @submit.prevent="submitForm">
         <div class="form-group">
-          <template v-if="nameHasValue"></template>
           <label
-            v-else
+            v-show="!inputValueName"
             class="label-name"
             for="name"
             :class="{ focused: isFocusedName }"
@@ -16,7 +15,7 @@
             class="input-name"
             type="text"
             id="name"
-            name="name"
+            name="user_name"
             autocomplete="off"
             required
             v-model="inputValueName"
@@ -25,9 +24,8 @@
           />
         </div>
         <div class="form-group">
-          <template v-if="emailHasValue"></template>
           <label
-            v-else
+            v-show="!inputValueEmail"
             class="label-email"
             for="email"
             :class="{ focused: isFocusedEmail }"
@@ -37,7 +35,7 @@
             class="input-email"
             type="email"
             id="email"
-            name="email"
+            name="user_email"
             autocomplete="off"
             required
             v-model="inputValueEmail"
@@ -46,9 +44,8 @@
           />
         </div>
         <div class="form-group">
-          <template v-if="messageHasValue"></template>
           <label
-            v-else
+            v-show="!inputValueMessage"
             class="label-message"
             for="message"
             :class="{ focused: isFocusedMessage }"
@@ -80,6 +77,7 @@
 import ComponentLayout from "@/layouts/ComponentLayout.vue";
 import PrimaryButton from "./PrimaryButton.vue";
 import BusinessIllustration from "../assets/illustrations/BusinessIllustration.vue";
+import emailjs from "emailjs-com";
 
 export default {
   name: "ContactSection",
@@ -98,15 +96,37 @@ export default {
       inputValueMessage: "",
     };
   },
-  computed: {
-    nameHasValue() {
-      return !!this.inputValueName;
-    },
-    emailHasValue() {
-      return !!this.inputValueEmail;
-    },
-    messageHasValue() {
-      return !!this.inputValueMessage;
+  methods: {
+    submitForm() {
+      emailjs
+        .sendForm(
+          process.env.VUE_APP_EMAILJS_SERVICE_ID,
+          process.env.VUE_APP_EMAILJS_TEMPLATE_ID,
+          this.$refs.form,
+          process.env.VUE_APP_EMAILJS_USER_ID,
+          {
+            name: this.inputValueName,
+            email: this.inputValueEmail,
+            message: this.inputValueMessage,
+          }
+        )
+        .then(
+          (result) => {
+            console.log("SUCCESS!", result.text);
+          },
+          (error) => {
+            console.log("FAILED...", error.text);
+          }
+        );
+
+      // Reset form field
+      this.inputValueName = "";
+      this.inputValueEmail = "";
+      this.inputValueMessage = "";
+
+      this.isFocusedName = false;
+      this.isFocusedEmail = false;
+      this.isFocusedMessage = false;
     },
   },
 };
