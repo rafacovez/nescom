@@ -139,7 +139,6 @@ export default {
     } else {
       this.navOpen = false;
     }
-    console.log(this.screenWidth);
   },
   beforeUnmount() {
     window.removeEventListener("resize", this.setScreenWidth);

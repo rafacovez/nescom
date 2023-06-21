@@ -1,4 +1,14 @@
 <template>
+  <SentModal
+    :modal-is-visible="modalIsVisible"
+    @update:modal-is-visible="modalIsVisible = $event"
+    ref="SentModal"
+  >
+    <p>
+      ¡Su mensaje fue enviado exitosamente! Gracias por ponerte en contacto con
+      nosotros.
+    </p>
+  </SentModal>
   <ComponentLayout class="contact-section">
     <div class="contact-section__text">
       <h3>Envíanos un correo</h3>
@@ -77,6 +87,7 @@
 import ComponentLayout from "@/layouts/ComponentLayout.vue";
 import PrimaryButton from "./PrimaryButton.vue";
 import BusinessIllustration from "../assets/illustrations/BusinessIllustration.vue";
+import SentModal from "./SentModal.vue";
 import emailjs from "emailjs-com";
 
 export default {
@@ -85,6 +96,7 @@ export default {
     ComponentLayout,
     PrimaryButton,
     BusinessIllustration,
+    SentModal,
   },
   data() {
     return {
@@ -94,6 +106,7 @@ export default {
       inputValueName: "",
       inputValueEmail: "",
       inputValueMessage: "",
+      modalIsVisible: false,
     };
   },
   methods: {
@@ -127,6 +140,8 @@ export default {
       this.isFocusedName = false;
       this.isFocusedEmail = false;
       this.isFocusedMessage = false;
+
+      this.modalIsVisible = true;
     },
   },
 };
