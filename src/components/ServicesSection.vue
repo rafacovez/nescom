@@ -6,6 +6,7 @@
         v-for="service in services"
         :key="service.id"
         :class="`service ${toKebabCase(service.name)}`"
+        :aria-label="`Detalles sobre el servicio de ${service.heading}`"
       >
         <img v-lazy="getImgSrc(service.name)" :alt="service.heading" />
         <h3>{{ service.heading }}</h3>

@@ -1,15 +1,15 @@
 <template>
-  <SentModal
-    :modal-is-visible="modalIsVisible"
-    @update:modal-is-visible="modalIsVisible = $event"
-    ref="SentModal"
-  >
-    <p>
-      ¡Su mensaje fue enviado exitosamente! Gracias por ponerte en contacto con
-      nosotros.
-    </p>
-  </SentModal>
   <ComponentLayout class="contact-section">
+    <SentModal
+      :modal-is-visible="modalIsVisible"
+      @update:modal-is-visible="modalIsVisible = $event"
+      ref="SentModal"
+    >
+      <p>
+        ¡Su mensaje fue enviado exitosamente! Gracias por ponerte en contacto
+        con nosotros.
+      </p>
+    </SentModal>
     <div class="contact-section__text">
       <h3>Envíanos un correo</h3>
       <form ref="form" @submit.prevent="submitForm">

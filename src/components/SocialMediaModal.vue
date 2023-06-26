@@ -1,83 +1,36 @@
 <template>
   <div class="social-media">
     <button
-      @click="
-        navigateToInstagram();
-        toggleNav();
-      "
+      v-for="social in socials"
+      :key="social.id"
       role="link"
       tabindex="0"
       class="social-media__icon"
-      aria-label="Navigate to Nescom RD Instagram profile"
+      :aria-label="`Navigate to Nescom ${social.name}`"
+      @click="navigateTo(social.url)"
     >
-      <InstagramLogo />
-    </button>
-    <button
-      @click="
-        navigateToFacebook();
-        toggleNav();
-      "
-      role="link"
-      tabindex="0"
-      class="social-media__icon"
-      aria-label="Navigate to Nescom RD Facebook page"
-    >
-      <FacebookLogo />
-    </button>
-    <button
-      @click="
-        navigateToTwitter();
-        toggleNav();
-      "
-      role="link"
-      tabindex="0"
-      class="social-media__icon"
-      aria-label="Navigate to Nescom RD Twitter profile"
-    >
-      <TwitterLogo />
-    </button>
-    <button
-      @click="
-        navigateToYoutube();
-        toggleNav();
-      "
-      role="link"
-      tabindex="0"
-      class="social-media__icon"
-      aria-label="Navigate to Nescom RD Youtube"
-    >
-      <YoutubeLogo />
+      <object :data="getSocialLogo(social.name)" type="image/svg+xml"></object>
     </button>
   </div>
 </template>
 
 <script>
-import InstagramLogo from "@/assets/icons/InstagramLogo.vue";
-import FacebookLogo from "@/assets/icons/FacebookLogo.vue";
-import TwitterLogo from "@/assets/icons/TwitterLogo.vue";
-import YoutubeLogo from "@/assets/icons/YoutubeLogo.vue";
+import socials from "@/data/socials";
+import { navigateTo } from "@/utils/navigateTo";
 
 export default {
   name: "SocialMediaModal",
-  components: {
-    InstagramLogo,
-    FacebookLogo,
-    TwitterLogo,
-    YoutubeLogo,
+  data() {
+    return {
+      socials: socials.socials,
+    };
   },
   methods: {
-    navigateToInstagram() {
-      window.location.href = "https://www.instagram.com/nescomrd";
+    navigateTo(url) {
+      navigateTo(url);
     },
-    navigateToFacebook() {
-      window.location.href = "https://www.facebook.com/nescomrd";
-    },
-    navigateToTwitter() {
-      window.location.href = "https://twitter.com/nescomrd";
-    },
-    navigateToYoutube() {
-      window.location.href =
-        "https://www.youtube.com/channel/UCK6yeR3uawJDFfUKMehdD1A";
+    getSocialLogo(social) {
+      return require(`../assets/${social}Logo.svg`);
     },
   },
 };
