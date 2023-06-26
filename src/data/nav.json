@@ -1,0 +1,16 @@
+{
+  "items": [
+    {
+      "name": "Servicios",
+      "ref": "#servicesSection"
+    },
+    {
+      "name": "Clientes",
+      "ref": "#clientsSection"
+    },
+    {
+      "name": "Contacto",
+      "ref": "#contactSection"
+    }
+  ]
+}
