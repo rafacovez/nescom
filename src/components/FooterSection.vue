@@ -9,7 +9,7 @@
         <a
           href="https://www.porlalinea.com.do/secciones/en-conexion/con-nestor-estevez/"
         >
-          Blog | Néstor Estévez <ArrowUpRightIcon class="icon" />
+          Blog | Néstor Estévez <ArrowUpRight />
         </a>
       </li>
     </ul>
@@ -31,12 +31,12 @@
 </template>
 
 <script>
-import { ArrowUpRightIcon } from "@heroicons/vue/20/solid";
+import ArrowUpRight from "@/assets/icons/ArrowUpRight.vue";
 
 export default {
   name: "FooterSection",
   components: {
-    ArrowUpRightIcon,
+    ArrowUpRight,
   },
   data() {
     return {
@@ -98,10 +98,6 @@ export default {
   text-decoration: none;
   width: fit-content;
   color: var(--white);
-}
-
-.footer > ul > li > a > .icon {
-  width: 15px;
 }
 
 .sub-footer {

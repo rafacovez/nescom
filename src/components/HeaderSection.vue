@@ -2,7 +2,7 @@
   <div class="pre-header">
     <a href="https://porlalinea.com.do">
       Por La Línea: Un medio para defender el derecho a la información.
-      <ArrowUpRightIcon class="icon" />
+      <ArrowUpRight class="icon" />
     </a>
   </div>
   <header class="header">
@@ -42,7 +42,8 @@
           <a
             href="https://www.porlalinea.com.do/secciones/en-conexion/con-nestor-estevez/"
           >
-            Blog | Néstor Estévez <ArrowUpRightIcon class="icon" />
+            Blog | Néstor Estévez
+            <ArrowUpRight class="icon" />
           </a>
         </li>
       </ul>
@@ -106,7 +107,7 @@ import InstagramLogo from "@/assets/icons/InstagramLogo.vue";
 import FacebookLogo from "@/assets/icons/FacebookLogo.vue";
 import TwitterLogo from "@/assets/icons/TwitterLogo.vue";
 import YoutubeLogo from "@/assets/icons/YoutubeLogo.vue";
-import { ArrowUpRightIcon } from "@heroicons/vue/20/solid";
+import ArrowUpRight from "@/assets/icons/ArrowUpRight.vue";
 import {
   navigateToInstagram,
   navigateToFacebook,
@@ -129,7 +130,7 @@ export default {
     FacebookLogo,
     TwitterLogo,
     YoutubeLogo,
-    ArrowUpRightIcon,
+    ArrowUpRight,
   },
   mounted() {
     this.setScreenWidth();
@@ -177,8 +178,19 @@ export default {
 </script>
 
 <style>
-.pre-header {
-  display: none;
+.pre-header > a {
+  background-color: var(--red);
+  margin: 0;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  color: var(--white);
+  font-size: calc(var(--font-size) * 0.7);
+  font-weight: var(--font-bold);
+  text-align: center;
+  text-decoration: none;
 }
 
 .header {
@@ -197,11 +209,10 @@ export default {
   color: var(--black);
   position: fixed;
   flex-direction: column;
-  top: 62px;
-  left: 0;
-  min-height: 100%;
+  inset: 0;
+  height: 100vh;
   width: 100%;
-  padding: 2rem 3rem;
+  padding: 8rem 3rem 0 3rem;
   margin: 0;
   visibility: hidden;
   opacity: 0;
@@ -239,11 +250,6 @@ export default {
   width: 100%;
 }
 
-.nav > ul > li > a > .icon {
-  width: 15px;
-  color: var(--black);
-}
-
 .nav__social-media {
   display: flex;
   align-items: center;
@@ -269,6 +275,7 @@ export default {
   padding: 0;
   margin: 0;
   cursor: pointer;
+  z-index: 200;
 }
 
 .open-nav-button > span {
@@ -302,6 +309,12 @@ export default {
   transition: inherit;
 }
 
+.open-nav-button.x {
+  position: fixed;
+  top: 50px;
+  right: 25px;
+}
+
 .open-nav-button.x > span {
   transform: translateX(10px);
   background-color: rgba(255, 0, 0, 0);
@@ -316,34 +329,6 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
-  .pre-header {
-    display: block;
-  }
-
-  .pre-header > a {
-    background-color: var(--red);
-    margin: 0;
-    padding: 0.5rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.2rem;
-    color: var(--white);
-    font-size: calc(var(--font-size) * 0.7);
-    font-weight: var(--font-bold);
-    text-align: center;
-    text-decoration: none;
-  }
-
-  .pre-header > a > .icon {
-    width: 15px;
-    transition: all ease-out 0.2s;
-  }
-
-  .pre-header > a:hover > .icon {
-    transform: translate(2px, -2px);
-  }
-
   .header {
     position: sticky;
     top: 0;
@@ -358,6 +343,7 @@ export default {
     position: static;
     padding: 0;
     margin: 0;
+    height: fit-content;
     width: fit-content;
   }
 
@@ -374,17 +360,8 @@ export default {
     transition: all ease-out 0.2s;
   }
 
-  .nav > ul > li > a > .icon {
-    transition: all ease-out 0.2s;
-  }
-
   .nav > ul > li:hover {
     border-bottom-color: var(--red);
-  }
-
-  .nav > ul > li:hover > a > .icon {
-    color: var(--red);
-    transform: translate(2px, -2px);
   }
 
   .nav__social-media {

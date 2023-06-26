@@ -1,4 +1,5 @@
 <template>
+  <SocialMediaModal />
   <PrimaryLayout>
     <LandingSection id="landingSection" />
     <ServicesSection id="servicesSection" />
@@ -15,10 +16,12 @@ import ServicesSection from "./components/ServicesSection.vue";
 import PhilosophySection from "./components/PhilosophySection.vue";
 import ClientsSection from "./components/ClientsSection.vue";
 import ContactSection from "./components/ContactSection.vue";
+import SocialMediaModal from "./components/SocialMediaModal.vue";
 
 export default {
   name: "HomePage",
   components: {
+    SocialMediaModal,
     PrimaryLayout,
     LandingSection,
     ServicesSection,

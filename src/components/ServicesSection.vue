@@ -2,48 +2,14 @@
   <ComponentLayout class="services-section">
     <h2>Nuestros servicios</h2>
     <article class="services-wrapper">
-      <section class="service master-of-ceremony">
-        <img v-lazy="masterOfCeremonyImg" alt="Maestría de ceremonias" />
-        <h3>Maestría de ceremonias</h3>
-        <p>
-          Cuando organizas una actividad, el papel de quien conduce se vuelve
-          determinante para el éxito o el fracaso de la misma.
-        </p>
-      </section>
-      <section class="service communication">
-        <img v-lazy="communicationImg" alt="Hand gesturing" />
-        <h3>Consultoría en comunicación</h3>
-        <p>
-          Siempre necesitaremos comunicarnos. ¿Cómo te comunicas? ¿Lo quieres
-          mejorar? Nosotros podemos ayudarte.
-        </p>
-      </section>
-      <section class="service commercial-voice">
-        <img v-lazy="commercialVoiceImg" alt="Microphone hanging up" />
-        <h3>Voz comercial</h3>
-        <p>
-          Cada mensaje ha iniciado como idea que pasa por diversos procesos.
-          Nosotros disponemos de la capacidad para hacer más impactante tu
-          mensaje.
-        </p>
-      </section>
-      <section class="service public-relations">
-        <img v-lazy="publicRelationsImg" alt="Hands shaking" />
-        <h3>Relaciones públicas</h3>
-        <p>
-          En un mundo tan cambiante, el esfuerzo planeado para influenciar la
-          opinión es determinante para iniciar, mantener o mejorar fructíferas
-          relaciones.
-        </p>
-      </section>
-      <section class="service voiceover">
-        <img v-lazy="voiceoverImg" alt="Microphone on air" />
-        <h3>Oratoria y locución</h3>
-        <p>
-          El adecuado manejo de la palabra marca la diferencia. Para quienes
-          tienen sueños o ideas por realizar, la oratoria se vuelve una especie
-          de llave maestra.
-        </p>
+      <section
+        v-for="service in services"
+        :key="service.id"
+        :class="`service ${toKebabCase(service.name)}`"
+      >
+        <img v-lazy="getImgSrc(service.name)" :alt="service.heading" />
+        <h3>{{ service.heading }}</h3>
+        <p>{{ service.description }}</p>
       </section>
     </article>
   </ComponentLayout>
@@ -51,25 +17,27 @@
 
 <script>
 import ComponentLayout from "@/layouts/ComponentLayout.vue";
-import masterOfCeremony from "../assets/services/master-of-ceremony.webp";
-import communication from "../assets/services/communication.webp";
-import commercialVoice from "../assets/services/commercial-voice.webp";
-import publicRelations from "../assets/services/public-relations.webp";
-import voiceover from "../assets/services/voiceover.webp";
+import services from "../data/services.json";
 
 export default {
   name: "ServicesSection",
   data() {
     return {
-      masterOfCeremonyImg: masterOfCeremony,
-      communicationImg: communication,
-      commercialVoiceImg: commercialVoice,
-      publicRelationsImg: publicRelations,
-      voiceoverImg: voiceover,
+      services: services.services,
     };
   },
   components: {
     ComponentLayout,
+  },
+  methods: {
+    toKebabCase(target) {
+      const kebab = target.toLowerCase().replace(/\s+/g, "-");
+      return kebab;
+    },
+    getImgSrc(target) {
+      const logo = this.toKebabCase(target);
+      return require(`../assets/${logo}.webp`);
+    },
   },
 };
 </script>
