@@ -19,13 +19,14 @@
         :key="social.id"
         role="link"
         tabindex="0"
-        class="social-media-icon"
+        class="nav__social-media--link"
         :aria-label="`Navigate to Nescom ${social.name}`"
         @click="navigateTo(social.url)"
       >
         <object
           :data="getSocialLogo(social.name)"
           type="image/svg+xml"
+          class="nav__social-media--icon"
         ></object>
       </button>
     </div>
@@ -152,15 +153,25 @@ export default {
   gap: 1rem;
 }
 
-.nav__social-media > .social-media-icon {
+.nav__social-media--link {
   background: none;
   border: none;
+  width: fit-content;
   cursor: pointer;
   opacity: 0.5;
+  z-index: 2;
 }
 
-.nav__social-media > .social-media-icon:hover {
+.nav__social-media--link:hover {
   opacity: 1;
+}
+
+.nav__social-media--icon {
+  height: 30px;
+  width: 30px;
+  object-fit: cover;
+  border-radius: 50%;
+  pointer-events: none;
 }
 
 @media only screen and (min-width: 768px) {

@@ -5,11 +5,15 @@
       :key="social.id"
       role="link"
       tabindex="0"
-      class="social-media__icon"
+      class="social-media__button"
       :aria-label="`Navigate to Nescom ${social.name}`"
       @click="navigateTo(social.url)"
     >
-      <object :data="getSocialLogo(social.name)" type="image/svg+xml"></object>
+      <object
+        :data="getSocialLogo(social.name)"
+        type="image/svg+xml"
+        class="social-media__icon"
+      ></object>
     </button>
   </div>
 </template>
@@ -52,24 +56,35 @@ export default {
     flex-direction: column;
     gap: 1rem;
     border: 1px solid var(--gray);
+    height: fit-content;
     width: fit-content;
     margin: 0;
     padding: 1rem 0.5rem;
     border-radius: var(--border-radius-md);
+    z-index: 1;
+  }
+
+  .social-media__button {
+    background: none;
+    border: none;
+    height: fit-content;
+    width: fit-content;
+    opacity: 0.5;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+  }
+
+  .social-media__button:hover {
+    opacity: 1;
   }
 
   .social-media__icon {
-    display: grid;
-    place-items: center;
-    background: none;
-    border: none;
-    opacity: 0.5;
-    max-width: 30px;
-    cursor: pointer;
-  }
-
-  .social-media__icon:hover {
-    opacity: 1;
+    height: 30px;
+    width: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+    pointer-events: none;
   }
 }
 </style>
