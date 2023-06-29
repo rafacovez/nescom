@@ -5,12 +5,8 @@ node_modules
 # APIs
 /api
 
-# Firebase
-*/firebase
-
 # local env files
-.env.local
-.env.*.local
+.env.*
 
 # Log files
 npm-debug.log*
