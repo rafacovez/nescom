@@ -86,9 +86,10 @@
 <script>
 import ComponentLayout from "@/layouts/ComponentLayout.vue";
 import PrimaryButton from "./PrimaryButton.vue";
-import BusinessIllustration from "../assets/illustrations/BusinessIllustration.vue";
+import BusinessIllustration from "@/assets/illustrations/BusinessIllustration.vue";
 import SentModal from "./SentModal.vue";
-import emailjs from "emailjs-com";
+import db from "@/firebase/init.js";
+import { collection, addDoc } from "firebase/firestore";
 
 export default {
   name: "ContactSection",
@@ -110,27 +111,19 @@ export default {
     };
   },
   methods: {
-    submitForm() {
-      emailjs
-        .sendForm(
-          process.env.VUE_APP_EMAILJS_SERVICE_ID,
-          process.env.VUE_APP_EMAILJS_TEMPLATE_ID,
-          this.$refs.form,
-          process.env.VUE_APP_EMAILJS_USER_ID,
-          {
-            name: this.inputValueName,
-            email: this.inputValueEmail,
-            message: this.inputValueMessage,
-          }
-        )
-        .then(
-          (result) => {
-            console.log("SUCCESS!", result.text);
-          },
-          (error) => {
-            console.log("FAILED...", error.text);
-          }
-        );
+    async submitForm() {
+      // "users" collection reference
+      const colRef = collection(db, "users");
+
+      // data to send
+      const userData = {
+        name: this.inputValueName,
+        email: this.inputValueEmail,
+        message: this.inputValueMessage,
+      };
+
+      // create document and return reference to it
+      await addDoc(colRef, userData);
 
       // Reset form field
       this.inputValueName = "";

@@ -61,7 +61,7 @@ export default {
     margin: 0;
     padding: 1rem 0.5rem;
     border-radius: var(--border-radius-md);
-    z-index: 1;
+    z-index: 599;
   }
 
   .social-media__button {
@@ -72,7 +72,7 @@ export default {
     opacity: 0.5;
     cursor: pointer;
     position: relative;
-    z-index: 2;
+    z-index: 600;
   }
 
   .social-media__button:hover {
