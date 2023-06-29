@@ -174,6 +174,18 @@ export default {
   pointer-events: none;
 }
 
+.footer > .nav {
+  padding: 2rem;
+}
+
+.footer > .nav > ul {
+  padding: 0;
+}
+
+.footer > * > .nav__social-media {
+  margin-top: 2rem;
+}
+
 @media only screen and (min-width: 768px) {
   .header > .nav {
     position: static;
