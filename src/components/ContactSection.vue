@@ -1,15 +1,15 @@
 <template>
   <ComponentLayout class="contact-section">
-    <SentModal
+    <PopUpModal
       :modal-is-visible="modalIsVisible"
       @update:modal-is-visible="modalIsVisible = $event"
-      ref="SentModal"
+      ref="PopUpModal"
+      class="sent"
     >
-      <p>
-        ¡Su mensaje fue enviado exitosamente! Gracias por ponerte en contacto
-        con nosotros.
-      </p>
-    </SentModal>
+      <CheckIcon class="sent__check-icon" />
+      <p class="sent__heading">¡Bien!</p>
+      <p class="sent__para">Su mensaje fue enviado exitosamente.</p>
+    </PopUpModal>
     <div class="contact-section__text">
       <h3>Envíanos un correo</h3>
       <form ref="form" @submit.prevent="submitForm">
@@ -87,7 +87,8 @@
 import ComponentLayout from "@/layouts/ComponentLayout.vue";
 import PrimaryButton from "./PrimaryButton.vue";
 import BusinessIllustration from "@/assets/illustrations/BusinessIllustration.vue";
-import SentModal from "./SentModal.vue";
+import PopUpModal from "./PopUpModal.vue";
+import { CheckIcon } from "@heroicons/vue/20/solid";
 import db from "@/firebase/init.js";
 import { collection, addDoc } from "firebase/firestore";
 
@@ -97,7 +98,8 @@ export default {
     ComponentLayout,
     PrimaryButton,
     BusinessIllustration,
-    SentModal,
+    PopUpModal,
+    CheckIcon,
   },
   data() {
     return {
@@ -125,7 +127,7 @@ export default {
       // create document and return reference to it
       await addDoc(colRef, userData);
 
-      // Reset form field
+      // reset form field
       this.inputValueName = "";
       this.inputValueEmail = "";
       this.inputValueMessage = "";
@@ -134,7 +136,7 @@ export default {
       this.isFocusedEmail = false;
       this.isFocusedMessage = false;
 
-      this.modalIsVisible = true;
+      this.$refs.PopUpModal.showPopUp();
     },
   },
 };
@@ -203,6 +205,35 @@ textarea:focus {
 
 .contact-section__illustration {
   display: none;
+}
+
+.sent {
+  text-align: center;
+}
+
+.sent__check-icon {
+  position: absolute;
+  top: 0;
+  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 50px;
+  background-color: green;
+  color: var(--white);
+  border-radius: 50%;
+  padding: 5px;
+}
+
+.sent__heading {
+  font-size: calc(var(--font-size) * 1.5);
+  font-weight: var(--font-bold);
+  margin-top: 1rem;
+}
+
+.sent__para {
+  font-size: calc(var(--font-size) * 0.8);
+  margin: 1rem 0;
 }
 
 @media only screen and (min-width: 1080px) {
