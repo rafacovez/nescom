@@ -1,24 +1,11 @@
-# nescom
+# Nescom SRL Business Website
 
-## Project setup
-```
-npm install
-```
+Welcome to the repository for the Nescom SRL Business Website. This website showcases the services provided by Nescom, a leading company in the Dominican Republic. Nescom specializes in areas such as master of ceremony, commercial voice, public relationships and communication consulting.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Disclaimer
 
-### Compiles and minifies for production
-```
-npm run build
-```
+The code in this repository is licensed under the MIT license. Please refer to the [LICENSE](LICENSE.md) file for more details.
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Contact
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+If you have any questions, feedback, or inquiries, please feel free to contact us via email at [contact@nescom.com](mailto:contact@nescom.com).
