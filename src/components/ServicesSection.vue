@@ -8,9 +8,13 @@
         :class="`service ${toKebabCase(service.name)}`"
         :aria-label="`Detalles sobre el servicio de ${service.heading}`"
       >
-        <img v-lazy="getImgSrc(service.name)" :alt="service.heading" />
-        <h3>{{ service.heading }}</h3>
-        <p>{{ service.description }}</p>
+        <img
+          class="service__img"
+          v-lazy="getImgSrc(service.name)"
+          :alt="service.heading"
+        />
+        <h3 class="service__heading">{{ service.heading }}</h3>
+        <p class="service__paragraph">{{ service.description }}</p>
       </section>
     </article>
   </ComponentLayout>
@@ -44,10 +48,6 @@ export default {
 </script>
 
 <style>
-.services-section > h2 {
-  margin-bottom: 2rem;
-}
-
 .services-wrapper {
   display: grid;
   gap: 2rem;
@@ -81,17 +81,17 @@ export default {
   transition: all ease-out 0.2s;
 }
 
-.service > p {
-  font-size: calc(var(--font-size) * 0.9);
-}
-
-.service > img {
+.service__img {
   position: absolute;
   inset: 0;
   object-fit: cover;
   height: 100%;
   width: 100%;
   z-index: -50;
+}
+
+.service__paragraph {
+  font-size: calc(var(--font-size) * 0.9);
 }
 
 .service:hover::after {

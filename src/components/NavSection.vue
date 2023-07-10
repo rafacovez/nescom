@@ -1,17 +1,15 @@
 <template>
   <nav class="nav">
-    <ul>
-      <li v-for="item in nav" :key="item.id" @click="scrollTo(item.ref)">
+    <ul class="nav__list">
+      <router-link
+        class="nav__item"
+        v-for="item in nav"
+        :key="item.id"
+        :to="item.ref"
+      >
         {{ item.name }}
-      </li>
-      <li>
-        <a
-          href="https://www.porlalinea.com.do/secciones/en-conexion/con-nestor-estevez/"
-        >
-          Blog | Néstor Estévez
-          <ArrowUpRight class="icon" />
-        </a>
-      </li>
+        <ArrowUpRight />
+      </router-link>
     </ul>
     <div class="nav__social-media">
       <button
@@ -89,60 +87,35 @@ export default {
   transform: translateY(0px);
 }
 
-.header > .nav > ul {
-  margin: 0;
-  padding: 0;
-}
-
-.header > .nav > ul > li {
+.header > .nav > .nav__list > .nav__item {
+  display: flex;
+  width: 100%;
   color: var(--black);
   font-size: calc(var(--font-size) * 0.9);
   font-weight: var(--font-regular);
   border-bottom: 1px solid var(--gray);
   padding: 1rem 0;
-  list-style: none;
-  cursor: pointer;
-}
-
-.header > .nav > ul > li > a {
-  display: flex;
-  gap: 0.2rem;
-  color: var(--black);
   text-decoration: none;
-  width: 100%;
 }
 
-.footer > .nav > ul {
+.footer > .nav > .nav__list {
   display: flex;
+  gap: 20px;
   flex-direction: column;
-  gap: 1rem;
   padding: 2rem;
   margin: 0;
 }
 
-.footer > .nav > ul > li {
-  font-size: calc(var(--font-size) * 0.8);
-  text-decoration: underline;
-  width: fit-content;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-}
-
-.footer > .nav > ul > li > a {
+.footer > .nav > .nav__list > .nav__item {
   display: flex;
-  gap: 0.2rem;
-}
-
-.footer > .nav > ul > li:hover,
-.footer > .nav > ul > li > a:hover {
-  text-decoration: none;
-}
-
-.footer > .nav > ul > li > a {
-  text-decoration: none;
   width: fit-content;
   color: var(--white);
+  font-size: calc(var(--font-size) * 0.8);
+  text-decoration: underline;
+}
+
+.footer > .nav > .nav__list > .nav__item:hover {
+  text-decoration: none;
 }
 
 .nav__social-media {
@@ -178,7 +151,7 @@ export default {
   padding: 2rem;
 }
 
-.footer > .nav > ul {
+.footer > .nav > .nav__list {
   padding: 0;
 }
 
@@ -195,24 +168,25 @@ export default {
     width: fit-content;
   }
 
-  .header > .nav > ul {
+  .header > .nav > .nav__list {
     display: flex;
-    gap: 2rem;
+    gap: 30px;
   }
 
-  .header > .nav > ul > li {
+  .header > .nav > .nav__list > .nav__item {
     font-size: calc(var(--font-size) * 0.8);
     font-weight: var(--font-bold);
     border-bottom-width: 2px;
     padding: 0.2rem 0;
     transition: all ease-out 0.2s;
+    width: fit-content;
   }
 
-  .header > .nav > ul > li:hover {
+  .header > .nav > .nav__list > .nav__item:hover {
     border-bottom-color: var(--red);
   }
 
-  .footer > .nav > ul {
+  .footer > .nav > .nav__list {
     align-items: center;
   }
 

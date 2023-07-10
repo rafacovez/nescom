@@ -62,7 +62,6 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.2rem;
   color: var(--white);
   font-size: calc(var(--font-size) * 0.7);
   font-weight: var(--font-bold);

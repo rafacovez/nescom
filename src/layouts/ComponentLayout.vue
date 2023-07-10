@@ -18,6 +18,14 @@ export default {
   padding: 2rem;
 }
 
+.component > h1,
+.component > h2,
+.component > h3,
+.component > h4,
+.component > h5 {
+  margin-bottom: 2rem;
+}
+
 @media only screen and (min-width: 768px) {
   .component {
     border-top: none;

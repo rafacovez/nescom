@@ -1,16 +1,16 @@
 {
   "items": [
     {
-      "name": "Servicios",
-      "ref": "#servicesSection"
-    },
-    {
-      "name": "Clientes",
-      "ref": "#clientsSection"
-    },
-    {
       "name": "Contacto",
-      "ref": "#contactSection"
+      "ref": "/contact"
+    },
+    {
+      "name": "Tarjetas de presentación",
+      "ref": "/cards"
+    },
+    {
+      "name": "Blog | Néstor Estévez",
+      "ref": "/blog"
     }
   ]
 }

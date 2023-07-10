@@ -55,10 +55,6 @@ export default {
 </script>
 
 <style>
-.clients-section__heading {
-  margin: 0 0 2rem 0;
-}
-
 .clients-wrapper {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import HomePage from "./HomePage.vue";
+import HomePage from "@/views/HomePage.vue";
 
 export default {
   name: "App",
@@ -24,6 +24,7 @@ export default {
   --dark-gray: rgb(50, 50, 50);
   --white: rgba(242, 242, 242);
   --red: rgba(237, 57, 56);
+  --green: rgb(0, 165, 0);
   --border-radius-sm: 2px;
   --border-radius-md: 32px;
 }
@@ -72,6 +73,8 @@ p {
 ol,
 ul {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 input,

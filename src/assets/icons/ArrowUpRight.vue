@@ -15,11 +15,12 @@ export default {
 
 <style>
 .icon {
+  margin-left: 5px;
   width: 15px;
   transition: all ease-out 0.2s;
 }
 
-a:hover > .icon {
+*:hover > .icon {
   transform: translate(5px, -5px);
 }
 </style>

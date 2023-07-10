@@ -8,7 +8,7 @@
     >
       <CheckIcon class="sent__check-icon" />
       <p class="sent__heading">¡Bien!</p>
-      <p class="sent__para">Su mensaje fue enviado exitosamente.</p>
+      <p class="sent__paragraph">Su mensaje fue enviado exitosamente.</p>
     </PopUpModal>
     <div class="contact-section__text">
       <h3>Envíanos un correo</h3>
@@ -168,7 +168,7 @@ form {
   width: 100%;
   font-size: calc(var(--font-size) * 0.8);
   padding: 1rem;
-  margin: 1.5rem 0 0 0;
+  margin-top: 1.5rem;
 }
 
 .form-group > input,
@@ -181,7 +181,7 @@ form {
 }
 
 .form-group > input:focus,
-textarea:focus {
+.form-group > textarea:focus {
   border: 1px solid blue;
 }
 
@@ -219,7 +219,7 @@ textarea:focus {
   right: 0;
   margin: 0 auto;
   width: 50px;
-  background-color: green;
+  background-color: var(--green);
   color: var(--white);
   border-radius: 50%;
   padding: 5px;
@@ -231,7 +231,7 @@ textarea:focus {
   margin-top: 1rem;
 }
 
-.sent__para {
+.sent__paragraph {
   font-size: calc(var(--font-size) * 0.8);
   margin: 1rem 0;
 }

@@ -5,9 +5,13 @@
         Hacemos más efectivas las relaciones entre nuestros clientes y sus
         asociados.
       </h1>
-      <PrimaryButton @click="scrollTo('#contactSection')"
-        >Contáctanos</PrimaryButton
+      <PrimaryButton
+        class="landing-section__text--btn"
+        @click="scrollTo('#contactSection')"
       >
+        Contáctanos
+        <ArrowUpRight />
+      </PrimaryButton>
     </div>
     <div class="landing-section__illustration">
       <CommunicationIllustration />
@@ -18,7 +22,8 @@
 <script>
 import PrimaryButton from "./PrimaryButton.vue";
 import ComponentLayout from "@/layouts/ComponentLayout.vue";
-import CommunicationIllustration from "../assets/illustrations/CommunicationIllustration.vue";
+import CommunicationIllustration from "@/assets/illustrations/CommunicationIllustration.vue";
+import ArrowUpRight from "@/assets/icons/ArrowUpRight.vue";
 
 export default {
   name: "LandingSection",
@@ -26,6 +31,7 @@ export default {
     PrimaryButton,
     ComponentLayout,
     CommunicationIllustration,
+    ArrowUpRight,
   },
   methods: {
     scrollTo(selector) {
@@ -47,6 +53,10 @@ export default {
   display: none;
 }
 
+.landing-section__text--btn {
+  display: flex;
+}
+
 @media only screen and (min-width: 1080px) {
   .landing-section {
     display: flex;
@@ -65,7 +75,7 @@ export default {
 
   .landing-section__illustration {
     display: block;
-    max-width: 250px;
+    max-width: 350px;
   }
 }
 </style>
