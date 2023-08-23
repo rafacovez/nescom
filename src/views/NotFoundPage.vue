@@ -1,5 +1,5 @@
 <template>
-  <h1>Didn't found it 404</h1>
+  <h1>Not found! that page doesn't exists...</h1>
 </template>
 
 <script>

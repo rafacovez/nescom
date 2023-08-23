@@ -1,29 +1,34 @@
 import { createApp } from "vue";
-import { createRouter, createWebHistory } from "vue-router";
 import App from "./App.vue";
 import VueLazyload from "vue-lazyload";
-import NotFoundPage from "@/views/NotFoundPage.vue";
-import HomePage from "@/views/HomePage.vue";
-import ContactPage from "@/views/ContactPage.vue";
-
-const NotFound = { template: NotFoundPage };
-const Home = { template: HomePage };
-const Contact = { template: ContactPage };
+import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
-  { path: "/", name: "Home", component: Home },
-  { path: "/contact", name: "Contact", component: Contact },
-  { path: "/:pathMatch(.*)*", name: "NotFound", component: NotFound },
+  {
+    path: "/blog",
+    name: "BlogPage",
+    component: () => import("@/views/BlogPage.vue"),
+  },
+  {
+    path: "/",
+    name: "HomePage",
+    component: () => import("@/views/HomePage.vue"),
+  },
+  {
+    path: "/:catchAll(.*)", // Matches any route that hasn't been matched by other routes
+    name: "NotFoundPage",
+    component: () => import("@/views/NotFoundPage.vue"),
+  },
 ];
 
-const router = createRouter({
+const routers = createRouter({
   history: createWebHistory(),
   routes,
 });
 
 const app = createApp(App);
 
-app.use(router);
+app.use(routers);
 app.use(VueLazyload);
 
 app.mount("#app");

@@ -64,6 +64,10 @@ export default {
 </script>
 
 <style>
+.nav > .nav__list > .nav__item {
+  cursor: pointer;
+}
+
 .header > .nav {
   background-color: var(--white);
   color: var(--black);

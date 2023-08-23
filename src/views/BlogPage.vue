@@ -1,9 +1,9 @@
 <template>
-  <h1>Contacttt</h1>
+  <h1>I'm the blog</h1>
 </template>
 
 <script>
 export default {
-  name: "ContactPage",
+  name: "BlogPage",
 };
 </script>

@@ -1,16 +1,13 @@
 <template>
   <SocialMediaModal />
-  <PrimaryLayout>
-    <LandingSection id="landingSection" />
-    <ServicesSection id="servicesSection" />
-    <PhilosophySection id="philosophySection" />
-    <ClientsSection id="clientsSection" />
-    <ContactSection id="contactSection" />
-  </PrimaryLayout>
+  <LandingSection id="landingSection" />
+  <ServicesSection id="servicesSection" />
+  <PhilosophySection id="philosophySection" />
+  <ClientsSection id="clientsSection" />
+  <ContactSection id="contactSection" />
 </template>
 
 <script>
-import PrimaryLayout from "@/layouts/PrimaryLayout.vue";
 import LandingSection from "@/components/LandingSection.vue";
 import ServicesSection from "@/components/ServicesSection.vue";
 import PhilosophySection from "@/components/PhilosophySection.vue";
@@ -22,7 +19,6 @@ export default {
   name: "HomePage",
   components: {
     SocialMediaModal,
-    PrimaryLayout,
     LandingSection,
     ServicesSection,
     PhilosophySection,
