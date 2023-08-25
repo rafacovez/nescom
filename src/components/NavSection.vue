@@ -8,7 +8,6 @@
         :to="item.ref"
       >
         {{ item.name }}
-        <ArrowUpRight />
       </router-link>
     </ul>
     <div class="nav__social-media">
@@ -32,7 +31,6 @@
 </template>
 
 <script>
-import ArrowUpRight from "@/assets/icons/ArrowUpRight.vue";
 import nav from "@/data/nav";
 import socials from "@/data/socials";
 import { navigateTo } from "@/utils/navigateTo";
@@ -45,9 +43,6 @@ export default {
       nav: nav.items,
       socials: socials.socials,
     };
-  },
-  components: {
-    ArrowUpRight,
   },
   methods: {
     navigateTo(url) {
@@ -68,7 +63,7 @@ export default {
   cursor: pointer;
 }
 
-.header > .nav {
+.main-header > .nav {
   background-color: var(--white);
   color: var(--black);
   position: fixed;
@@ -85,13 +80,13 @@ export default {
   z-index: 100;
 }
 
-.header > .nav.show {
+.main-header > .nav.show {
   visibility: visible;
   opacity: 1;
   transform: translateY(0px);
 }
 
-.header > .nav > .nav__list > .nav__item {
+.main-header > .nav > .nav__list > .nav__item {
   display: flex;
   width: 100%;
   color: var(--black);
@@ -164,7 +159,7 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
-  .header > .nav {
+  .main-header > .nav {
     position: static;
     padding: 0;
     margin: 0;
@@ -172,12 +167,12 @@ export default {
     width: fit-content;
   }
 
-  .header > .nav > .nav__list {
+  .main-header > .nav > .nav__list {
     display: flex;
     gap: 30px;
   }
 
-  .header > .nav > .nav__list > .nav__item {
+  .main-header > .nav > .nav__list > .nav__item {
     font-size: calc(var(--font-size) * 0.8);
     font-weight: var(--font-bold);
     border-bottom-width: 2px;
@@ -186,7 +181,7 @@ export default {
     width: fit-content;
   }
 
-  .header > .nav > .nav__list > .nav__item:hover {
+  .main-header > .nav > .nav__list > .nav__item:hover {
     border-bottom-color: var(--red);
   }
 

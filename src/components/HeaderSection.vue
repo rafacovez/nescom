@@ -1,18 +1,24 @@
 <template>
-  <div class="pre-header">
-    <a href="https://porlalinea.com.do">
-      Por La Línea: Un medio para defender el derecho a la información.
-      <ArrowUpRight class="icon" />
-    </a>
-  </div>
   <header class="header">
-    <router-link to="/"
-      ><img class="logo" :src="logoPath" alt="Nescom RD"
-    /></router-link>
-    <button @click="toggleNav" class="open-nav-button" :class="{ x: navOpen }">
-      <span></span>
-    </button>
-    <NavSection @click="toggleNav" :class="{ show: navOpen }"></NavSection>
+    <div class="pre-header">
+      <a href="https://porlalinea.com.do">
+        Por La Línea: Un medio para defender el derecho a la información.
+        <ArrowUpRight class="icon" />
+      </a>
+    </div>
+    <div class="main-header">
+      <router-link to="/"
+        ><img class="logo" :src="logoPath" alt="Nescom RD"
+      /></router-link>
+      <button
+        @click="toggleNav"
+        class="open-nav-button"
+        :class="{ x: navOpen }"
+      >
+        <span></span>
+      </button>
+      <NavSection @click="toggleNav" :class="{ show: navOpen }"></NavSection>
+    </div>
   </header>
 </template>
 
@@ -69,7 +75,7 @@ export default {
   text-decoration: none;
 }
 
-.header {
+.main-header {
   background-color: var(--white);
   display: flex;
   justify-content: space-between;
@@ -140,7 +146,7 @@ export default {
 }
 
 @media only screen and (min-width: 768px) {
-  .header {
+  .main-header {
     position: sticky;
     top: 0;
     justify-content: space-between;

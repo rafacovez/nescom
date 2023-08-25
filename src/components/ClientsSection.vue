@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import clients from "../data/clients.json";
+import clients from "@/data/clients.json";
 import ComponentLayout from "@/layouts/ComponentLayout.vue";
 
 export default {

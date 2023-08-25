@@ -5,10 +5,9 @@
         Hacemos más efectivas las relaciones entre nuestros clientes y sus
         asociados.
       </h1>
-      <router-link to="/contact">
+      <router-link class="landing-section__text--link" to="/contact">
         <PrimaryButton class="landing-section__text--btn">
           Contáctanos
-          <ArrowUpRight />
         </PrimaryButton>
       </router-link>
     </div>
@@ -21,7 +20,6 @@
 <script>
 import PrimaryButton from "./PrimaryButton.vue";
 import ComponentLayout from "@/layouts/ComponentLayout.vue";
-import ArrowUpRight from "@/assets/icons/ArrowUpRight.vue";
 import conferenceSpeaker from "@/assets/conference-speaker.webp";
 
 export default {
@@ -34,7 +32,6 @@ export default {
   components: {
     PrimaryButton,
     ComponentLayout,
-    ArrowUpRight,
   },
   methods: {
     scrollTo(selector) {
@@ -56,8 +53,9 @@ export default {
   display: none;
 }
 
-.landing-section__text--btn {
-  display: flex;
+.landing-section__text--link {
+  width: fit-content;
+  text-decoration: none;
 }
 
 @media only screen and (min-width: 1080px) {

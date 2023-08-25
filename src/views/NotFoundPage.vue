@@ -8,7 +8,7 @@
       />
     </div>
     <div class="text-wrapper">
-      <h1 class="msg">Oops! Parece que la página que buscas no existe...</h1>
+      <h1 class="msg">Parece que la página que buscas no existe...</h1>
       <router-link to="/">
         <PrimaryButtonVue>Volver al inicio</PrimaryButtonVue>
       </router-link>

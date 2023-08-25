@@ -61,6 +61,7 @@ export default {
 .pop-up__button {
   display: flex;
   gap: 5px;
+  margin: 0 auto;
 }
 
 .pop-up__button > .x-icon {
