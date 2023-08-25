@@ -6,9 +6,9 @@
     </a>
   </div>
   <header class="header">
-    <a href="https://nescomrd.com"
+    <router-link to="/"
       ><img class="logo" :src="logoPath" alt="Nescom RD"
-    /></a>
+    /></router-link>
     <button @click="toggleNav" class="open-nav-button" :class="{ x: navOpen }">
       <span></span>
     </button>

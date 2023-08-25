@@ -5,6 +5,11 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
+    path: "/contact",
+    name: "ContactPage",
+    component: () => import("@/views/ContactPage.vue"),
+  },
+  {
     path: "/blog",
     name: "BlogPage",
     component: () => import("@/views/BlogPage.vue"),

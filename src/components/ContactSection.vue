@@ -78,7 +78,7 @@
       </form>
     </div>
     <div class="contact-section__illustration">
-      <BusinessIllustration />
+      <img v-lazy="ContactIllustrationPath" alt="Contact via email" />
     </div>
   </ComponentLayout>
 </template>
@@ -86,8 +86,8 @@
 <script>
 import ComponentLayout from "@/layouts/ComponentLayout.vue";
 import PrimaryButton from "./PrimaryButton.vue";
-import BusinessIllustration from "@/assets/illustrations/BusinessIllustration.vue";
 import PopUpModal from "./PopUpModal.vue";
+import ContactIllustration from "@/assets/contact.webp";
 import { CheckIcon } from "@heroicons/vue/20/solid";
 import db from "@/firebase/init.js";
 import { collection, addDoc } from "firebase/firestore";
@@ -97,12 +97,12 @@ export default {
   components: {
     ComponentLayout,
     PrimaryButton,
-    BusinessIllustration,
     PopUpModal,
     CheckIcon,
   },
   data() {
     return {
+      ContactIllustrationPath: ContactIllustration,
       isFocusedName: false,
       isFocusedEmail: false,
       isFocusedMessage: false,
@@ -251,8 +251,8 @@ form {
 
   .contact-section__illustration {
     display: block;
-    flex-basis: 30%;
-    max-width: 250px;
+    flex-basis: 40%;
+    max-width: 500px;
   }
 }
 </style>

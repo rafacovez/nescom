@@ -5,16 +5,15 @@
         Hacemos más efectivas las relaciones entre nuestros clientes y sus
         asociados.
       </h1>
-      <PrimaryButton
-        class="landing-section__text--btn"
-        @click="scrollTo('#contactSection')"
-      >
-        Contáctanos
-        <ArrowUpRight />
-      </PrimaryButton>
+      <router-link to="/contact">
+        <PrimaryButton class="landing-section__text--btn">
+          Contáctanos
+          <ArrowUpRight />
+        </PrimaryButton>
+      </router-link>
     </div>
     <div class="landing-section__illustration">
-      <CommunicationIllustration />
+      <img v-lazy="conferenceSpeakerPath" alt="Conference Speaker" />
     </div>
   </ComponentLayout>
 </template>
@@ -22,15 +21,19 @@
 <script>
 import PrimaryButton from "./PrimaryButton.vue";
 import ComponentLayout from "@/layouts/ComponentLayout.vue";
-import CommunicationIllustration from "@/assets/illustrations/CommunicationIllustration.vue";
 import ArrowUpRight from "@/assets/icons/ArrowUpRight.vue";
+import conferenceSpeaker from "@/assets/conference-speaker.webp";
 
 export default {
   name: "LandingSection",
+  data() {
+    return {
+      conferenceSpeakerPath: conferenceSpeaker,
+    };
+  },
   components: {
     PrimaryButton,
     ComponentLayout,
-    CommunicationIllustration,
     ArrowUpRight,
   },
   methods: {
