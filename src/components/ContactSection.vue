@@ -7,6 +7,7 @@
       class="sent"
     >
       <CheckIcon class="sent__check-icon" />
+      <img v-lazy="EmailSentIllustrationPath" alt="Message sent" />
       <p class="sent__heading">¡Bien!</p>
       <p class="sent__paragraph">Su mensaje fue enviado exitosamente.</p>
     </PopUpModal>
@@ -88,21 +89,15 @@ import ComponentLayout from "@/layouts/ComponentLayout.vue";
 import PrimaryButton from "./PrimaryButton.vue";
 import PopUpModal from "./PopUpModal.vue";
 import ContactIllustration from "@/assets/contact.webp";
+import EmailSentIllustration from "@/assets/sent-message.webp";
 import { CheckIcon } from "@heroicons/vue/20/solid";
-import db from "@/firebase/init.js";
-import { collection, addDoc } from "firebase/firestore";
 
 export default {
   name: "ContactSection",
-  components: {
-    ComponentLayout,
-    PrimaryButton,
-    PopUpModal,
-    CheckIcon,
-  },
   data() {
     return {
       ContactIllustrationPath: ContactIllustration,
+      EmailSentIllustrationPath: EmailSentIllustration,
       isFocusedName: false,
       isFocusedEmail: false,
       isFocusedMessage: false,
@@ -112,21 +107,14 @@ export default {
       modalIsVisible: false,
     };
   },
+  components: {
+    ComponentLayout,
+    PrimaryButton,
+    PopUpModal,
+    CheckIcon,
+  },
   methods: {
     async submitForm() {
-      // "users" collection reference
-      const colRef = collection(db, "users");
-
-      // data to send
-      const userData = {
-        name: this.inputValueName,
-        email: this.inputValueEmail,
-        message: this.inputValueMessage,
-      };
-
-      // create document and return reference to it
-      await addDoc(colRef, userData);
-
       // reset form field
       this.inputValueName = "";
       this.inputValueEmail = "";
