@@ -1,6 +1,12 @@
 <template>
   <ComponentLayout class="blog-section">
-    <h3>Blog</h3>
+    <div class="blog-section__header">
+      <h3>Blog</h3>
+      <span v-if="$route.path === '/'">&mdash;</span>
+      <router-link class="link" to="/blog" v-if="$route.path === '/'"
+        >Ver todas las publicaciones</router-link
+      >
+    </div>
     <div class="blog-section__posts-wrapper">
       <div class="blog-section__post blog-section__post--primary"></div>
       <div class="blog-section__post blog-section__post--a"></div>
@@ -22,6 +28,12 @@ export default {
 </script>
 
 <style>
+.blog-section__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
 .blog-section__posts-wrapper {
   display: grid;
   grid-template-areas:

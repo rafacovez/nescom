@@ -22,7 +22,8 @@ export default {
 .component > h2,
 .component > h3,
 .component > h4,
-.component > h5 {
+.component > h5,
+.component > [class$="__header"] {
   margin-bottom: 2rem;
 }
 

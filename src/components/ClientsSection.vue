@@ -13,13 +13,13 @@
       >
         <img v-lazy="getLogoSrc(client)" :alt="`${client.name} logo`" />
       </button>
-      <button
-        @click="scrollTo('#contactSection')"
+      <router-link
+        to="/contacto"
         aria-label="Go to contact page"
         class="clients-wrapper__client"
       >
         <p>Tu entidad aquí</p>
-      </button>
+      </router-link>
     </div>
   </ComponentLayout>
 </template>

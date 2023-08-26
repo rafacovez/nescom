@@ -5,7 +5,7 @@
         Hacemos más efectivas las relaciones entre nuestros clientes y sus
         asociados.
       </h1>
-      <router-link class="landing-section__text--link" to="/contact">
+      <router-link class="landing-section__text--link" to="/contacto">
         <PrimaryButton class="landing-section__text--btn">
           Contáctanos
         </PrimaryButton>

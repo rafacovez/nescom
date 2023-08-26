@@ -112,4 +112,15 @@ object {
   clip: rect(0, 0, 0, 0);
   border: 0;
 }
+
+.link {
+  font-size: var(--font-size);
+  font-weight: var(--font-bold);
+  color: var(--red);
+  text-decoration-color: var(--red);
+}
+
+.link:hover {
+  text-decoration: none;
+}
 </style>
