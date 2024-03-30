@@ -1,0 +1,36 @@
+# Node.js dependencies
+**/node_modules
+
+# Environment variables
+**/.env
+**/.env.production
+
+# Compiled files
+**/build
+**/dist
+
+# Log files
+*.log
+
+# macOS system files
+.DS_Store
+
+# IDE and editor files
+.idea
+.vscode
+
+# Dependency lock files
+package-lock.json
+yarn.lock
+
+# Local environment configuration
+**/.env.local
+
+# Production build files (for React applications, adjust accordingly)
+**/.next
+
+# Visual Studio Code workspace settings
+*.code-workspace
+
+# AWS credentials (if applicable)
+aws-exports.js

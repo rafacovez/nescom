@@ -1,0 +1,88 @@
+:root {
+  --font-size: 1em;
+  --font-medium: 400;
+  --font-bold: 700;
+  --font-family: 'Arial', sans-serif;
+  --background-color: rgb(242, 242, 242);
+  --foreground-color: rgb(237, 58, 57);
+  --primary-text-color: rgb(33, 33, 33);
+  --secondary-text-color: rgb(102, 102, 102);
+}
+
+[data-theme='dark'] {
+  --background-color: rgb(33, 33, 33);
+  --foreground-color: rgb(237, 58, 57);
+  --primary-text-color: rgb(242, 242, 242);
+  --secondary-text-color: rgb(102, 102, 102);
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
+  transition: all 0.2s ease-out;
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: var(--font-bold);
+  line-height: calc(var(--font-size) * 1);
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  font-weight: var(--font-regular);
+  line-height: calc(var(--font-size) * 1.6);
+  margin: 0;
+  padding: 0;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+input,
+textarea,
+button,
+select {
+  font: inherit;
+}
+
+img,
+picture,
+svg,
+video,
+object {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

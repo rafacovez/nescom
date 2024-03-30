@@ -1,0 +1,17 @@
+[
+  {
+    "label": "Inicio",
+    "to": "/",
+    "external": false
+  },
+  {
+    "label": "Blog",
+    "to": "/nestorestevez",
+    "external": false
+  },
+  {
+    "label": "Servicios",
+    "to": "/servicios",
+    "external": false
+  }
+]
