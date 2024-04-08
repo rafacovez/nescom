@@ -13,7 +13,7 @@
     </PopUpModal>
     <div class="contact-section__text">
       <h3>Envíanos un correo</h3>
-      <form ref="form" @submit.prevent="submitForm">
+      <form ref="form" @submit.prevent="sendEmail">
         <div class="form-group">
           <label
             v-show="!inputValueName"
@@ -91,6 +91,7 @@ import PopUpModal from "./PopUpModal.vue";
 import ContactIllustration from "@/assets/contact.webp";
 import EmailSentIllustration from "@/assets/sent-message.webp";
 import { CheckIcon } from "@heroicons/vue/20/solid";
+import emailjs from "emailjs-com";
 
 export default {
   name: "ContactSection",
@@ -114,7 +115,21 @@ export default {
     CheckIcon,
   },
   methods: {
-    async submitForm() {
+    sendEmail() {
+      emailjs
+        .sendForm(
+          "service_fnzzbb3",
+          "template_d3lyxkm",
+          this.$refs.form,
+          "2J6YzKd48YPHj6elh"
+        )
+        .then(
+          () => {},
+          (error) => {
+            console.log("FAILED...", error.text);
+          }
+        );
+
       // reset form field
       this.inputValueName = "";
       this.inputValueEmail = "";
@@ -164,6 +179,7 @@ form {
   outline: none;
   border: 1px solid var(--foreground-color);
   background-color: var(--background-color);
+  color: var(--primary-text-color);
   border-radius: var(--border-radius-sm);
   touch-action: manipulation;
 }

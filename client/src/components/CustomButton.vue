@@ -28,7 +28,7 @@ export default {
   padding: 0.5rem 2rem;
   border: 2px solid var(--primary-color);
   border-radius: var(--border-radius-md);
-  box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 4px 4px 4px 0 var(--box-shadow-color);
   cursor: pointer;
   transition: all ease-out 0.2s;
 }
@@ -42,7 +42,7 @@ export default {
 
 .btn:hover {
   transform: translateY(-1px);
-  box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 4px 4px 4px 2px var(--box-shadow-color);
 }
 
 @media only screen and (min-width: 768px) {

@@ -2,21 +2,21 @@
   <div v-show="modalIsVisible" class="pop-up">
     <div class="pop-up__modal">
       <slot> </slot>
-      <PrimaryButton @click="hidePopUp" class="pop-up__button"
-        ><XMarkIcon class="x-icon" />Cerrar</PrimaryButton
+      <CustomButton :isPrimary="true" @click="hidePopUp" class="pop-up__button"
+        ><XMarkIcon class="x-icon" />Cerrar</CustomButton
       >
     </div>
   </div>
 </template>
 
 <script>
-import PrimaryButton from "./CustomButton.vue";
+import CustomButton from "./CustomButton.vue";
 import { XMarkIcon } from "@heroicons/vue/20/solid";
 
 export default {
   name: "PopUpModal",
   components: {
-    PrimaryButton,
+    CustomButton,
     XMarkIcon,
   },
   props: {

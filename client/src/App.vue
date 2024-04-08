@@ -32,6 +32,7 @@ export default {
   --background-color: rgba(242, 242, 242);
   --foreground-color: rgba(158, 152, 170);
   --primary-color: rgba(237, 57, 56);
+  --box-shadow-color: rgba(0, 0, 0, 0.2);
   --green: rgb(0, 165, 0);
   --border-radius-sm: 2px;
   --border-radius-md: 32px;
@@ -42,6 +43,7 @@ export default {
   --secondary-text-color: rgba(158, 152, 170);
   --background-color: rgba(33, 33, 33);
   --foreground-color: rgb(50, 50, 50);
+  --box-shadow-color: rgba(255, 255, 255, 0.1);
 }
 
 html {

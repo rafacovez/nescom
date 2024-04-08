@@ -75,7 +75,7 @@ export default {
   width: 100%;
   position: absolute;
   inset: 0;
-  background-color: var(--secondary-text-color);
+  background-color: var(--primary-text-color);
   opacity: 0.8;
   z-index: -25;
   transition: all ease-out 0.2s;

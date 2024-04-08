@@ -50,11 +50,11 @@ export default {
     display: block;
     position: fixed;
     top: 30%;
-    transform: translateY(-30%);
     left: 20px;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    background-color: var(--primary-color);
     border: 1px solid var(--foreground-color);
     height: fit-content;
     width: fit-content;
@@ -85,6 +85,10 @@ export default {
     object-fit: cover;
     border-radius: 50%;
     pointer-events: none;
+  }
+
+  .social-media__icon > svg > path {
+    fill: blue;
   }
 }
 </style>

@@ -12,6 +12,7 @@
       /></a>
       <div class="header-utilities">
         <LoginButton />
+        <ToggleThemeButton />
         <button
           @click="toggleNav"
           class="open-nav-button"
@@ -19,14 +20,6 @@
         >
           <span></span>
         </button>
-        <CustomButton
-          class="toggle-theme-button"
-          @click="toggleTheme"
-          aria-label="Toggle themes"
-        >
-          <span v-if="this.theme == 'dark'">Modo claro</span>
-          <span v-else> Modo oscuro</span>
-        </CustomButton>
         <NavSection @click="toggleNav" :class="{ show: navOpen }"></NavSection>
       </div>
     </div>
@@ -38,8 +31,8 @@ import NavSection from "./NavSection.vue";
 import logo from "@/assets/logo.png";
 import { toggleNav } from "@/utils/toggleNav";
 import LoginButton from "./LoginButton.vue";
-import CustomButton from "./CustomButton.vue";
 import ArrowUpRight from "@/assets/icons/ArrowUpRight.vue";
+import ToggleThemeButton from "./ToggleThemeButton.vue";
 
 export default {
   name: "HeaderSection",
@@ -48,15 +41,14 @@ export default {
       logoPath: logo,
       navOpen: false,
       screenWidth: window.innerWidth,
-      theme: localStorage.getItem("theme") || "",
     };
   },
 
   components: {
     NavSection,
     LoginButton,
-    CustomButton,
     ArrowUpRight,
+    ToggleThemeButton,
   },
   methods: {
     toggleNav() {
@@ -66,20 +58,11 @@ export default {
       this.screenWidth = window.innerWidth;
       this.navOpen = this.screenWidth < 768 ? false : true;
     },
-    toggleTheme() {
-      this.theme = this.theme === "dark" ? "" : "dark";
-      document.documentElement.setAttribute("data-theme", this.theme);
-      localStorage.setItem("theme", this.theme);
-    },
   },
   mounted() {
     // get screen width
     this.setScreenWidth();
     window.addEventListener("resize", this.setScreenWidth);
-
-    // get theme value
-    let localTheme = localStorage.getItem("theme");
-    document.documentElement.setAttribute("data-theme", localTheme);
   },
   beforeUnmount() {
     window.removeEventListener("resize", this.setScreenWidth);
@@ -108,10 +91,6 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-}
-
-.toggle-theme-button {
-  display: none;
 }
 
 .logo {
@@ -186,10 +165,6 @@ export default {
     padding: 1rem 4rem;
     z-index: 500;
     border-bottom: 1px solid var(--foreground-color);
-  }
-
-  .toggle-theme-button {
-    display: block;
   }
 
   .open-nav-button {
