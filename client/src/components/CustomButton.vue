@@ -33,9 +33,19 @@ export default {
   transition: all ease-out 0.2s;
 }
 
+.btn > input {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: fit-content;
+  cursor: pointer;
+}
+
 .btn--primary {
   background-color: var(--primary-color);
-  color: var(--background-color);
+  color: var(--white);
   width: 100%;
   padding: 0.5rem 4rem;
 }

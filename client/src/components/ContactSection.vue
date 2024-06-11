@@ -6,80 +6,69 @@
       ref="PopUpModal"
       class="sent"
     >
-      <CheckIcon class="sent__check-icon" />
-      <img v-lazy="EmailSentIllustrationPath" alt="Message sent" />
-      <p class="sent__heading">¡Bien!</p>
-      <p class="sent__paragraph">Su mensaje fue enviado exitosamente.</p>
+      <font-awesome-icon
+        v-if="formWasSuccessful"
+        icon="fas fa-check"
+        class="sent__check-icon sent__check-icon--success"
+      />
+      <font-awesome-icon
+        v-else
+        icon="fas fa-exclamation"
+        class="sent__check-icon sent__check-icon--error"
+      />
+      <div class="sent__wrapper">
+        <img
+          src="https://nescommedia.s3.us-east-2.amazonaws.com/brand/sent-message.webp"
+          :alt="altText"
+        />
+        <p class="sent__heading">{{ heading }}</p>
+        <p class="sent__paragraph">{{ paragraph }}</p>
+      </div>
     </PopUpModal>
     <div class="contact-section__text">
-      <h3>Envíanos un correo</h3>
+      <h3 class="contact-section__heading">Envíanos un correo</h3>
       <form ref="form" @submit.prevent="sendEmail">
-        <div class="form-group">
-          <label
-            v-show="!inputValueName"
-            class="label-name"
-            for="name"
-            :class="{ focused: isFocusedName }"
-            >Nombre:</label
-          >
-          <input
-            class="input-name"
-            type="text"
-            id="name"
-            name="user_name"
-            autocomplete="off"
-            required
-            v-model="inputValueName"
-            @focus="isFocusedName = true"
-            @blur="isFocusedName = false"
-          />
-        </div>
-        <div class="form-group">
-          <label
-            v-show="!inputValueEmail"
-            class="label-email"
-            for="email"
-            :class="{ focused: isFocusedEmail }"
-            >Correo:</label
-          >
-          <input
-            class="input-email"
-            type="email"
-            id="email"
-            name="user_email"
-            autocomplete="off"
-            required
-            v-model="inputValueEmail"
-            @focus="isFocusedEmail = true"
-            @blur="isFocusedEmail = false"
-          />
-        </div>
-        <div class="form-group">
-          <label
-            v-show="!inputValueMessage"
-            class="label-message"
-            for="message"
-            :class="{ focused: isFocusedMessage }"
-            >Mensaje:</label
-          >
-          <textarea
-            class="input-message"
-            id="message"
-            name="message"
-            autocomplete="off"
-            required
-            v-model="inputValueMessage"
-            @focus="isFocusedMessage = true"
-            @blur="isFocusedMessage = false"
-          ></textarea>
-        </div>
-        <CustomButton class="submit-button" :isPrimary="true">
-          <input type="submit" value="Enviar" />
+        <InputComponent
+          :inputName="'Nombre'"
+          :isRequired="true"
+          :inputValue="inputValueName"
+          @update:inputValue="(value) => (inputValueName = value)"
+          :isFocused="isFocusedName"
+          @update:isFocused="(value) => (isFocusedName = value)"
+        />
+        <InputComponent
+          :inputName="'Correo'"
+          :isRequired="true"
+          :inputValue="inputValueEmail"
+          @update:inputValue="(value) => (inputValueEmail = value)"
+          :isFocused="isFocusedEmail"
+          @update:isFocused="(value) => (isFocusedEmail = value)"
+        />
+        <InputComponent
+          :inputName="'Mensaje'"
+          :isRequired="true"
+          :isTextarea="true"
+          :inputValue="inputValueMessage"
+          @update:inputValue="(value) => (inputValueMessage = value)"
+          :isFocused="isFocusedMessage"
+          @update:isFocused="(value) => (isFocusedMessage = value)"
+        />
+        <CheckboxComponent
+          ref="checkboxComponent"
+          :isChecked="isChecked"
+          @update:checked="updateChecked"
+          :checkboxText="'Acepto recibir actualizaciones sobre nuevo contenido a mi dirección de correo electrónico.'"
+        />
+        <CustomButton :isPrimary="true">
+          <input class="submit-button" type="submit" value="Enviar" />
         </CustomButton>
       </form>
     </div>
     <div class="contact-section__illustration">
-      <img v-lazy="ContactIllustrationPath" alt="Contact via email" />
+      <img
+        src="https://nescommedia.s3.us-east-2.amazonaws.com/brand/contact.webp"
+        alt="Contact via email"
+      />
     </div>
   </ComponentLayout>
 </template>
@@ -88,17 +77,15 @@
 import ComponentLayout from "@/layouts/ComponentLayout.vue";
 import CustomButton from "./CustomButton.vue";
 import PopUpModal from "./PopUpModal.vue";
-import ContactIllustration from "@/assets/contact.webp";
-import EmailSentIllustration from "@/assets/sent-message.webp";
-import { CheckIcon } from "@heroicons/vue/20/solid";
-import emailjs from "emailjs-com";
+import CheckboxComponent from "./CheckboxComponent.vue";
+import InputComponent from "./InputComponent.vue";
+import axios from "axios";
+import axiosInstance from "@/axios-instance";
 
 export default {
   name: "ContactSection",
   data() {
     return {
-      ContactIllustrationPath: ContactIllustration,
-      EmailSentIllustrationPath: EmailSentIllustration,
       isFocusedName: false,
       isFocusedEmail: false,
       isFocusedMessage: false,
@@ -106,40 +93,156 @@ export default {
       inputValueEmail: "",
       inputValueMessage: "",
       modalIsVisible: false,
+      formWasSuccessful: false,
+      isChecked: true,
     };
   },
   components: {
     ComponentLayout,
+    InputComponent,
     CustomButton,
     PopUpModal,
-    CheckIcon,
+    CheckboxComponent,
+  },
+  computed: {
+    iconClass() {
+      return this.formWasSuccessful
+        ? "sent__check-icon sent__check-icon--success"
+        : "sent__check-icon sent__check-icon--error";
+    },
+    altText() {
+      return this.formWasSuccessful ? "Message sent" : "Error sending message";
+    },
+    heading() {
+      return this.formWasSuccessful ? "¡Bien!" : "¡Oh, oh...!";
+    },
+    paragraph() {
+      return this.formWasSuccessful
+        ? "Su mensaje fue enviado exitosamente."
+        : "Lo sentimos, pero hubo un error al enviar su correo. Por favor, vuelva a intentarlo más tarde.";
+    },
   },
   methods: {
-    sendEmail() {
-      emailjs
-        .sendForm(
-          "service_fnzzbb3",
-          "template_d3lyxkm",
-          this.$refs.form,
-          "2J6YzKd48YPHj6elh"
-        )
-        .then(
-          () => {},
-          (error) => {
-            console.log("FAILED...", error.text);
-          }
-        );
+    updateChecked(newValue) {
+      this.isChecked = newValue;
+    },
 
-      // reset form field
-      this.inputValueName = "";
-      this.inputValueEmail = "";
-      this.inputValueMessage = "";
+    // sendEmail() {
+    //   // Construct the request body
+    //   const requestBody = {
+    //     displayName: this.inputValueName,
+    //     email: this.inputValueEmail,
+    //     message: this.inputValueMessage,
+    //     receiveEmails: this.isChecked,
+    //     role: "notify",
+    //   };
 
-      this.isFocusedName = false;
-      this.isFocusedEmail = false;
-      this.isFocusedMessage = false;
+    //   Promise.all([
+    //     // Sending email
+    //     fetch(`${process.env.VUE_APP_URL}/api/emails`, {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify(requestBody),
+    //     }),
 
-      this.$refs.PopUpModal.showPopUp();
+    //     // Creating user if checked
+    //     this.isChecked
+    //       ? fetch(`${process.env.VUE_APP_URL}/api/users/createOrUpdateUser`, {
+    //           method: "POST",
+    //           headers: {
+    //             "Content-Type": "application/json",
+    //           },
+    //           body: JSON.stringify(requestBody),
+    //         })
+    //       : Promise.resolve({ ok: true }), // Resolve immediately if not creating a user
+    //   ])
+    //     .then(([emailResponse, userResponse]) => {
+    //       if (!emailResponse.ok) throw new Error("Failed to send email");
+
+    //       // Check user creation response, log errors but do not throw for duplicate user
+    //       if (!userResponse.ok && userResponse.status !== 409) {
+    //         console.error(
+    //           "Failed to create user, status:",
+    //           userResponse.status
+    //         );
+    //         // You might want to handle other non-critical errors differently here
+    //       } else if (userResponse.status === 409) {
+    //         console.error("Duplicate user found");
+    //       }
+
+    //       // Reset form fields
+    //       this.inputValueName = "";
+    //       this.inputValueEmail = "";
+    //       this.inputValueMessage = "";
+    //       this.isFocusedName = false;
+    //       this.isFocusedEmail = false;
+    //       this.isFocusedMessage = false;
+
+    //       // Show success modal
+    //       this.formWasSuccessful = true; // Set to true if email sent successfully
+    //       this.modalIsVisible = true;
+    //     })
+    //     .catch((error) => {
+    //       console.error("Operation failed:", error);
+    //       this.formWasSuccessful = false;
+    //       this.modalIsVisible = true;
+    //     })
+    //     .finally(() => {
+    //       // Show modal in any case
+    //       this.$refs.PopUpModal.showPopUp();
+    //     });
+    // },
+    async sendEmail() {
+      // Construct the request body
+      const requestBody = {
+        displayName: this.inputValueName,
+        email: this.inputValueEmail,
+        message: this.inputValueMessage,
+        receiveEmails: this.isChecked,
+        role: "notify",
+      };
+
+      try {
+        const emailRequest = axiosInstance.post("/api/emails", requestBody);
+        const userRequest = this.isChecked
+          ? axiosInstance.post("/api/users/createOrUpdateUser", requestBody)
+          : Promise.resolve({ status: 200 });
+
+        const [emailResponse, userResponse] = await axios.all([
+          emailRequest,
+          userRequest,
+        ]);
+
+        if (emailResponse.status !== 200)
+          throw new Error("Failed to send email");
+
+        if (userResponse.status !== 200 && userResponse.status !== 409) {
+          console.error("Failed to create user, status:", userResponse.status);
+        } else if (userResponse.status === 409) {
+          console.error("Duplicate user found");
+        }
+
+        // Reset form fields
+        this.inputValueName = "";
+        this.inputValueEmail = "";
+        this.inputValueMessage = "";
+        this.isFocusedName = false;
+        this.isFocusedEmail = false;
+        this.isFocusedMessage = false;
+
+        // Show success modal
+        this.formWasSuccessful = true;
+        this.modalIsVisible = true;
+      } catch (error) {
+        console.error("Operation failed:", error);
+        this.formWasSuccessful = false;
+        this.modalIsVisible = true;
+      } finally {
+        // Show modal in any case
+        this.$refs.PopUpModal.showPopUp();
+      }
     },
   },
 };
@@ -148,62 +251,18 @@ export default {
 <style>
 form {
   display: flex;
-  flex-direction: column;
   gap: 1rem;
-  margin: 2rem 0;
+  flex-direction: column;
 }
 
-.form-group {
-  position: relative;
-  background-color: var(--background-color);
-}
-
-.form-group > label {
-  color: var(--secondary-text-color);
-  font-weight: var(--font-bold);
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  transition: all ease-out 0.2s;
-}
-
-.form-group > * {
-  width: 100%;
-  font-size: calc(var(--font-size) * 0.8);
-  padding: 1rem;
-  margin-top: 1.5rem;
-}
-
-.form-group > input,
-.form-group > textarea {
-  outline: none;
-  border: 1px solid var(--foreground-color);
-  background-color: var(--background-color);
-  color: var(--primary-text-color);
-  border-radius: var(--border-radius-sm);
-  touch-action: manipulation;
-}
-
-.form-group > input:focus,
-.form-group > textarea:focus {
-  border: 1px solid var(--primary-color);
-}
-
-.form-group > label.focused {
-  padding: 0;
-  margin: 0;
-  color: var(--primary-text-color);
-  font-size: calc(var(--font-size) * 0.9);
+.contact-section__heading {
+  margin-bottom: 2rem;
 }
 
 .submit-button {
-  margin: 1.5rem 0 0 0;
-}
-
-.submit-button > input {
   background: none;
   border: none;
-  color: var(--background-color);
+  color: inherit;
   pointer-events: none;
 }
 
@@ -222,11 +281,19 @@ form {
   left: 0;
   right: 0;
   margin: 0 auto;
+  height: 50px;
   width: 50px;
-  background-color: var(--green);
-  color: var(--background-color);
+  color: var(--white);
   border-radius: 50%;
   padding: 5px;
+}
+
+.sent__check-icon--success {
+  background-color: var(--green);
+}
+
+.sent__check-icon--error {
+  background-color: var(--red);
 }
 
 .sent__heading {

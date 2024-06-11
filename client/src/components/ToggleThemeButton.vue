@@ -5,30 +5,18 @@
     class="toggle-theme-switch"
     :class="{ dark: theme }"
   >
-    <span v-if="this.theme == 'dark'">
-      <MoonIcon />
-    </span>
-    <span v-else>
-      <SunIcon />
-    </span>
+    <font-awesome-icon class="toggle-icon" icon="fas fa-sun" />
+    <font-awesome-icon class="toggle-icon" icon="fas fa-moon" />
   </div>
 </template>
 
 <script>
-import { SunIcon } from "@heroicons/vue/20/solid";
-import { MoonIcon } from "@heroicons/vue/20/solid";
-
 export default {
   name: "ToggleThemeButton",
   data() {
     return {
       theme: localStorage.getItem("theme") || "",
     };
-  },
-
-  components: {
-    SunIcon,
-    MoonIcon,
   },
   methods: {
     toggleTheme() {
@@ -55,15 +43,12 @@ export default {
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: space-around;
     height: 20px;
     width: 40px;
     border-radius: 10px;
     background-color: var(--foreground-color);
     cursor: pointer;
-  }
-
-  .toggle-theme-switch.dark {
-    flex-direction: row-reverse;
   }
 
   .toggle-theme-switch::after {
@@ -78,17 +63,16 @@ export default {
     bottom: 0;
     transform: scale(1.1);
     border: 1px solid var(--primary-color);
-    background-color: white;
+    background-color: var(--white);
   }
 
   .toggle-theme-switch.dark::after {
     left: 0;
   }
 
-  .toggle-theme-switch > span > svg {
-    width: 15px;
-    margin: 2px;
-    color: white;
+  .toggle-icon {
+    width: 10px;
+    color: var(--white);
   }
 }
 </style>

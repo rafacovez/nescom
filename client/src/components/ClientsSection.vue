@@ -11,7 +11,7 @@
         :aria-label="`Visit ${client.name} website`"
         @click="navigateTo(client.url)"
       >
-        <img v-lazy="getLogoSrc(client)" :alt="`${client.name} logo`" />
+        <img v-lazy="client.imageSrc" :alt="`${client.name} logo`" />
       </button>
       <router-link
         to="/contacto"
@@ -45,10 +45,6 @@ export default {
     },
     navigateTo(url) {
       window.open(url, "_blank");
-    },
-    getLogoSrc(client) {
-      const logo = client.name.toLowerCase().replace(/\s+/g, "-");
-      return require(`../assets/${logo}.webp`);
     },
   },
 };

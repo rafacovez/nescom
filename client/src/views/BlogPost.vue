@@ -1,18 +1,18 @@
 <template>
   <div>
     <SocialMediaModal />
-    <ContactSection />
+    <PostSection />
   </div>
 </template>
 
 <script>
-import ContactSection from "@/components/ContactSection.vue";
+import PostSection from "@/components/PostSection.vue";
 import SocialMediaModal from "@/components/SocialMediaModal.vue";
 
 export default {
-  name: "ContactPage",
+  name: "BlogPost",
   components: {
-    ContactSection,
+    PostSection,
     SocialMediaModal,
   },
 };

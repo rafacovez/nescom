@@ -2,47 +2,58 @@
   "clients": [
     {
       "name": "Coopsano",
-      "url": "https://coopsano.com/"
+      "url": "https://coopsano.com/",
+      "imageSrc": "https://nescommedia.s3.us-east-2.amazonaws.com/clients/coopsano.webp"
     },
     {
       "name": "Presidencia",
-      "url": "https://presidencia.gob.do/"
+      "url": "https://presidencia.gob.do/",
+      "imageSrc": "https://nescommedia.s3.us-east-2.amazonaws.com/clients/presidencia.webp"
     },
     {
       "name": "Intec",
-      "url": "https://www.intec.edu.do/"
+      "url": "https://www.intec.edu.do/",
+      "imageSrc": "https://nescommedia.s3.us-east-2.amazonaws.com/clients/intec.webp"
     },
     {
       "name": "German Cooperation",
-      "url": "https://www.giz.de/en/html/index.html"
+      "url": "https://www.giz.de/en/html/index.html",
+      "imageSrc": "https://nescommedia.s3.us-east-2.amazonaws.com/clients/german-cooperation.webp"
     },
     {
       "name": "Anpa RD",
-      "url": "http://www.anpard.com/"
+      "url": "http://www.anpard.com/",
+      "imageSrc": "https://nescommedia.s3.us-east-2.amazonaws.com/clients/anpa-rd.webp"
     },
     {
       "name": "World bank",
-      "url": "https://www.worldbank.org/en/home"
+      "url": "https://www.worldbank.org/en/home",
+      "imageSrc": "https://nescommedia.s3.us-east-2.amazonaws.com/clients/world-bank.webp"
     },
     {
       "name": "Infotep",
-      "url": "https://www.infotep.gob.do/"
+      "url": "https://www.infotep.gob.do/",
+      "imageSrc": "https://nescommedia.s3.us-east-2.amazonaws.com/clients/infotep.webp"
     },
     {
       "name": "Inter American Bank",
-      "url": "https://www.iadb.org/en"
+      "url": "https://www.iadb.org/en",
+      "imageSrc": "https://nescommedia.s3.us-east-2.amazonaws.com/clients/inter-american-bank.webp"
     },
     {
       "name": "Isfodosu",
-      "url": "https://isfodosu.edu.do/"
+      "url": "https://isfodosu.edu.do/",
+      "imageSrc": "https://nescommedia.s3.us-east-2.amazonaws.com/clients/isfodosu.webp"
     },
     {
       "name": "Pinturas Tropical",
-      "url": "http://www.pinturastropical.com.do/site/"
+      "url": "http://www.pinturastropical.com.do/site/",
+      "imageSrc": "https://nescommedia.s3.us-east-2.amazonaws.com/clients/pinturas-tropical.webp"
     },
     {
       "name": "Unicaribe",
-      "url": "https://unicaribe.edu.do/"
+      "url": "https://unicaribe.edu.do/",
+      "imageSrc": "https://nescommedia.s3.us-east-2.amazonaws.com/clients/unicaribe.webp"
     }
   ]
 }

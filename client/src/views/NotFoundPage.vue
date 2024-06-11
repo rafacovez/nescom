@@ -3,7 +3,7 @@
     <div class="illustration-wrapper">
       <img
         class="page-not-found-illustration"
-        v-lazy="pageNotFoundPath"
+        src="https://nescommedia.s3.us-east-2.amazonaws.com/brand/page-not-found.webp"
         alt="Page Not Found"
       />
     </div>
@@ -19,15 +19,9 @@
 <script>
 import ComponentLayout from "@/layouts/ComponentLayout.vue";
 import CustomButton from "@/components/CustomButton.vue";
-import pageNotFound from "@/assets/page-not-found.webp";
 
 export default {
   name: "NotFoundPage",
-  data() {
-    return {
-      pageNotFoundPath: pageNotFound,
-    };
-  },
   components: {
     ComponentLayout,
     CustomButton,

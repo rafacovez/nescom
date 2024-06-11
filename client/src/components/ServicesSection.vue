@@ -10,7 +10,7 @@
       >
         <img
           class="service__img"
-          v-lazy="getImgSrc(service.name)"
+          v-lazy="service.imageSrc"
           :alt="service.heading"
         />
         <h3 class="service__heading">{{ service.heading }}</h3>
@@ -39,10 +39,6 @@ export default {
       const kebab = target.toLowerCase().replace(/\s+/g, "-");
       return kebab;
     },
-    getImgSrc(target) {
-      const logo = this.toKebabCase(target);
-      return require(`../assets/${logo}.webp`);
-    },
   },
 };
 </script>
@@ -57,7 +53,7 @@ export default {
   position: relative;
   border: 2px solid var(--primary-color);
   border-radius: var(--border-radius-sm);
-  color: var(--background-color);
+  color: var(--white);
   margin: 0;
   padding: 1rem;
   height: 250px;
@@ -75,7 +71,7 @@ export default {
   width: 100%;
   position: absolute;
   inset: 0;
-  background-color: var(--primary-text-color);
+  background-color: var(--black);
   opacity: 0.8;
   z-index: -25;
   transition: all ease-out 0.2s;

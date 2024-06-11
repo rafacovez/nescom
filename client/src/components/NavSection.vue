@@ -20,11 +20,11 @@
         :aria-label="`Navigate to Nescom ${social.name}`"
         @click="navigateTo(social.url)"
       >
-        <object
-          :data="getSocialLogo(social.name)"
+        <font-awesome-icon
+          :icon="social.icon"
           type="image/svg+xml"
           class="nav__social-media--icon"
-        ></object>
+        />
       </button>
     </div>
   </nav>
@@ -50,9 +50,6 @@ export default {
     },
     scrollTo(selector) {
       scrollTo(selector);
-    },
-    getSocialLogo(social) {
-      return require(`../assets/${social}Logo.svg`);
     },
   },
 };
@@ -84,7 +81,7 @@ export default {
   opacity: 0;
   transform: translateY(-25px);
   transition: all ease-out 0.2s;
-  z-index: 100;
+  z-index: 1000;
 }
 
 .main-header > .header-utilities > .nav.show {
@@ -133,11 +130,12 @@ export default {
 }
 
 .nav__social-media--link {
+  color: var(--primary-text-color);
   background: none;
   border: none;
   width: fit-content;
   cursor: pointer;
-  opacity: 0.5;
+  opacity: 0.8;
   z-index: 2;
 }
 
@@ -146,8 +144,8 @@ export default {
 }
 
 .nav__social-media--icon {
-  height: 30px;
-  width: 30px;
+  height: 25px;
+  width: 25px;
   object-fit: cover;
   border-radius: 50%;
   pointer-events: none;
@@ -176,6 +174,7 @@ export default {
     margin: 0;
     height: fit-content;
     width: fit-content;
+    transition: none;
   }
 
   .main-header > .header-utilities > .nav > .nav__list {

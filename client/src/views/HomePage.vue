@@ -1,11 +1,13 @@
 <template>
-  <SocialMediaModal />
-  <LandingSection id="landingSection" />
-  <ServicesSection id="servicesSection" />
-  <PhilosophySection id="philosophySection" />
-  <ClientsSection id="clientsSection" />
-  <BlogSection id="blogSection" />
-  <ContactSection id="contactSection" />
+  <div>
+    <SocialMediaModal />
+    <LandingSection id="landingSection" />
+    <ServicesSection id="servicesSection" />
+    <PhilosophySection id="philosophySection" />
+    <ClientsSection id="clientsSection" />
+    <BlogSection id="blogSection" />
+    <ContactSection id="contactSection" />
+  </div>
 </template>
 
 <script>

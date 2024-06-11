@@ -12,7 +12,10 @@
       </router-link>
     </div>
     <div class="landing-section__illustration">
-      <img v-lazy="conferenceSpeakerPath" alt="Conference Speaker" />
+      <img
+        src="https://nescommedia.s3.us-east-2.amazonaws.com/brand/conference-speaker.webp"
+        alt="Conference Speaker"
+      />
     </div>
   </ComponentLayout>
 </template>
@@ -20,15 +23,9 @@
 <script>
 import CustomButton from "./CustomButton.vue";
 import ComponentLayout from "@/layouts/ComponentLayout.vue";
-import conferenceSpeaker from "@/assets/conference-speaker.webp";
 
 export default {
   name: "LandingSection",
-  data() {
-    return {
-      conferenceSpeakerPath: conferenceSpeaker,
-    };
-  },
   components: {
     CustomButton,
     ComponentLayout,

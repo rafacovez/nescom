@@ -3,15 +3,21 @@
     <div class="pre-header">
       <a href="https://porlalinea.com.do">
         Por La Línea: Un medio para defender el derecho a la información.
-        <ArrowUpRight class="icon" />
+        <font-awesome-icon
+          icon="fas fa-arrow-up-right-from-square"
+          class="icon"
+        />
       </a>
     </div>
     <div class="main-header">
       <a href="https://nescomrd.com"
-        ><img class="logo" :src="logoPath" alt="Nescom RD"
+        ><img
+          class="logo"
+          src="https://nescommedia.s3.us-east-2.amazonaws.com/brand/logo.png"
+          alt="Nescom RD"
       /></a>
       <div class="header-utilities">
-        <LoginButton />
+        <ProfileButton />
         <ToggleThemeButton />
         <button
           @click="toggleNav"
@@ -28,17 +34,14 @@
 
 <script>
 import NavSection from "./NavSection.vue";
-import logo from "@/assets/logo.png";
 import { toggleNav } from "@/utils/toggleNav";
-import LoginButton from "./LoginButton.vue";
-import ArrowUpRight from "@/assets/icons/ArrowUpRight.vue";
+import ProfileButton from "./ProfileButton.vue";
 import ToggleThemeButton from "./ToggleThemeButton.vue";
 
 export default {
   name: "HeaderSection",
   data() {
     return {
-      logoPath: logo,
       navOpen: false,
       screenWidth: window.innerWidth,
     };
@@ -46,8 +49,7 @@ export default {
 
   components: {
     NavSection,
-    LoginButton,
-    ArrowUpRight,
+    ProfileButton,
     ToggleThemeButton,
   },
   methods: {
@@ -78,11 +80,12 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--background-color);
+  color: var(--white);
   font-size: calc(var(--font-size) * 0.7);
   font-weight: var(--font-bold);
   text-align: center;
   text-decoration: none;
+  gap: 0.5rem;
 }
 
 .main-header {
@@ -103,7 +106,7 @@ export default {
   padding: 0;
   margin: 0;
   cursor: pointer;
-  z-index: 200;
+  z-index: 1001;
 }
 
 .open-nav-button > span {

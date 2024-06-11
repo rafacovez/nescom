@@ -3,7 +3,10 @@
     <div class="pop-up__modal">
       <slot> </slot>
       <CustomButton :isPrimary="true" @click="hidePopUp" class="pop-up__button"
-        ><XMarkIcon class="x-icon" />Cerrar</CustomButton
+        ><font-awesome-icon
+          icon="fas fa-xmark"
+          class="x-icon"
+        />Cerrar</CustomButton
       >
     </div>
   </div>
@@ -11,13 +14,11 @@
 
 <script>
 import CustomButton from "./CustomButton.vue";
-import { XMarkIcon } from "@heroicons/vue/20/solid";
 
 export default {
   name: "PopUpModal",
   components: {
     CustomButton,
-    XMarkIcon,
   },
   props: {
     modalIsVisible: {
@@ -50,6 +51,7 @@ export default {
 
 .pop-up__modal {
   position: relative;
+  display: block;
   background-color: var(--background-color);
   border: 2px solid var(--foreground-color);
   border-radius: var(--border-radius-sm);
@@ -60,6 +62,8 @@ export default {
 
 .pop-up__button {
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 5px;
   margin: 0 auto;
 }

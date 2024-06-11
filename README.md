@@ -1,6 +1,6 @@
 # Nescom SRL Business Website
 
-Welcome to the repository for the Nescom SRL Business Website. This website showcases the services provided by Nescom, a leading company in the Dominican Republic. Nescom specializes in areas such as master of ceremony, commercial voice, public relationships and communication consulting.
+Welcome to the repository for the Nescom SRL Business Website. This website showcases the services provided by Nescom, a leading interpersonal communication company in the Dominican Republic. Nescom specializes in areas such as master of ceremony, commercial voice, public relationships and communication consulting.
 
 ## Disclaimer
 

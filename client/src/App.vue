@@ -1,11 +1,13 @@
 <template>
-  <HeaderSection />
-  <main>
-    <slot>
-      <router-view></router-view>
-    </slot>
-  </main>
-  <FooterSection />
+  <div>
+    <HeaderSection />
+    <main>
+      <slot>
+        <router-view></router-view>
+      </slot>
+    </main>
+    <FooterSection />
+  </div>
 </template>
 
 <script>
@@ -27,6 +29,8 @@ export default {
   --font-regular: 400;
   --font-bold: 700;
   --font-family: "Poppins", sans-serif;
+  --black: rgba(33, 33, 33);
+  --white: rgba(242, 242, 242);
   --primary-text-color: rgba(33, 33, 33);
   --secondary-text-color: rgb(50, 50, 50);
   --background-color: rgba(242, 242, 242);
@@ -34,6 +38,7 @@ export default {
   --primary-color: rgba(237, 57, 56);
   --box-shadow-color: rgba(0, 0, 0, 0.2);
   --green: rgb(0, 165, 0);
+  --red: rgb(211, 6, 6);
   --border-radius-sm: 2px;
   --border-radius-md: 32px;
 }

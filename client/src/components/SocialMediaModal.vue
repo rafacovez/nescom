@@ -9,11 +9,11 @@
       :aria-label="`Navigate to Nescom ${social.name}`"
       @click="navigateTo(social.url)"
     >
-      <object
-        :data="getSocialLogo(social.name)"
+      <font-awesome-icon
+        :icon="social.icon"
         type="image/svg+xml"
         class="social-media__icon"
-      ></object>
+      />
     </button>
   </div>
 </template>
@@ -32,9 +32,6 @@ export default {
   methods: {
     navigateTo(url) {
       navigateTo(url);
-    },
-    getSocialLogo(social) {
-      return require(`../assets/${social}Logo.svg`);
     },
   },
 };
@@ -55,7 +52,7 @@ export default {
     flex-direction: column;
     gap: 1rem;
     background-color: var(--primary-color);
-    border: 1px solid var(--foreground-color);
+    border: 1px solid var(--primary-text-color);
     height: fit-content;
     width: fit-content;
     margin: 0;
@@ -69,7 +66,7 @@ export default {
     border: none;
     height: fit-content;
     width: fit-content;
-    opacity: 0.5;
+    opacity: 0.8;
     cursor: pointer;
     position: relative;
     z-index: 600;
@@ -80,15 +77,12 @@ export default {
   }
 
   .social-media__icon {
-    height: 30px;
-    width: 30px;
+    color: var(--primary-text-color);
+    height: 25px;
+    width: 25px;
     object-fit: cover;
     border-radius: 50%;
     pointer-events: none;
-  }
-
-  .social-media__icon > svg > path {
-    fill: blue;
   }
 }
 </style>

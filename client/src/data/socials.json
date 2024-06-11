@@ -3,22 +3,26 @@
     {
       "name": "Instagram",
       "username": "nescomrd",
-      "url": "https://instagram.com/nescomrd"
+      "url": "https://instagram.com/nescomrd",
+      "icon": "fa-brands fa-instagram"
     },
     {
       "name": "Facebook",
       "username": "nescomrd",
-      "url": "https://facebook.com/nescomrd"
+      "url": "https://facebook.com/nescomrd",
+      "icon": "fa-brands fa-facebook-f"
     },
     {
       "name": "Twitter",
       "username": "nescomrd",
-      "url": "https://twitter.com/nescomrd"
+      "url": "https://twitter.com/nescomrd",
+      "icon": "fa-brands fa-x-twitter"
     },
     {
       "name": "YouTube",
       "username": "nescomrd8814",
-      "url": "https://www.youtube.com/channel/UCK6yeR3uawJDFfUKMehdD1A"
+      "url": "https://www.youtube.com/channel/UCK6yeR3uawJDFfUKMehdD1A",
+      "icon": "fa-brands fa-youtube"
     }
   ]
 }
