@@ -1,13 +1,12 @@
-# Nescom SRL Business Website
+# nescom
 
-Welcome to the repository for the Nescom SRL Business Website. This website showcases the services provided by Nescom, a leading interpersonal communication company in the Dominican Republic. Nescom specializes in areas such as master of ceremony, commercial voice, public relationships and communication consulting.
+This template should help get you started developing with Vue 3 in Vite.
 
-## Disclaimer
+## Recommended IDE Setup
 
-The code in this repository is licensed under the MIT license. Please refer to the [LICENSE](LICENSE.md) file for more details.
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
 
-## Contact
-
+## Type Support for `.vue` Imports in TS
 If you have any questions, feedback, or inquiries, please feel free to contact us via email at [contact@nescom.com](mailto:contact@nescom.com).
 
 test

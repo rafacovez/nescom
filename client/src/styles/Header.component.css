@@ -1,0 +1,27 @@
+.header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid var(--secondary-text-color);
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 30px;
+  text-decoration: none;
+  color: var(--primary-text-color);
+}
+
+.header__heading {
+  font-size: calc(var(--font-size) * 1.2);
+}
+
+.header__utilities {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
