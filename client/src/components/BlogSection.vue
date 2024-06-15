@@ -15,10 +15,10 @@
         :class="['blog-section__post--' + index]"
         :to="'/blog/post/' + post.url"
       >
-        <img
+        <ThumbnailComponent
           v-show="post.thumbnailImage !== ''"
-          v-lazy="post.thumbnailImage"
-          :alt="post.title"
+          :thumbnailSrc="post.thumbnailImage"
+          :thumbnailAlt="post.title"
           class="blog-section__post-thumbnail"
         />
         <h4 class="blog-section__post-title">{{ post.title }}</h4>
@@ -35,12 +35,14 @@
 
 <script>
 import ComponentLayout from "@/layouts/ComponentLayout.vue";
+import ThumbnailComponent from "./ThumbnailComponent.vue";
 import axiosInstance from "@/axios-instance";
 
 export default {
   name: "BlogSection",
   components: {
     ComponentLayout,
+    ThumbnailComponent,
   },
   data() {
     return {
@@ -120,31 +122,36 @@ export default {
 .blog-section__post-thumbnail {
   position: absolute;
   inset: 0;
-  height: 100%;
   width: 100%;
   z-index: -1;
 }
 
-/* .blog-section__post::after {
+.blog-section__post::after {
   content: "";
   display: block;
   height: 100%;
   width: 100%;
   position: absolute;
   inset: 0;
-  background-color: var(--black);
+  background: linear-gradient(
+    to top,
+    rgba(33, 33, 33),
+    rgba(33, 33, 33, 0) 50%
+  );
   opacity: 0.5;
-  z-index: -25;
+  z-index: 25;
   transition: all ease-out 0.2s;
-} */
+}
 
 .blog-section__post-title {
   color: var(--white);
+  z-index: 50;
 }
 
 .blog-section__post-content {
   color: var(--white);
   margin: 1rem 0;
+  z-index: 50;
 }
 
 .blog-section__post--0 {
@@ -175,10 +182,6 @@ export default {
 
   .blog-section__post {
     min-height: 0;
-  }
-
-  .blog-section__post:not(.blog-section__post--0) {
-    max-width: 200px;
   }
 
   .blog-section__post--0 > .blog-section__post-title {
