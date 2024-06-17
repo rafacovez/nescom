@@ -287,7 +287,7 @@ export default {
               updatePost
             );
 
-            if (response.status !== 200) {
+            if (response.status !== 201) {
               throw new Error("Failed to update post");
             } else {
               this.$router.push("/blog");
@@ -318,7 +318,7 @@ export default {
               newPost
             );
 
-            if (response.status !== 200) {
+            if (response.status !== 201) {
               throw new Error("Failed to create post");
             } else {
               this.$router.push("/blog");
