@@ -159,7 +159,7 @@ export default {
   background-color: var(--background-color);
   box-shadow: 1px 1px 4px 0 var(--box-shadow-color);
   padding: 0.5rem 1rem;
-  z-index: 500;
+  z-index: var(--z-index-front-md);
   user-select: none;
 }
 

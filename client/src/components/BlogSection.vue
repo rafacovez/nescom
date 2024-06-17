@@ -115,7 +115,7 @@ export default {
   justify-content: flex-end;
   padding: 1rem;
   position: relative;
-  z-index: 50;
+  z-index: var(--z-index-front-md);
   overflow: hidden;
 }
 
@@ -123,7 +123,7 @@ export default {
   position: absolute;
   inset: 0;
   width: 100%;
-  z-index: -1;
+  z-index: var(--z-index-back-sm);
 }
 
 .blog-section__post::after {
@@ -139,19 +139,19 @@ export default {
     rgba(33, 33, 33, 0) 50%
   );
   opacity: 0.5;
-  z-index: 25;
+  z-index: var(--z-index-front-sm);
   transition: all ease-out 0.2s;
 }
 
 .blog-section__post-title {
   color: var(--white);
-  z-index: 50;
+  z-index: var(--z-index-front-md);
 }
 
 .blog-section__post-content {
   color: var(--white);
   margin: 1rem 0;
-  z-index: 50;
+  z-index: var(--z-index-front-md);
 }
 
 .blog-section__post--0 {

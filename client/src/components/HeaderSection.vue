@@ -76,6 +76,7 @@ export default {
 .header {
   position: sticky;
   top: 0;
+  z-index: var(--z-index-front-xxl);
 }
 
 .pre-header > .pre-header__link {
@@ -120,7 +121,7 @@ export default {
   padding: 0;
   margin: 0;
   cursor: pointer;
-  z-index: 1001;
+  z-index: var(--z-index-front-xxl);
 }
 
 .open-nav-button > span {
@@ -178,7 +179,7 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 4rem;
-    z-index: 500;
+    z-index: var(--z-index-front-xl);
     border-bottom: 1px solid var(--foreground-color);
   }
 

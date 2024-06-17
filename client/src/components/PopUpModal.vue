@@ -46,7 +46,7 @@ export default {
   display: grid;
   place-items: center;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
+  z-index: var(--z-index-front-xl);
 }
 
 .pop-up__modal {
@@ -57,7 +57,7 @@ export default {
   border-radius: var(--border-radius-sm);
   padding: 2rem;
   max-width: 300px;
-  z-index: 1001;
+  z-index: var(--z-index-front-xxl);
 }
 
 .pop-up__button {

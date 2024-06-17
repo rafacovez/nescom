@@ -73,7 +73,7 @@ export default {
   inset: 0;
   background-color: var(--black);
   opacity: 0.8;
-  z-index: -25;
+  z-index: var(--z-index-back-md);
   transition: all ease-out 0.2s;
 }
 
@@ -83,7 +83,7 @@ export default {
   object-fit: cover;
   height: 100%;
   width: 100%;
-  z-index: -50;
+  z-index: var(--z-index-back-sm);
 }
 
 .service__paragraph {
