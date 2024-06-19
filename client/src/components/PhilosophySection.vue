@@ -39,7 +39,7 @@ export default {
   flex-direction: column;
   gap: 2rem;
   background-color: var(--primary-color);
-  color: var(--background-color);
+  color: var(--white);
   padding: 2rem;
   margin: 0;
 }

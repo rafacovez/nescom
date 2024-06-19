@@ -1,11 +1,11 @@
 <template>
   <header class="header">
     <div class="pre-header">
-      <a href="https://porlalinea.com.do">
+      <a class="pre-header__link" href="https://porlalinea.com.do">
         Por La Línea: Un medio para defender el derecho a la información.
         <font-awesome-icon
           icon="fas fa-arrow-up-right-from-square"
-          class="icon"
+          class="pre-header__icon"
         />
       </a>
     </div>
@@ -73,7 +73,13 @@ export default {
 </script>
 
 <style>
-.pre-header > a {
+.header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-front-xxl);
+}
+
+.pre-header > .pre-header__link {
   background-color: var(--primary-color);
   margin: 0;
   padding: 0.5rem;
@@ -88,12 +94,21 @@ export default {
   gap: 0.5rem;
 }
 
+.pre-header__icon {
+  transition: all 0.2s ease-out;
+}
+
+.pre-header > .pre-header__link:hover > .pre-header__icon {
+  transform: translate(2px, -2px);
+}
+
 .main-header {
   background-color: var(--background-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
+  gap: 2rem;
 }
 
 .logo {
@@ -106,7 +121,7 @@ export default {
   padding: 0;
   margin: 0;
   cursor: pointer;
-  z-index: 1001;
+  z-index: var(--z-index-front-xxl);
 }
 
 .open-nav-button > span {
@@ -161,12 +176,10 @@ export default {
 
 @media only screen and (min-width: 768px) {
   .main-header {
-    position: sticky;
-    top: 0;
     justify-content: space-between;
     align-items: center;
     padding: 1rem 4rem;
-    z-index: 500;
+    z-index: var(--z-index-front-xl);
     border-bottom: 1px solid var(--foreground-color);
   }
 

@@ -51,13 +51,13 @@ export default {
 
 .checkbox-icon {
   display: none;
+  color: var(--white);
 }
 
 .checkbox.checked > .checkbox-icon {
   max-width: 75%;
   margin: 0 auto;
   display: block;
-  color: var(--background-color);
 }
 
 .checkbox-text {

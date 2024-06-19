@@ -81,7 +81,7 @@ export default {
   opacity: 0;
   transform: translateY(-25px);
   transition: all ease-out 0.2s;
-  z-index: 1000;
+  z-index: var(--z-index-front-xl);
 }
 
 .main-header > .header-utilities > .nav.show {
@@ -136,7 +136,7 @@ export default {
   width: fit-content;
   cursor: pointer;
   opacity: 0.8;
-  z-index: 2;
+  z-index: var(--z-index-front-sm);
 }
 
 .nav__social-media--link:hover {

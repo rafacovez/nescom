@@ -20,17 +20,13 @@
       :isFocused="isFocusedContent"
       @update:isFocused="(value) => (isFocusedContent = value)"
     />
-    <div class="image-input-wrapper">
-      <input
-        @change="getImage"
-        class="sr-only"
-        type="file"
-        id="imageInput"
-        accept="image/*"
-      />
-      <label for="imageInput">Click aquí para añadir una portada</label>
-      <img :src="this.postThumbnailPreviewSrc" :alt="this.postThumbnailAlt" />
-    </div>
+    <ThumbnailComponent
+      :onInputChange="getImage"
+      :thumbnailSrc="this.postThumbnailPreviewSrc"
+      :thumbnailAlt="this.postThumbnailAlt"
+      :isInput="true"
+      :labelText="'Click aquí para añadir una portada'"
+    />
     <div class="form-actions">
       <CustomButton @click="publishPost" :isPrimary="true">
         <input class="publish-button" type="submit" value="Publicar" />
@@ -45,6 +41,7 @@
 <script>
 import InputComponent from "@/components/InputComponent.vue";
 import CustomButton from "@/components/CustomButton.vue";
+import ThumbnailComponent from "./ThumbnailComponent.vue";
 import { mapState } from "vuex";
 import axiosInstance from "@/axios-instance";
 
@@ -53,6 +50,7 @@ export default {
   components: {
     InputComponent,
     CustomButton,
+    ThumbnailComponent,
   },
   data() {
     return {
@@ -289,7 +287,7 @@ export default {
               updatePost
             );
 
-            if (response.status !== 200) {
+            if (response.status !== 201) {
               throw new Error("Failed to update post");
             } else {
               this.$router.push("/blog");
@@ -320,7 +318,7 @@ export default {
               newPost
             );
 
-            if (response.status !== 200) {
+            if (response.status !== 201) {
               throw new Error("Failed to create post");
             } else {
               this.$router.push("/blog");
@@ -349,37 +347,6 @@ export default {
   border-radius: var(--border-radius-md);
 }
 
-.image-input-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--foreground-color);
-  width: 100%;
-  height: 200px;
-  border-radius: var(--border-radius-sm);
-  margin: 2rem 0;
-  overflow: hidden;
-}
-
-.image-input-wrapper > label {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-items: center;
-  font-size: calc(var(--font-size) * 0.8);
-  color: var(--secondary-text-color);
-  cursor: pointer;
-}
-
-.image-input-wrapper > img {
-  width: 100%;
-  opacity: 0.6;
-  z-index: -1000;
-}
-
 .form-actions {
   display: flex;
   gap: 1rem;
@@ -388,11 +355,5 @@ export default {
 
 .publish-button {
   color: var(--white);
-}
-
-@media only screen and (min-width: 768px) {
-  .image-input-wrapper {
-    height: 400px;
-  }
 }
 </style>

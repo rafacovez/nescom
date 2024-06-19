@@ -74,6 +74,10 @@ export default {
   overflow: hidden;
 }
 
+[data-theme="dark"] .clients-wrapper__client {
+  filter: grayscale(0%);
+}
+
 .clients-wrapper__client:hover {
   background-color: var(--background-color);
   filter: grayscale(0%);

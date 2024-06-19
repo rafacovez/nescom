@@ -41,6 +41,14 @@ export default {
   --red: rgb(211, 6, 6);
   --border-radius-sm: 2px;
   --border-radius-md: 32px;
+  --z-index-back-sm: -100;
+  --z-index-back-md: -50;
+  --z-index-back-xl: -25;
+  --z-index-neutral: 0;
+  --z-index-front-sm: 25;
+  --z-index-front-md: 50;
+  --z-index-front-xl: 100;
+  --z-index-front-xxl: 250;
 }
 
 [data-theme="dark"] {
