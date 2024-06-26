@@ -100,8 +100,6 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  console.log(process.env.SERVER_API_KEY);
-
   // fetches user data, if any
   await store.dispatch("fetchUserData");
 
