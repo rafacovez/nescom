@@ -6,18 +6,18 @@ export async function sendEmail(req, res) {
     service: "gmail",
     auth: {
       type: "OAuth2",
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_PASS,
-      clientId: process.env.GMAIL_CLIENT_ID,
-      clientSecret: process.env.GMAIL_SECRET_CLIENT,
-      refreshToken: process.env.GMAIL_REFRESH_TOKEN,
+      user: process.env.SERVER_GMAIL_USER,
+      pass: process.env.SERVER_GMAIL_PASS,
+      clientId: process.env.SERVER_GMAIL_CLIENT_ID,
+      clientSecret: process.env.SERVER_GMAIL_SECRET_CLIENT,
+      refreshToken: process.env.SERVER_GMAIL_REFRESH_TOKEN,
     },
   });
 
   try {
     const mailOptions = {
       from: { name: req.body.displayName, email: req.body.email }, // Doesn't show this from name attribute on the actual email
-      to: process.env.GMAIL_RECIPIENT,
+      to: process.env.SERVER_GMAIL_RECIPIENT,
       subject: "Nuevo mensaje desde nescomrd.com",
       text: req.body.message,
     };

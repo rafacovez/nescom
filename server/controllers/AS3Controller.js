@@ -14,16 +14,16 @@ export async function uploadThumbnailImage(req, res) {
 
     const client = new S3Client({
       credentials: {
-        accessKeyId: process.env.AS3_ACCESS_KEY,
-        secretAccessKey: process.env.AS3_SECRET_KEY,
+        accessKeyId: process.env.SERVER_AS3_ACCESS_KEY,
+        secretAccessKey: process.env.SERVER_AS3_SECRET_KEY,
       },
-      region: process.env.AS3_REGION,
+      region: process.env.SERVER_AS3_REGION,
     });
 
     const key = `posts-thumbnails/${randomImageName()}`;
     
     const params = {
-      Bucket: process.env.AS3_BUCKET,
+      Bucket: process.env.SERVER_AS3_BUCKET,
       Key: key,
       Body: webpBuffer,
       ContentType: "image/webp",
@@ -32,7 +32,7 @@ export async function uploadThumbnailImage(req, res) {
     const putCommand = new PutObjectCommand(params);
     await client.send(putCommand);
 
-    const url = `https://${process.env.AS3_BUCKET}.s3.${process.env.AS3_REGION}.amazonaws.com/${key}`;
+    const url = `https://${process.env.SERVER_AS3_BUCKET}.s3.${process.env.SERVER_AS3_REGION}.amazonaws.com/${key}`;
 
     res.status(200).json({ url });
   } catch (error) {

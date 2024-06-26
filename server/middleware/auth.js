@@ -2,7 +2,7 @@ import "../loadEnvironment.js";
 
 const auth = async (req, res, next) => {
   const apiKey = req.headers["secret-api-key"];
-  const validApiKey = process.env.API_KEY;
+  const validApiKey = process.env.SERVER_API_KEY;
 
   if (!apiKey) {
     return res.status(404).json({ message: "API key is missing." });
