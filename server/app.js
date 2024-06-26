@@ -6,8 +6,8 @@ import cors from "cors";
 import path from "path";
 import "./loadEnvironment.js";
 
-const ATLAS_URI = process.env.ATLAS_URI || "";
-const PORT = process.env.PORT || 3000;
+const ATLAS_URI = process.env.SERVER_ATLAS_URI || "";
+const PORT = process.env.SERVER_PORT || 3000;
 const app = express();
 
 // Middleware
