@@ -2,9 +2,7 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY start.sh ./start.sh
-COPY client ./client
-COPY server ./server
+COPY . .
 
 RUN chmod +x ./start.sh
 
