@@ -9,9 +9,9 @@ RUN chmod +x ./start.sh
 RUN cd client && npm install && \
     cd ../server && npm install
 
-ENV PORT=3000
+ENV PORT=80
 
-EXPOSE 3000
+EXPOSE 80
 
 RUN ls
 
