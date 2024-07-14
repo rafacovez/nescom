@@ -205,26 +205,54 @@ export default {
       };
 
       try {
-        const emailRequest = axiosInstance.post("/api/emails", requestBody);
-        const userRequest = this.isChecked
-          ? axiosInstance.post("/api/users/createOrUpdateUser", requestBody)
-          : Promise.resolve({ status: 200 });
+        // send email
+        const emailRequest = await axiosInstance.post(
+          "/api/emails",
+          requestBody
+        );
+        let userRequest = Promise.resolve({
+          status: 200,
+          message: "isChecked is false",
+        });
 
+        // register user if agreed
+        if (this.isChecked) {
+          let response = await axiosInstance.get("/api/users/getUserByEmail", {
+            params: { email: requestBody.email },
+          });
+
+          if (response.status === 404) {
+            userRequest = axiosInstance.post(
+              "/api/users/createOrUpdateUser",
+              requestBody
+            );
+          } else {
+            userRequest = Promise.resolve({
+              status: 200,
+              message: "User already exists",
+            });
+          }
+        }
+
+        // wait for promises to resolve
         const [emailResponse, userResponse] = await axios.all([
           emailRequest,
           userRequest,
         ]);
 
-        if (emailResponse.status !== 200)
+        // throw failed email sending error
+        if (emailResponse.status !== 200) {
           throw new Error("Failed to send email");
+        }
 
+        // throw failed user creating error
         if (userResponse.status !== 200 && userResponse.status !== 409) {
           console.error("Failed to create user, status:", userResponse.status);
         } else if (userResponse.status === 409) {
           console.error("Duplicate user found");
         }
 
-        // Reset form fields
+        // reset form fields
         this.inputValueName = "";
         this.inputValueEmail = "";
         this.inputValueMessage = "";
@@ -232,15 +260,16 @@ export default {
         this.isFocusedEmail = false;
         this.isFocusedMessage = false;
 
-        // Show success modal
+        // show success modal
         this.formWasSuccessful = true;
         this.modalIsVisible = true;
       } catch (error) {
+        // show failed modal
         console.error("Operation failed:", error);
         this.formWasSuccessful = false;
         this.modalIsVisible = true;
       } finally {
-        // Show modal in any case
+        // show modal in any case
         this.$refs.PopUpModal.showPopUp();
       }
     },

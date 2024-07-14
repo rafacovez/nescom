@@ -11,7 +11,8 @@
     <p class="post-url">
       https://nescomrd.com/blog/post/{{ this.formattedUrl }}
     </p>
-    <InputComponent
+    <QuillEditor id="contentEditor" theme="snow" />
+    <!-- <InputComponent
       :inputName="'Contenido'"
       :isTextarea="true"
       :isRequired="true"
@@ -19,7 +20,7 @@
       @update:inputValue="(value) => (inputValueContent = value)"
       :isFocused="isFocusedContent"
       @update:isFocused="(value) => (isFocusedContent = value)"
-    />
+    /> -->
     <ThumbnailComponent
       :onInputChange="getImage"
       :thumbnailSrc="this.postThumbnailPreviewSrc"
@@ -88,30 +89,6 @@ export default {
     }
   },
   methods: {
-    // getPost() {
-    //   fetch(
-    //     `${process.env.VUE_APP_URL}/api/posts/getPostById/${this.existentPostId}`,
-    //     {
-    //       method: "GET",
-    //     }
-    //   )
-    //     .then((response) => {
-    //       if (response.status === 404) {
-    //         this.$router.push("/404");
-    //       } else if (!response.ok) {
-    //         throw new Error("Error fetching post data");
-    //       }
-    //       return response.json();
-    //     })
-    //     .then((data) => {
-    //       this.inputValueTitle = data.title;
-    //       this.inputValueContent = data.content;
-    //       this.postThumbnailPreviewSrc = data.thumbnailImage;
-    //     })
-    //     .catch((error) => {
-    //       console.error(error);
-    //     });
-    // },
     async getPost() {
       try {
         const response = await axiosInstance.get(
@@ -134,6 +111,7 @@ export default {
         this.inputValueTitle = data.title;
         this.inputValueContent = data.content;
         this.postThumbnailPreviewSrc = data.thumbnailImage;
+        this.postThumbnailSrc = data.thumbnailImage;
       } catch (error) {
         console.error("Error fetching post data:", error);
       }
@@ -144,35 +122,7 @@ export default {
       this.postThumbnailKey = this.postThumbnail.name;
       this.postThumbnailAlt = this.inputValueTitle;
     },
-    // async publishThumbnail() {
-    //   if (document.getElementById("createPostForm").checkValidity()) {
-    //     const formData = new FormData();
-
-    //     formData.append("title", this.inputValueTitle);
-    //     formData.append("content", this.inputValueContent);
-    //     formData.append("thumbnailImage", this.postThumbnail);
-    //     formData.append("thumbnailImageKey", this.postThumbnailKey);
-    //     formData.append("url", this.formattedUrl);
-
-    //     await fetch(`${process.env.VUE_APP_URL}/api/media/upload`, {
-    //       method: "POST",
-    //       body: formData,
-    //     })
-    //       .then((response) => {
-    //         if (!response.ok) {
-    //           throw new Error("Failed to upload post thumbnail");
-    //         }
-    //         return response.json();
-    //       })
-    //       .then((data) => {
-    //         this.postThumbnailSrc = data.url;
-    //       })
-    //       .catch((error) => {
-    //         console.error("Error uploading post data:", error);
-    //       });
-    //   }
-    // },
-    async publishThumbnail() {
+    async publishThumbnail(key) {
       if (document.getElementById("createPostForm").checkValidity()) {
         const formData = new FormData();
 
@@ -183,10 +133,11 @@ export default {
         formData.append("url", this.formattedUrl);
 
         try {
-          const response = await axiosInstance.post(
-            "/api/media/upload",
-            formData
-          );
+          const request = key
+            ? `/api/media/upload/?key=${key}`
+            : "/api/media/upload";
+
+          const response = await axiosInstance.post(request, formData);
 
           if (response.status !== 200) {
             throw new Error("Failed to upload post thumbnail");
@@ -198,82 +149,23 @@ export default {
         }
       }
     },
-    // eslint-disable-next-line
-    // async publishPost() { // TODO: Check for duplicated titles
-    //   if (this.existentPostId) {
-    //     const updatePost = {
-    //       title: this.inputValueTitle,
-    //       content: this.inputValueContent,
-    //       categoryTags: ["one", "two"],
-    //       thumbnailImage: this.postThumbnailSrc,
-    //       url: this.formattedUrl,
-    //       featured: true,
-    //       status: "published",
-    //     };
-
-    //     fetch(
-    //       `${process.env.VUE_APP_URL}/api/posts/updatePostById/${this.existentPostId}`,
-    //       {
-    //         method: "POST",
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //         },
-    //         body: JSON.stringify(updatePost),
-    //       }
-    //     )
-    //       .then((response) => {
-    //         if (!response.ok) {
-    //           throw new Error("Failed to update post");
-    //         } else {
-    //           this.$router.push("/blog");
-    //         }
-    //       })
-    //       .catch((error) => {
-    //         console.error(error);
-    //       });
-    //   } else {
-    //     await this.publishThumbnail();
-
-    //     const newPost = {
-    //       title: this.inputValueTitle,
-    //       author: this.userData._id,
-    //       content: this.inputValueContent,
-    //       categoryTags: ["one", "two"],
-    //       thumbnailImage: this.postThumbnailSrc,
-    //       url: this.formattedUrl,
-    //       viewsReadCount: 12,
-    //       likesReactions: 5,
-    //       comments: ["Hello guys", "Looks great!"],
-    //       featured: true,
-    //       status: "published",
-    //     };
-
-    //     await fetch(`${process.env.VUE_APP_URL}/api/posts/createPost`, {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify(newPost),
-    //     })
-    //       .then((response) => {
-    //         if (!response.ok) {
-    //           throw new Error("Failed to create post");
-    //         } else {
-    //           this.$router.push("/blog");
-    //         }
-    //       })
-    //       .catch((error) => {
-    //         console.error(error);
-    //       });
-    //   }
-    // },
     async publishPost() {
       // Check if the form is valid before proceeding
-      if (document.getElementById("createPostForm").checkValidity()) {
+      if (
+        document.getElementById("createPostForm").checkValidity() &&
+        document.getElementById("imageInput").files[0] !== undefined
+      ) {
+        // if updating post
         if (this.existentPostId) {
+          await this.publishThumbnail(
+            this.postThumbnailSrc.split("/")[
+              this.postThumbnailSrc.split("/").length - 1
+            ]
+          );
+
           const updatePost = {
             title: this.inputValueTitle,
-            content: this.inputValueContent,
+            content: document.getElementById("contentEditor").getHTML(),
             categoryTags: ["one", "two"],
             thumbnailImage: this.postThumbnailSrc,
             url: this.formattedUrl,
@@ -287,7 +179,7 @@ export default {
               updatePost
             );
 
-            if (response.status !== 201) {
+            if (response.status !== 200) {
               throw new Error("Failed to update post");
             } else {
               this.$router.push("/blog");
@@ -296,12 +188,13 @@ export default {
             console.error("Error updating post:", error);
           }
         } else {
+          // if creating post
           await this.publishThumbnail();
 
           const newPost = {
             title: this.inputValueTitle,
             author: this.userData._id,
-            content: this.inputValueContent,
+            content: document.getElementById("contentEditor").getHTML(),
             categoryTags: ["one", "two"],
             thumbnailImage: this.postThumbnailSrc,
             url: this.formattedUrl,
@@ -326,6 +219,12 @@ export default {
           } catch (error) {
             console.error("Error creating post:", error);
           }
+        }
+      } else {
+        if (document.getElementById("imageInput").files[0] == undefined) {
+          const inputThumbnail =
+            document.getElementById("imageInput").nextElementSibling;
+          inputThumbnail.classList.add("error");
         }
       }
     },

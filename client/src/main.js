@@ -10,6 +10,8 @@ import NotFoundPage from "@/views/NotFoundPage.vue";
 import store from "./store";
 import vue3GoogleLogin from "vue3-google-login";
 import VueLazyload from "vue-lazyload";
+import { QuillEditor } from "@vueup/vue-quill";
+import "@vueup/vue-quill/dist/vue-quill.snow.css";
 
 // icons set up
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -125,6 +127,9 @@ const app = createApp(App);
 
 // Font Awesome component set up
 app.component("font-awesome-icon", FontAwesomeIcon);
+
+// Quill Editor component set up
+app.component("QuillEditor", QuillEditor);
 
 app.use(router);
 app.use(store);

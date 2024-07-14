@@ -108,26 +108,21 @@ export default createStore({
           params: { googleId: userId },
         });
 
-        // If user is not found, create or update the user
-        if (response.status === 404) {
-          const user = {
-            displayName: googleData.name,
-            googleId: googleData.sub,
-            profilePicture: googleData.picture,
-            email: googleData.email,
-            receiveEmails: true,
-            role: "registered",
-          };
+        const user = {
+          displayName: googleData.name,
+          googleId: googleData.sub,
+          profilePicture: googleData.picture,
+          email: googleData.email,
+          receiveEmails: true,
+          role: response.data.role === "admin" ? "admin" : "registered",
+        };
 
-          response = await axiosInstance.post(
-            "/api/users/createOrUpdateUser",
-            user
-          );
+        response = await axiosInstance.post(
+          "/api/users/createOrUpdateUser",
+          user
+        );
 
-          if (!response.data) {
-            throw new Error("Failed to create or update user");
-          }
-        } else if (!response.data) {
+        if (!response.data) {
           throw new Error("Failed to fetch user data");
         }
 

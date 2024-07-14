@@ -39,7 +39,7 @@ export default {
   --box-shadow-color: rgba(0, 0, 0, 0.2);
   --green: rgb(0, 165, 0);
   --red: rgb(211, 6, 6);
-  --border-radius-sm: 2px;
+  --border-radius-sm: 4px;
   --border-radius-md: 32px;
   --z-index-back-sm: -100;
   --z-index-back-md: -50;
