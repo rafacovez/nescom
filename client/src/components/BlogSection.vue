@@ -117,6 +117,12 @@ export default {
   position: relative;
   z-index: var(--z-index-front-md);
   overflow: hidden;
+  min-width: 200px;
+  transition: all 0.2s ease-out;
+}
+
+.blog-section__post:hover {
+  opacity: 0.9;
 }
 
 .blog-section__post-thumbnail {
@@ -138,7 +144,6 @@ export default {
     rgba(33, 33, 33),
     rgba(33, 33, 33, 0) 50%
   );
-  opacity: 0.5;
   z-index: var(--z-index-front-sm);
   transition: all ease-out 0.2s;
 }
@@ -149,9 +154,11 @@ export default {
 }
 
 .blog-section__post-content {
+  max-height: 100px;
   color: var(--white);
   margin: 1rem 0;
   z-index: var(--z-index-front-md);
+  overflow: hidden;
 }
 
 .blog-section__post--0 {
@@ -182,6 +189,10 @@ export default {
 
   .blog-section__post {
     min-height: 0;
+  }
+
+  .blog-section__post--0 {
+    min-width: 600px;
   }
 
   .blog-section__post--0 > .blog-section__post-title {

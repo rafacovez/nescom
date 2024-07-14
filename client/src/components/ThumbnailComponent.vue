@@ -70,6 +70,10 @@ export default {
   opacity: 0.6;
 }
 
+.thumbnail__label.error {
+  border: 1px solid var(--red);
+}
+
 .thumbnail__img {
   position: absolute;
   top: 0;

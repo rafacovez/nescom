@@ -20,7 +20,15 @@ export async function uploadThumbnailImage(req, res) {
       region: process.env.SERVER_AS3_REGION,
     });
 
-    const key = `posts-thumbnails/${randomImageName()}`;
+    let key = req.params.key;
+
+    if (!key) {
+      key = `posts-thumbnails/${randomImageName()}`;
+    
+      console.log("New key:", key);
+    }
+    
+    console.log("Same key:", key);
     
     const params = {
       Bucket: process.env.SERVER_AS3_BUCKET,
