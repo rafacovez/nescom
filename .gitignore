@@ -1,5 +1,4 @@
 # CLIENT
-
 .DS_Store
 node_modules
 /dist
@@ -78,3 +77,4 @@ jspm_packages/
 # OS-specific files
 .DS_Store
 Thumbs.db
+*.pem

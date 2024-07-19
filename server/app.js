@@ -4,6 +4,8 @@ import routes from "./routes/index.js";
 import auth from "./middleware/auth.js";
 import cors from "cors";
 import path from "path";
+import fs from "fs";
+import https from "https";
 import "./loadEnvironment.js";
 
 const ATLAS_URI = process.env.SERVER_ATLAS_URI || "";
@@ -44,6 +46,17 @@ app.use((err, _req, res, next) => {
   res.status(500).send("Uh oh! An unexpected error occurred.");
 });
 
-app.listen(PORT, () => {
-  console.log(`Express app listening on port: ${PORT}`);
-});
+if (process.env.NODE_ENV === "production") {
+  const options = {
+    key: fs.readFileSync("../privkey.pem"),
+    cert: fs.readFileSync("../fullchain.pem")
+  };
+  
+  https.createServer(options, app).listen(PORT, () => {
+    console.log(`Express app listening on port: ${PORT}`);
+  });
+} else {
+  app.listen(PORT, () => {
+    console.log(`Express app listening on port: ${PORT}`);
+  });
+}
