@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="nescom-light" class="h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% load static %}
+    <link rel="icon" type="image/svg+xml" href="{% static 'favicon/favicon.svg' %}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}" />
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}" />
+    <link rel="stylesheet" href="{% static 'css/src/output.css' %}" />
+    <title>
+      {% block title %}
+        NesCom RD — Agregamos valor a su comunicación
+      {% endblock %}
+    </title>
+  </head>
+  <body class="min-h-full flex flex-col">
+    <c-header />
+    <main class="flex grow flex-col">
+      {% block content %}
+
+      {% endblock %}
+    </main>
+    <c-footer />
+  </body>
+</html>

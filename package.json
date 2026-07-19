@@ -1,0 +1,21 @@
+{
+  "name": "nescom",
+  "version": "1.0.0",
+  "description": "A modern, high-performance corporate web application developed for **Nescom RD** using Python, Django 5.x, Wagtail CMS, and HTMX, styled with Tailwind CSS v4 and DaisyUI v5.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx @tailwindcss/cli -i ./static/css/src/input.css -o ./static/css/src/output.css --minify",
+    "watch:css": "npx @tailwindcss/cli -i ./static/css/src/input.css -o ./static/css/src/output.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.3.2",
+    "tailwindcss": "^4.3.2"
+  },
+  "devDependencies": {
+    "daisyui": "^5.6.18"
+  }
+}

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container mx-auto px-4 max-w-3xl grow flex flex-col justify-center items-center gap-6 text-center py-12">
+    <span class="badge badge-primary text-xs font-bold tracking-wider uppercase">
+      <span class="loading loading-ring loading-xs"></span>
+      Nueva plataforma en desarrollo
+    </span>
+
+    <h1 class="text-3xl md:text-4xl font-black tracking-tight text-base-content max-w-2xl leading-tight">Hacemos más efectivas las relaciones entre nuestros clientes y sus asociados.</h1>
+
+    <p class="text-base text-base-content/70 max-w-xl leading-relaxed">Nos dedicamos a optimizar sus procesos comunicacionales. Filosofía corporativa inspirada en el servicio, eficiencia, calidad, proacción y entusiasmo. Próximamente blog especializado.</p>
+
+    <div class="w-full card card-border bg-base-100 shadow-xl max-w-lg mx-auto grid sm:grid-cols-2 gap-6 p-6 items-center text-center sm:text-left border-secondary/20 mt-4">
+      <div class="space-y-1">
+        <p class="text-xs font-bold uppercase tracking-wider text-secondary">Correo Electrónico</p>
+        <a href="mailto:info@nescomrd.com" class="text-base text-base-content hover:text-accent font-bold transition-colors block">info@nescomrd.com</a>
+      </div>
+
+      <div class="space-y-1 sm:border-l sm:border-base-content/10 sm:pl-6">
+        <p class="text-xs font-bold uppercase tracking-wider text-secondary">Atención Directa</p>
+        <div class="space-y-1 text-sm text-base-content font-bold">
+          <a href="tel:+18294359356" class="hover:text-accent transition-colors flex items-center justify-center sm:justify-start gap-2">
+            <span>📞</span>
+            <span>+1 (829) 435-9356</span>
+          </a>
+          <a href="tel:+18092509356" class="hover:text-accent transition-colors flex items-center justify-center sm:justify-start gap-2">
+            <span>📞</span>
+            <span>+1 (809) 250-9356</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
