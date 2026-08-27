@@ -16,13 +16,13 @@
       {% endblock %}
     </title>
   </head>
-  <body class="min-h-full flex flex-col">
-    <c-header />
-    <main class="flex grow flex-col">
-      {% block content %}
+    <body class="min-h-full flex flex-col">
+      {% include "components/header.html" %}
+        <main class="flex grow flex-col">
+          {% block content %}
 
-      {% endblock %}
-    </main>
-    <c-footer />
-  </body>
+          {% endblock %}
+        </main>
+      {% include "components/footer.html" %}
+    </body>
 </html>

@@ -1,0 +1,5 @@
+{% with icon_path='icons/brands/'|add:name|add:'.svg' %}
+  <span class="inline-flex {% if class %}{{ class }}{% endif %}">
+    {% include icon_path %}
+  </span>
+{% endwith %}

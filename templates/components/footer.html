@@ -1,0 +1,30 @@
+{% now 'Y' as current_year %}
+<footer>
+  <footer class="footer footer-horizontal footer-center bg-base-200 text-base-content rounded p-10">
+    {% comment %} <nav class="grid grid-flow-col gap-4">
+      <a class="link link-hover">About us</a>
+      <a class="link link-hover">Contact</a>
+      <a class="link link-hover">Jobs</a>
+      <a class="link link-hover">Press kit</a>
+    </nav> {% endcomment %}
+    <nav>
+      <div class="grid grid-flow-col gap-4">
+        <a target="_blank" href="https://x.com/nescomRD">
+          {% include "components/brand_icon.html" with name="x" class="w-6 h-6 text-primary" %}
+        </a>
+        <a target="_blank" href="https://web.facebook.com/nescomRD">
+          {% include "components/brand_icon.html" with name="facebook" class="w-6 h-6 text-primary" %}
+        </a>
+        <a target="_blank" href="https://www.instagram.com/nescomRD">
+          {% include "components/brand_icon.html" with name="instagram" class="w-6 h-6 text-primary" %}
+        </a>
+        <a target="_blank" href="https://www.youtube.com/channel/UCK6yeR3uawJDFfUKMehdD1A">
+          {% include "components/brand_icon.html" with name="youtube" class="w-6 h-6 text-primary" %}
+        </a>
+      </div>
+    </nav>
+    <aside>
+      <p>© 2016 - {{ current_year }} NesCom RD. Todos los derechos reservados.</p>
+    </aside>
+  </footer>
+</footer>

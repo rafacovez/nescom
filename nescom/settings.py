@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+
 import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -21,73 +22,72 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
 
-environ.Env.read_env(BASE_DIR / '.env')
+environ.Env.read_env(BASE_DIR / ".env")
 
 
 # ─── Security ─────────────────────────────────────────────────────────────────
 
-SECRET_KEY=env('SECRET_KEY')
+SECRET_KEY = env("SECRET_KEY")
 
-DEBUG = env.bool('DEBUG', default=True)
+DEBUG = env.bool("DEBUG", default=True)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS", default=[])
 
-CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[])
+CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=[])
 
-SECURE_SSL_REDIRECT = env.bool('SECURE_SSL_REDIRECT', default=False)
-SECURE_HSTS_SECONDS = env.int('SECURE_HSTS_SECONDS', default=0)
-SESSION_COOKIE_SECURE = env.bool('SESSION_COOKIE_SECURE', default=False)
-CSRF_COOKIE_SECURE = env.bool('CSRF_COOKIE_SECURE', default=False)
+SECURE_SSL_REDIRECT = env.bool("SECURE_SSL_REDIRECT", default=False)
+SECURE_HSTS_SECONDS = env.int("SECURE_HSTS_SECONDS", default=0)
+SESSION_COOKIE_SECURE = env.bool("SESSION_COOKIE_SECURE", default=False)
+CSRF_COOKIE_SECURE = env.bool("CSRF_COOKIE_SECURE", default=False)
 
 # Only set this if the env var exists (production behind a reverse proxy)
-if env('SECURE_PROXY_SSL_HEADER', default=None):
-    SECURE_PROXY_SSL_HEADER = env.tuple('SECURE_PROXY_SSL_HEADER')
+if env("SECURE_PROXY_SSL_HEADER", default=None):
+    SECURE_PROXY_SSL_HEADER = env.tuple("SECURE_PROXY_SSL_HEADER")
 
 
 # ─── Application definition ───────────────────────────────────────────────────
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'whitenoise.runserver_nostatic',
-    'django.contrib.staticfiles',
-    'environ',
-    'django_cotton',
-    'home',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "whitenoise.runserver_nostatic",
+    "django.contrib.staticfiles",
+    "environ",
+    "home",
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = 'nescom.urls'
+ROOT_URLCONF = "nescom.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [BASE_DIR / "templates"],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'nescom.wsgi.application'
+WSGI_APPLICATION = "nescom.wsgi.application"
 
 
 # ─── Database ─────────────────────────────────────────────────────────────────
@@ -95,22 +95,22 @@ WSGI_APPLICATION = 'nescom.wsgi.application'
 # When .env has DB_NAME/USER/PASSWORD/HOST/PORT, it switches to PostgreSQL.
 # Otherwise it falls back to SQLite for quick local development.
 
-if env('DB_NAME', default=None):
+if env("DB_NAME", default=None):
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': env('DB_NAME'),
-            'USER': env('DB_USER'),
-            'PASSWORD': env('DB_PASSWORD'),
-            'HOST': env('DB_HOST'),
-            'PORT': env.int('DB_PORT', default=5432),
+        "default": {
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": env("DB_NAME"),
+            "USER": env("DB_USER"),
+            "PASSWORD": env("DB_PASSWORD"),
+            "HOST": env("DB_HOST"),
+            "PORT": env.int("DB_PORT", default=5432),
         }
     }
 else:
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
         }
     }
 
@@ -119,25 +119,25 @@ else:
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
 
 
 # ─── Internationalization ─────────────────────────────────────────────────────
 
-LANGUAGE_CODE = 'es-do'
+LANGUAGE_CODE = "es-do"
 
-TIME_ZONE = 'America/Santo_Domingo'
+TIME_ZONE = "America/Santo_Domingo"
 
 USE_I18N = True
 
@@ -146,22 +146,22 @@ USE_TZ = True
 
 # ─── Static files (CSS, JavaScript, Images) ───────────────────────────────────
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_URL = "static/"
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 WHITENOISE_MANIFEST_STRICT = False
 
 
 # ─── Wagtail ─────────────────────────────────────────────────
 
-WAGTAILADMIN_BASE_URL = env('WAGTAILADMIN_BASE_URL', default='http://localhost:8000')
-WAGTAIL_SITE_NAME = env('WAGTAIL_SITE_NAME', default='Nescom RD')
+WAGTAILADMIN_BASE_URL = env("WAGTAILADMIN_BASE_URL", default="http://localhost:8000")
+WAGTAIL_SITE_NAME = env("WAGTAIL_SITE_NAME", default="Nescom RD")
 
 
 # ─── Media files — S3 / Garage ────────────────────────────────────────────────
 
-if env('AWS_ACCESS_KEY_ID', default=None):
+if env("AWS_ACCESS_KEY_ID", default=None):
     STORAGES = {
         "default": {
             "BACKEND": "storages.backends.s3.S3Storage",
@@ -171,7 +171,7 @@ if env('AWS_ACCESS_KEY_ID', default=None):
                 "bucket_name": env("AWS_STORAGE_BUCKET_NAME"),
                 "endpoint_url": env("AWS_S3_ENDPOINT_URL"),
                 "region_name": env("AWS_S3_REGION_NAME"),
-                "default_acl": env("AWS_DEFAULT_ACL", default='public-read'),
+                "default_acl": env("AWS_DEFAULT_ACL", default="public-read"),
                 "signature_version": "s3v4",
             },
         },
@@ -192,14 +192,14 @@ else:
 
 # ─── Email ────────────────────────────────────────────────────────────────────
 
-EMAIL_HOST = env('EMAIL_HOST', default='localhost')
-EMAIL_PORT = env.int('EMAIL_PORT', default=587)
-EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
-EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
-EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
-DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='webmaster@localhost')
+EMAIL_HOST = env("EMAIL_HOST", default="localhost")
+EMAIL_PORT = env.int("EMAIL_PORT", default=587)
+EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
+EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
+DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="webmaster@localhost")
 
 
 # ─── Default primary key field type ───────────────────────────────────────────
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
