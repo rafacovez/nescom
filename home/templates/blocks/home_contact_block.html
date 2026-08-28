@@ -1,0 +1,38 @@
+{% extends "components/section.html" %}
+{% load wagtailcore_tags %}
+
+{% block section_content %}
+<div id="contacto" class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+  
+  <div class="lg:col-span-5 flex flex-col gap-6">
+    {% if value.etiqueta %}
+      <span class="badge badge-primary badge-outline text-xs font-bold uppercase tracking-wider py-3 px-4 w-max">
+        {{ value.etiqueta }}
+      </span>
+    {% endif %}
+
+    <h2 class="text-3xl md:text-5xl font-black text-base-content tracking-tight leading-tight">
+      {{ value.titular }}
+    </h2>
+
+    {% if value.subtitular %}
+      <p class="text-base-content/75 text-base md:text-lg leading-relaxed">
+        {{ value.subtitular }}
+      </p>
+    {% endif %}
+
+    {% if value.pagina_contacto %}
+      <div class="prose text-base-content/80 mt-2">
+        {{ value.pagina_contacto.specific.intro|richtext }}
+      </div>
+    {% endif %}
+  </div>
+  
+  <div class="lg:col-span-7">
+    {% if value.pagina_contacto %}
+      {% include "components/contact_form.html" with contact_page=value.pagina_contacto.specific %}
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}

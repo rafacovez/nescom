@@ -1,4 +1,30 @@
-.venv
-db.sqlite3
-node_modules
+# Environments & Credentials
+.venv/
+venv/
 .env
+*.env
+
+# Databases & Media
+db.sqlite3
+media/
+staticfiles/
+
+# Node
+node_modules/
+npm-debug.log*
+
+# Python cache & build artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.ruff_cache/
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log

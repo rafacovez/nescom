@@ -1,0 +1,93 @@
+{% load static wagtailcore_tags wagtailsettings_tags blog_tags %}
+{% get_site_navigation as nav %}
+{% get_settings use_default_site=True %}
+{% now 'Y' as current_year %}
+
+<footer class="bg-base-200 text-base-content mt-auto border-t border-base-300">
+  
+  <div class="footer max-w-7xl mx-auto p-10 grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
+    
+    <aside class="col-span-2 md:col-span-4 lg:col-span-2 flex flex-col gap-4">
+      <a href="/" class="flex items-center gap-2 text-2xl font-black tracking-tight text-base-content">
+        <img class="h-8 w-8 object-contain" src="{% static 'images/logo.png' %}" alt="NesCom" />
+        <span>Nes<span class="text-primary">Com</span></span>
+      </a>
+      <p class="text-sm text-base-content/70 max-w-sm leading-relaxed">
+        NESTEVEZ, Servicios de Comunicación, SRL.<br />
+        Hacemos más efectivas las relaciones entre nuestros clientes y sus asociados.
+      </p>
+    </aside>
+    
+    {% for blog in nav.blogs %}
+      <nav class="flex flex-col gap-2">
+        <h6 class="footer-title opacity-80 text-primary font-bold">{{ blog.title }}</h6>
+        <a href="{% pageurl blog %}" class="link link-hover text-sm font-semibold">Todos los artículos</a>
+        {% for cat in nav.categories %}
+          <a href="{% pageurl blog %}?categoria={{ cat.slug }}" class="link link-hover text-sm text-base-content/75">
+            {{ cat.nombre }}
+          </a>
+        {% endfor %}
+      </nav>
+    {% endfor %}
+    
+    <nav class="flex flex-col gap-2">
+      <h6 class="footer-title opacity-80 text-primary font-bold">Compañía</h6>
+      <a href="/contacto/" class="link link-hover text-sm text-base-content/75">Contacto</a>
+    </nav>
+    
+    {% if nav.legal_pages %}
+      <nav class="flex flex-col gap-2">
+        <h6 class="footer-title opacity-80 text-primary font-bold">Legal</h6>
+        {% for legal in nav.legal_pages %}
+          <a href="{% pageurl legal %}" class="link link-hover text-sm text-base-content/75">
+            {{ legal.title }}
+          </a>
+        {% endfor %}
+      </nav>
+    {% endif %}
+
+  </div>
+  
+  <div class="border-t border-base-300">
+    <div class="footer max-w-7xl mx-auto px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+      
+      <aside class="items-center grid-flow-col text-xs text-base-content/70 text-center sm:text-left">
+        <p>© 2016 - {{ current_year }} NESTEVEZ, Servicios de Comunicación, SRL. Todos los derechos reservados.</p>
+      </aside>
+      
+      <nav class="flex items-center gap-4">
+        {% if settings.home.SocialMediaSettings.x %}
+          <a target="_blank" rel="noopener noreferrer" href="{{ settings.home.SocialMediaSettings.x }}" class="hover:text-primary transition-colors" title="X (Twitter)">
+            {% include "components/brand_icon.html" with name="x" class="w-5 h-5 fill-current" %}
+          </a>
+        {% endif %}
+
+        {% if settings.home.SocialMediaSettings.facebook %}
+          <a target="_blank" rel="noopener noreferrer" href="{{ settings.home.SocialMediaSettings.facebook }}" class="hover:text-primary transition-colors" title="Facebook">
+            {% include "components/brand_icon.html" with name="facebook" class="w-5 h-5 fill-current" %}
+          </a>
+        {% endif %}
+
+        {% if settings.home.SocialMediaSettings.instagram %}
+          <a target="_blank" rel="noopener noreferrer" href="{{ settings.home.SocialMediaSettings.instagram }}" class="hover:text-primary transition-colors" title="Instagram">
+            {% include "components/brand_icon.html" with name="instagram" class="w-5 h-5 fill-current" %}
+          </a>
+        {% endif %}
+
+        {% if settings.home.SocialMediaSettings.youtube %}
+          <a target="_blank" rel="noopener noreferrer" href="{{ settings.home.SocialMediaSettings.youtube }}" class="hover:text-primary transition-colors" title="YouTube">
+            {% include "components/brand_icon.html" with name="youtube" class="w-5 h-5 fill-current" %}
+          </a>
+        {% endif %}
+
+        {% if settings.home.SocialMediaSettings.linkedin %}
+          <a target="_blank" rel="noopener noreferrer" href="{{ settings.home.SocialMediaSettings.linkedin }}" class="hover:text-primary transition-colors" title="LinkedIn">
+            {% include "components/brand_icon.html" with name="linkedin" class="w-5 h-5 fill-current" %}
+          </a>
+        {% endif %}
+      </nav>
+
+    </div>
+  </div>
+
+</footer>

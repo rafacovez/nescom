@@ -1,24 +1,5 @@
-.git
-.gitignore
-.env
-.env.example
-__pycache__/
-*.py[cod]
-*$py.class
-*.egg-info/
-dist/
-build/
-*.whl
-.venv/
-venv/
-.vscode/
-.idea/
-*.swp
-*.swo
-.DS_Store
-Thumbs.db
-Dockerfile
-.dockerignore
-README.md
-db.sqlite3
-node_modules/
+.git .gitignore .env .env.example **pycache**/ _.py[cod] _$py.class _.egg-info/ dist/ build/ _.whl
+.venv/ venv/ .vscode/ .idea/ _.swp _.swo .DS_Store Thumbs.db Dockerfile .dockerignore README.md
+db.sqlite3 node_modules/
+
+media/ staticfiles/ \*.log .pytest_cache/ .coverage htmlcov/

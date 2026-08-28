@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /cms/
+Disallow: /admin/
+Allow: /
+
+Sitemap: https://nescomrd.com/sitemap.xml

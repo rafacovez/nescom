@@ -1,0 +1,88 @@
+{% extends "components/section.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block section_content %}
+<div class="flex flex-col gap-10 overflow-hidden py-4">
+    
+  <div class="max-w-3xl mx-auto text-center flex flex-col items-center gap-3 px-4">
+    <h2 class="text-3xl md:text-5xl font-black tracking-tight text-base-content leading-tight">
+      {{ value.titular }}
+    </h2>
+    {% if value.subtitular %}
+      <p class="text-base-content/70 text-base md:text-lg leading-relaxed max-w-2xl">
+        {{ value.subtitular }}
+      </p>
+    {% endif %}
+  </div>
+  
+  <div class="relative w-full overflow-hidden mask-[linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] py-6">
+    <div class="testimonials-track flex gap-6 w-max">
+        
+      {% for loop_pass in "12" %}
+        {% for item in value.testimonios %}
+          <div class="card w-85 sm:w-105 bg-base-100 border border-base-200/90 shadow-md hover:shadow-xl transition-all duration-300 rounded-3xl p-7 flex flex-col justify-between shrink-0">
+            
+            <div class="flex flex-col gap-4">
+              <div class="text-primary/30">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+              </div>
+              
+              <p class="text-base-content/85 text-sm sm:text-base leading-relaxed italic">
+                “{{ item.testimonio }}”
+              </p>
+            </div>
+            
+            <div class="flex items-center gap-4 mt-6 pt-5 border-t border-base-200">
+              {% if item.foto_perfil %}
+                {% image item.foto_perfil fill-120x120 format-webp as avatar_img %}
+                <div class="avatar">
+                  <div class="w-13 h-13 rounded-full ring-2 ring-primary/20 ring-offset-base-100 ring-offset-2 overflow-hidden bg-base-200">
+                    <img 
+                      src="{{ avatar_img.url }}" 
+                      alt="{{ item.nombre }}" 
+                      width="{{ avatar_img.width }}"
+                      height="{{ avatar_img.height }}"
+                      loading="lazy"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+              {% endif %}
+
+              <div class="flex flex-col min-w-0">
+                <h4 class="font-bold text-base text-base-content truncate">
+                  {{ item.nombre }}
+                </h4>
+                <p class="text-xs sm:text-sm text-base-content/60 font-medium truncate">
+                  {{ item.cargo }}
+                </p>
+              </div>
+            </div>
+
+          </div>
+        {% endfor %}
+      {% endfor %}
+
+    </div>
+  </div>
+
+</div>
+
+<style>
+  @keyframes testimonials-marquee {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .testimonials-track {
+    animation: testimonials-marquee 40s linear infinite;
+    will-change: transform;
+  }
+</style>
+{% endblock %}
