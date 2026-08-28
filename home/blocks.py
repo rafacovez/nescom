@@ -61,7 +61,7 @@ class AboutBlock(blocks.StructBlock):
     titular = blocks.CharBlock(
         required=True,
         max_length=100,
-        default="Sobre Nosotros",
+        default="Sobre nosotros",
         label="Título de la sección",
     )
     subtitular = blocks.TextBlock(
@@ -147,7 +147,6 @@ class ClientsBlock(blocks.StructBlock):
     subtitular = blocks.TextBlock(
         required=False,
         rows=2,
-        default="Empresas que confían en nosotros",
         label="Subtítulo (opcional)",
     )
     clientes = blocks.ListBlock(
