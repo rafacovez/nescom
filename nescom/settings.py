@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     "home",
     "newsletter",
     "blog",
+    "wagtail.contrib.sitemaps",
     "wagtail.contrib.settings",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
