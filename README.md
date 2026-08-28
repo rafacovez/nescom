@@ -1,7 +1,7 @@
 # Nescom RD
 
-A modern, high-performance corporate website for **Nescom RD**, built with Python v3, Django v6,
-django-cotton v2, Wagtail CMS, HTMX, Tailwind CSS v4, and DaisyUI v5.
+A modern, high-performance corporate website for **Nescom RD**, built with Python v3,
+Django v6, Wagtail CMS, HTMX, Tailwind CSS v4, and DaisyUI v5.
 
 ## Disclaimer
 
