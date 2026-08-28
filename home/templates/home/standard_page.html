@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+<main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+  <article class="flex flex-col gap-6">
+        <header class="border-b border-base-200 pb-8 flex flex-col gap-3">
+        <span class="badge badge-primary badge-outline text-xs font-bold uppercase tracking-wider py-3 px-4 w-max">
+            Legal
+        </span>
+        <h1 class="text-4xl sm:text-5xl font-black text-base-content tracking-tight">
+            {{ page.title }}
+        </h1>
+        {% if page.subtitular %}
+            <p class="text-lg text-base-content/70">{{ page.subtitular }}</p>
+        {% endif %}
+        <time datetime="{{ page.last_published_at|date:'Y-m-d' }}" class="text-xs text-base-content/50 font-medium">
+            Última actualización: {{ page.last_published_at|date:"j \d\e F, Y" }}
+        </time>
+    </header>
+
+    <div class="prose prose-lg max-w-none text-base-content/90 leading-relaxed pt-4">
+      {{ page.cuerpo|richtext }}
+    </div>
+  </article>
+</main>
+{% endblock %}

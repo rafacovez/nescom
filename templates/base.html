@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="nescom-light" class="h-full">
   <head>
+    <script>
+      (function() {
+        function getCookie(name) {
+          const value = `; ${document.cookie}`;
+          const parts = value.split(`; ${name}=`);
+          if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        const savedTheme = getCookie('nescom_theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        
+        const activeTheme = savedTheme || (systemPrefersDark ? 'nescom-dark' : 'nescom-light');
+        document.documentElement.setAttribute('data-theme', activeTheme);
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {% load static %}
@@ -12,7 +27,7 @@
     <link rel="stylesheet" href="{% static 'css/src/output.css' %}" />
     <title>
       {% block title %}
-        NesCom RD — Agregamos valor a su comunicación
+        NesCom — Agregamos valor a su comunicación
       {% endblock %}
     </title>
   </head>
@@ -24,5 +39,22 @@
           {% endblock %}
         </main>
       {% include "components/footer.html" %}
+      <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const toggle = document.getElementById('theme-controller');
+        if (!toggle) return;
+
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        
+        toggle.checked = (currentTheme === 'nescom-dark');
+
+        toggle.addEventListener('change', () => {
+          const nextTheme = toggle.checked ? 'nescom-dark' : 'nescom-light';
+          document.documentElement.setAttribute('data-theme', nextTheme);
+          
+          document.cookie = `nescom_theme=${nextTheme}; path=/; max-age=31536000; SameSite=Lax`;
+        });
+      });
+    </script>
     </body>
 </html>

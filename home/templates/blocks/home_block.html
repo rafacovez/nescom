@@ -1,0 +1,47 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<section class="hero min-h-screen relative overflow-hidden flex items-center justify-center w-full">
+
+  {% if value.portada %}
+    {% image value.portada fill-1920x1080 format-webp as bg_desktop %}
+    {% image value.portada fill-800x1000 format-webp as bg_mobile %}
+
+    <picture class="absolute inset-0 w-full h-full">
+      <source media="(max-width: 768px)" srcset="{{ bg_mobile.url }}">
+      <img 
+        src="{{ bg_desktop.url }}" 
+        alt="{{ value.portada.title|default:value.titular }}" 
+        width="{{ bg_desktop.width }}"
+        height="{{ bg_desktop.height }}"
+        loading="eager" 
+        fetchpriority="high"
+        class="w-full h-full object-cover object-center pointer-events-none"
+      />
+    </picture>
+  {% endif %}
+
+  <div class="absolute inset-0 bg-black/65 z-0"></div>
+  
+  <div class="hero-content relative z-10 w-full flex justify-center text-center text-white px-4 py-24">
+    <div class="max-w-3xl flex flex-col items-center text-center mx-auto">
+      
+      <h1 class="mb-6 text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight text-white drop-shadow-md">
+        {{ value.titular }}
+      </h1>
+
+      {% if value.subtitular %}
+        <p class="mb-8 text-lg sm:text-xl text-white/90 font-light leading-relaxed max-w-2xl drop-shadow">
+          {{ value.subtitular }}
+        </p>
+      {% endif %}
+
+      {% if value.boton %}
+        <div class="flex justify-center w-full mt-2">
+          {% include_block value.boton %}
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+
+</section>

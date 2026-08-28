@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+<main class="min-h-[60vh] flex items-center justify-center px-4 py-16">
+  <div class="max-w-lg w-full bg-base-100 border border-base-200 shadow-xl rounded-3xl p-8 sm:p-12 text-center flex flex-col items-center gap-6">
+    <div class="w-16 h-16 bg-success/15 text-success rounded-full flex items-center justify-center shadow-inner">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
+
+    <h1 class="text-3xl font-black text-base-content">¡Mensaje enviado!</h1>
+
+    <div class="prose text-base-content/80">
+      {% if page.mensaje_agradecimiento %}
+        {{ page.mensaje_agradecimiento|richtext }}
+      {% else %}
+        <p>Gracias por comunicarte con nosotros. Nos pondremos en contacto contigo a la brevedad.</p>
+      {% endif %}
+    </div>
+
+    <a href="/" class="btn btn-primary rounded-2xl px-6">
+      Volver al Inicio
+    </a>
+  </div>
+</main>
+{% endblock %}

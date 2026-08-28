@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-# ─── Node builder: Tailwind CSS v4 ───────────────────────────────────────────
+# ─── 1. Node builder: Tailwind CSS ───────────────────────────────────────────
 FROM node:20-slim AS node-builder
 WORKDIR /app
 COPY package.json package-lock.json* .npmrc* ./
@@ -9,51 +9,62 @@ COPY . .
 RUN npm run build
 
 
-# ─── Python builder ──────────────────────────────────────────────────────────
+# ─── 2. Python builder ──────────────────────────────────────────────────────────
 FROM python:3.14-slim AS builder
 
-RUN mkdir /app
 WORKDIR /app
 
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     libpq-dev \
+    libjpeg-dev \
+    zlib1g-dev \
+    libwebp-dev \
     && rm -rf /var/lib/apt/lists/*
 
 RUN pip install --upgrade pip
-COPY requirements.txt /app/
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
+# Bring in built CSS/JS before collecting static
 COPY --from=node-builder /app/static/ ./static/
 
-RUN SECRET_KEY=*** python manage.py collectstatic --noinput
+RUN SECRET_KEY=build-time-secret-key python manage.py collectstatic --noinput
 
 
-# ─── Runtime ─────────────────────────────────────────────────────────────────
-FROM python:3.14-slim
+# ─── 3. Runtime ─────────────────────────────────────────────────────────────────
+FROM python:3.14-slim AS runner
 
+# Install runtime dependencies for Postgres & Wagtail image processing
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq5 \
+    libjpeg62-turbo \
+    zlib1g \
+    libwebp7 \
+    libopenjp2-7 \
     && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m -r appuser && \
-    mkdir /app && \
-    chown -R appuser /app
-
-COPY --from=builder /usr/local/lib/python3.14/site-packages/ /usr/local/lib/python3.14/site-packages/
-COPY --from=builder /usr/local/bin/ /usr/local/bin/
+    mkdir -p /app/media /app/staticfiles && \
+    chown -R appuser:appuser /app
 
 WORKDIR /app
 
-COPY --chown=appuser:appuser . .
-COPY --from=builder --chown=appuser:appuser /app/staticfiles ./staticfiles
+# Copy python dependencies
+COPY --from=builder /usr/local/lib/python3.14/site-packages/ /usr/local/lib/python3.14/site-packages/
+COPY --from=builder /usr/local/bin/ /usr/local/bin/
 
-ENV PYTHONDONTWRITEBYTECODE=1
-ENV PYTHONUNBUFFERED=1
+# Copy application source & built assets
+COPY --chown=appuser:appuser . .
+COPY --from=node-builder --chown=appuser:appuser /app/static/ ./static/
+COPY --from=builder --chown=appuser:appuser /app/staticfiles/ ./staticfiles/
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
 RUN printf '#!/bin/sh\n\
 set -e\n\
@@ -65,7 +76,7 @@ USER appuser
 EXPOSE 8000
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
-    CMD python manage.py check --deploy --fail-level WARNING
+    CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/').read()" || exit 1
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", \

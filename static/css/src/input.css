@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+@plugin '@tailwindcss/typography';
 
 @plugin 'daisyui' {
   themes:
@@ -7,7 +9,7 @@
 }
 
 @plugin 'daisyui/theme' {
-  name: "nescom-light";
+  name: 'nescom-light';
   default: true;
   prefersdark: false;
   color-scheme: light;
@@ -40,7 +42,7 @@
 }
 
 @plugin 'daisyui/theme' {
-  name: "nescom-dark";
+  name: 'nescom-dark';
   default: false;
   prefersdark: false;
   color-scheme: dark;
