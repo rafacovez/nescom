@@ -41,7 +41,7 @@ ruff==0.16.4
 s3transfer==0.19.2
 six==1.17.0
 soupsieve==2.9.2
-sqlparse==0.5.5
+sqlparse==0.6.0
 swapper==1.4.0
 telepath==0.3.1
 typing-inspection==0.4.4
