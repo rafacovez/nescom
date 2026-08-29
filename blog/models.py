@@ -8,13 +8,13 @@ from django.utils.text import slugify
 from modelcluster.contrib.taggit import ClusterTaggableManager
 from modelcluster.fields import ParentalKey, ParentalManyToManyField
 from taggit.models import TaggedItemBase
+from wagtail.admin.forms import WagtailAdminPageForm
 from wagtail.admin.panels import FieldPanel, InlinePanel, MultiFieldPanel
 from wagtail.fields import RichTextField
 from wagtail.models import Orderable, Page
 from wagtail.snippets.models import register_snippet
 
 
-# --- 1. Author Snippet ---
 @register_snippet
 class Author(models.Model):
     user = models.ForeignKey(
@@ -61,7 +61,6 @@ class Author(models.Model):
         verbose_name_plural = "Autores"
 
 
-# --- 2. Category Snippet ---
 @register_snippet
 class BlogCategory(models.Model):
     nombre = models.CharField(max_length=60, unique=True, verbose_name="Nombre")
@@ -82,7 +81,6 @@ class BlogCategory(models.Model):
         verbose_name_plural = "Categorías de Blog"
 
 
-# --- 3. Tags ---
 class BlogPostTag(TaggedItemBase):
     content_object = ParentalKey(
         "blog.BlogPostPage",
@@ -91,7 +89,6 @@ class BlogPostTag(TaggedItemBase):
     )
 
 
-# --- 4. Fuentes del Post (Hasta 5) ---
 class BlogPostFuente(Orderable):
     page = ParentalKey(
         "blog.BlogPostPage",
@@ -127,12 +124,19 @@ class BlogPostFuente(Orderable):
         return self.nombre.strip()[0].upper() if self.nombre.strip() else "?"
 
 
-# --- 5. Blog Index Page ---
 class BlogIndexPage(Page):
     intro = RichTextField(blank=True, help_text="Descripción o introducción del blog")
+    allowed_categories = ParentalManyToManyField(
+        "blog.BlogCategory",
+        blank=True,
+        related_name="allowed_in_blogs",
+        verbose_name="Categorías permitidas",
+        help_text="Deja vacío para permitir todas las categorías en este blog.",
+    )
 
     content_panels = Page.content_panels + [
         FieldPanel("intro"),
+        FieldPanel("allowed_categories", widget=forms.CheckboxSelectMultiple),
     ]
 
     subpage_types: ClassVar[tuple[str, ...]] = ("blog.BlogPostPage",)
@@ -143,14 +147,14 @@ class BlogIndexPage(Page):
             BlogPostPage.objects.child_of(self)
             .live()
             .public()
-            .order_by("-fecha_publicacion")  # <-- Order by the custom date
+            .order_by("-fecha_publicacion")
         )
         tag = request.GET.get("tag")
         if tag:
             posts = posts.filter(tags__slug=tag)
         categoria = request.GET.get("categoria")
         if categoria:
-            posts = posts.filter(categoria__slug=categoria)
+            posts = posts.filter(categorias__slug=categoria).distinct()
 
         context["posts"] = posts
         context["selected_tag"] = tag
@@ -158,7 +162,18 @@ class BlogIndexPage(Page):
         return context
 
 
-# --- 6. Blog Post Page ---
+class BlogPostPageForm(WagtailAdminPageForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        parent = self.parent_page or (
+            self.instance.get_parent() if self.instance.pk else None
+        )
+        if parent:
+            allowed = parent.specific.allowed_categories.all()
+            if allowed.exists():
+                self.fields["categorias"].queryset = allowed
+
+
 class BlogPostPage(Page):
     fecha_publicacion = models.DateTimeField(
         default=timezone.now,
@@ -181,18 +196,19 @@ class BlogPostPage(Page):
         verbose_name="Autores",
         help_text="Selecciona al menos un autor para este artículo.",
     )
-    categoria = models.ForeignKey(
-        BlogCategory,
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
+    categorias = ParentalManyToManyField(
+        "blog.BlogCategory",
+        blank=False,
         related_name="posts",
-        verbose_name="Pilar / Categoría principal",
+        verbose_name="Categorías",
+        help_text="Selecciona al menos una categoría para este artículo.",
     )
     tags = ClusterTaggableManager(
         through=BlogPostTag, blank=True, verbose_name="Etiquetas (Tags)"
     )
     cuerpo = RichTextField("Contenido del artículo")
+
+    base_form_class = BlogPostPageForm
 
     content_panels = Page.content_panels + [
         FieldPanel("fecha_publicacion"),
@@ -200,7 +216,7 @@ class BlogPostPage(Page):
         FieldPanel("autores", widget=forms.CheckboxSelectMultiple),
         MultiFieldPanel(
             (
-                FieldPanel("categoria"),
+                FieldPanel("categorias", widget=forms.CheckboxSelectMultiple),
                 FieldPanel("tags"),
             ),
             heading="Clasificación",
@@ -217,7 +233,6 @@ class BlogPostPage(Page):
     parent_page_types: ClassVar[tuple[str, ...]] = ("blog.BlogIndexPage",)
 
     def save(self, *args, **kwargs):
-        # Fallback in case the user cleared the field manually in the admin
         if not self.fecha_publicacion:
             self.fecha_publicacion = timezone.now()
         super().save(*args, **kwargs)

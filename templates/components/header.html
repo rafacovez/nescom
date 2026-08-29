@@ -20,7 +20,7 @@
                 <summary class="font-semibold">{{ blog.title }}</summary>
                 <ul class="pl-3 mt-1 space-y-1">
                   <li><a href="{% pageurl blog %}" class="font-bold text-primary">Ver todos</a></li>
-                  {% for cat in nav_data.categories %}
+                  {% for cat in blog.nav_categories %}
                     <li><a href="{% pageurl blog %}?categoria={{ cat.slug }}">{{ cat.nombre }}</a></li>
                   {% endfor %}
                 </ul>
@@ -56,14 +56,10 @@
                   </a>
                 </li>
                 <div class="divider my-0"></div>
-                {% for cat in nav_data.categories %}
-                  <li>
-                    <a href="{% pageurl blog %}?categoria={{ cat.slug }}">
-                      {{ cat.nombre }}
-                    </a>
-                  </li>
-                {% empty %}
-                  <li class="disabled"><span class="text-xs opacity-50">Sin categorías</span></li>
+                {% for cat in nav.categories %}
+                  <a href="{% pageurl blog %}?categoria={{ cat.slug }}" class="link link-hover text-sm text-base-content/75">
+                    {{ cat.nombre }}
+                  </a>
                 {% endfor %}
               </ul>
             </details>
