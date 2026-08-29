@@ -28,7 +28,9 @@
             </li>
           {% endfor %}
           
-          <li><a href="/contacto/">Contacto</a></li>
+          {% if nav_data.contact_page %}
+            <li><a href="{% pageurl nav_data.contact_page %}">{{ nav_data.contact_page.title }}</a></li>
+          {% endif %}
         </ul>
       </div>
       
@@ -68,7 +70,9 @@
           </li>
         {% endfor %}
 
-        <li><a href="/contacto/" class="font-medium">Contacto</a></li>
+        {% if nav_data.contact_page %}
+          <li><a href="{% pageurl nav_data.contact_page %}" class="font-medium">{{ nav_data.contact_page.title }}</a></li>
+        {% endif %}
       </ul>
     </div>
     

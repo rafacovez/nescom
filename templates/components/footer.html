@@ -30,10 +30,14 @@
       </nav>
     {% endfor %}
     
-    <nav class="flex flex-col gap-2">
-      <h6 class="footer-title opacity-80 text-primary font-bold">Compañía</h6>
-      <a href="/contacto/" class="link link-hover text-sm text-base-content/75">Contacto</a>
-    </nav>
+    {% if nav.contact_page %}
+      <nav class="flex flex-col gap-2">
+        <h6 class="footer-title opacity-80 text-primary font-bold">Compañía</h6>
+        <a href="{% pageurl nav.contact_page %}" class="link link-hover text-sm text-base-content/75">
+          {{ nav.contact_page.title }}
+        </a>
+      </nav>
+    {% endif %}
     
     {% if nav.legal_pages %}
       <nav class="flex flex-col gap-2">
