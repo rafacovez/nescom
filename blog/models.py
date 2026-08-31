@@ -154,7 +154,7 @@ class BlogIndexPage(Page):
             posts = posts.filter(tags__slug=tag)
         categoria = request.GET.get("categoria")
         if categoria:
-            posts = posts.filter(categorias__slug=categoria).distinct()
+            posts = posts.filter(categories__slug=categoria).distinct()
 
         context["posts"] = posts
         context["selected_tag"] = tag
@@ -171,7 +171,7 @@ class BlogPostPageForm(WagtailAdminPageForm):
         if parent:
             allowed = parent.specific.allowed_categories.all()
             if allowed.exists():
-                self.fields["categorias"].queryset = allowed
+                self.fields["categories"].queryset = allowed
 
 
 class BlogPostPage(Page):
@@ -196,7 +196,7 @@ class BlogPostPage(Page):
         verbose_name="Autores",
         help_text="Selecciona al menos un autor para este artículo.",
     )
-    categorias = ParentalManyToManyField(
+    categories = ParentalManyToManyField(
         "blog.BlogCategory",
         blank=False,
         related_name="posts",
@@ -216,7 +216,7 @@ class BlogPostPage(Page):
         FieldPanel("autores", widget=forms.CheckboxSelectMultiple),
         MultiFieldPanel(
             (
-                FieldPanel("categorias", widget=forms.CheckboxSelectMultiple),
+                FieldPanel("categories", widget=forms.CheckboxSelectMultiple),
                 FieldPanel("tags"),
             ),
             heading="Clasificación",
