@@ -64,6 +64,11 @@
             {% include "components/source_pill.html" with fuentes=page.fuentes.all %}
           </div>
         {% endif %}
+
+        <!-- TOP SHARE BUTTONS (Discreet header version) -->
+        <div class="pl-4 border-l border-base-300 hidden sm:block">
+          {% include "components/share_buttons.html" %}
+        </div>
       </div>
 
     </div>
@@ -80,15 +85,25 @@
     {{ page.cuerpo|richtext }}
   </div>
   
-  {% if page.tags.all %}
-    <div class="w-full flex flex-wrap gap-2 pt-6 border-t border-base-200 mt-4">
-      {% for tag in page.tags.all %}
-        <span class="badge badge-outline badge-neutral text-xs font-medium">
-          #{{ tag.name }}
-        </span>
-      {% endfor %}
+  <!-- BOTTOM SECTION: Tags + Prominent Global Settings Share Block -->
+  <div class="w-full flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pt-6 border-t border-base-200 mt-4">
+    
+    {% if page.tags.all %}
+      <div class="flex flex-wrap gap-2">
+        {% for tag in page.tags.all %}
+          <span class="badge badge-outline badge-neutral text-xs font-medium">
+            #{{ tag.name }}
+          </span>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <!-- Pulls globally from Site Settings, falls back gracefully if left empty -->
+    <div class="self-end md:self-auto bg-base-200/50 p-2 rounded-2xl border border-base-200">
+      {% include "components/share_buttons.html" with cta_text=settings.home.ConfiguracionSitio.blog_share_cta_text|default:"¿Te gustó? Compártelo" %}
     </div>
-  {% endif %}
+
+  </div>
 
 </article>
 {% endblock %}
