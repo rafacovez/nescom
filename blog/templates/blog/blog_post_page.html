@@ -1,33 +1,36 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags wagtailsettings_tags %}
 
 {% block content %}
-<article class="w-full max-w-4xl mx-auto px-4 sm:px-6 py-12 flex flex-col gap-8">
+{% get_settings %}
+<article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full flex flex-col gap-8 grow">
 
-  <header class="w-full flex flex-col gap-4">
-    {% if page.categoria %}
-      <span class="badge badge-primary badge-outline text-xs font-bold uppercase tracking-wider py-3 px-4 w-max">
-        {{ page.categoria.nombre }}
-      </span>
-    {% endif %}
+  <header class="w-full flex flex-col gap-4 text-left">
+    {% with main_category=page.categories.first %}
+      {% if main_category %}
+        <span class="badge badge-primary badge-outline text-xs font-bold uppercase tracking-wider py-3 px-4 w-max">
+          {{ main_category.nombre }}
+        </span>
+      {% endif %}
+    {% endwith %}
 
-    <h1 class="text-3xl sm:text-5xl md:text-6xl font-black text-base-content tracking-tight leading-tight">
+    <h1 class="text-4xl sm:text-5xl md:text-6xl font-black text-base-content tracking-tight leading-tight">
       {{ page.title }}
     </h1>
 
     <div class="flex flex-wrap items-center justify-between gap-6 pt-4 border-b border-base-200 pb-6 text-sm text-base-content/70">
       
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-4">
         {% for autor in page.autores.all %}
-          <div class="flex items-center gap-2">
+          <div class="flex items-center gap-3">
             <div class="avatar placeholder">
               {% if autor.foto %}
-                <div class="w-9 h-9 rounded-full ring-1 ring-base-300 overflow-hidden">
+                <div class="w-10 h-10 rounded-full ring-1 ring-base-300 overflow-hidden">
                   {% image autor.foto fill-80x80 format-webp as avatar_img %}
                   <img src="{{ avatar_img.url }}" alt="{{ autor.nombre }}" class="w-full h-full object-cover" />
                 </div>
               {% else %}
-                <div class="w-9 h-9 rounded-full bg-primary text-primary-content font-bold text-xs flex items-center justify-center">
+                <div class="w-10 h-10 rounded-full bg-primary text-primary-content font-bold text-xs flex items-center justify-center">
                   {{ autor.inicial }}
                 </div>
               {% endif %}
@@ -37,11 +40,22 @@
               {% if autor.cargo %}<span class="text-xs text-base-content/60">{{ autor.cargo }}</span>{% endif %}
             </div>
           </div>
+        {% empty %}
+          <div class="flex items-center gap-3">
+            <div class="avatar placeholder">
+              <div class="w-10 h-10 rounded-full bg-primary text-primary-content font-bold text-lg flex items-center justify-center">
+                {{ settings.home.ConfiguracionSitio.nombre_sitio|default:"S"|make_list|first|upper }}
+              </div>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-bold text-base-content">{{ settings.home.ConfiguracionSitio.nombre_sitio|default:"Redacción" }}</span>
+            </div>
+          </div>
         {% endfor %}
       </div>
 
       <div class="flex flex-wrap items-center gap-4">
-        <time datetime="{{ page.fecha_publicacion|default:page.first_published_at|date:'Y-m-d' }}">
+        <time datetime="{{ page.fecha_publicacion|default:page.first_published_at|date:'Y-m-d' }}" class="font-medium">
           {{ page.fecha_publicacion|default:page.first_published_at|date:"j \d\e F, Y" }}
         </time>
 
@@ -58,7 +72,7 @@
   {% if page.portada %}
     <figure class="w-full rounded-3xl overflow-hidden shadow-lg aspect-video bg-base-200">
       {% image page.portada fill-1200x675 format-webp as hero_img %}
-      <img src="{{ hero_img.url }}" alt="{{ page.title }}" class="w-full h-full object-cover" />
+      <img src="{{ hero_img.url }}" alt="{{ page.title }}" loading="eager" fetchpriority="high" class="w-full h-full object-cover" />
     </figure>
   {% endif %}
   
@@ -67,9 +81,9 @@
   </div>
   
   {% if page.tags.all %}
-    <div class="w-full flex flex-wrap gap-2 pt-6 border-t border-base-200">
+    <div class="w-full flex flex-wrap gap-2 pt-6 border-t border-base-200 mt-4">
       {% for tag in page.tags.all %}
-        <span class="badge badge-outline badge-neutral text-xs">
+        <span class="badge badge-outline badge-neutral text-xs font-medium">
           #{{ tag.name }}
         </span>
       {% endfor %}
