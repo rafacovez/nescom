@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailsettings_tags %}
+
+{% block title %}
+  Página no encontrada — {{ settings.home.ConfiguracionSitio.nombre_sitio|default:"Mi Sitio" }}
+{% endblock %}
+
+{% block content %}
+<div class="grow flex items-center justify-center px-4 py-20 w-full min-h-[70vh]">
+  
+  <div class="max-w-md w-full text-center flex flex-col items-center gap-6">
+    
+    <span class="badge badge-primary badge-outline font-bold text-xs tracking-widest px-3 py-2 uppercase">
+      Error 404
+    </span>
+
+    <h1 class="text-4xl sm:text-6xl font-black text-base-content tracking-tight">
+      Página no encontrada
+    </h1>
+
+    <p class="text-base-content/75 text-base sm:text-lg leading-relaxed">
+      Lo sentimos, la página que buscas no existe, ha sido movida o la dirección fue escrita incorrectamente.
+    </p>
+
+    <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+      <a href="/" class="btn btn-primary rounded-2xl px-8">
+        Volver al Inicio
+      </a>
+      <a href="javascript:history.back()" class="btn btn-ghost rounded-2xl px-6">
+        Regresar
+      </a>
+    </div>
+
+  </div>
+  
+</div>
+{% endblock %}
