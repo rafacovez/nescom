@@ -228,33 +228,11 @@ class HomeContactBlock(blocks.StructBlock):
 
 
 class BlogFeedBlock(blocks.StructBlock):
-    etiqueta = blocks.CharBlock(
-        required=False,
-        max_length=40,
-        default="Blog",
-        label="Etiqueta superior (Badge)",
-        help_text="Ej: 'Blog Corporativo' o 'Columna de Opinión'",
-    )
-    titular = blocks.CharBlock(
-        required=True,
-        max_length=100,
-        label="Título de la sección",
-    )
-    subtitular = blocks.TextBlock(
-        required=False,
-        rows=2,
-        label="Subtítulo o lema",
-    )
     pagina_blog = blocks.PageChooserBlock(
         required=True,
         page_type=["blog.BlogIndexPage"],
         label="Seleccionar Blog",
-        help_text="Elige la página índice del blog que quieres mostrar.",
-    )
-    foto_autor = ImageChooserBlock(
-        required=False,
-        label="Foto de autor (opcional)",
-        help_text="Úsalo para columnas personales como la de Néstor.",
+        help_text="El título, introducción y artículos se mostrarán automáticamente desde esta página.",
     )
     limite = blocks.IntegerBlock(
         default=3,
@@ -269,14 +247,17 @@ class BlogFeedBlock(blocks.StructBlock):
         limite = value.get("limite", 3)
 
         if blog_page:
+            blog_page_specific = blog_page.specific
+            context["blog_page"] = blog_page_specific
             context["articulos"] = (
-                blog_page.get_children()
+                blog_page_specific.get_children()
                 .live()
                 .public()
                 .order_by("-first_published_at")[:limite]
                 .specific()
             )
         else:
+            context["blog_page"] = None
             context["articulos"] = []
         return context
 
