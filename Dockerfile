@@ -39,6 +39,9 @@ RUN SECRET_KEY=build-time-secret-key python manage.py collectstatic --noinput
 # ─── 3. Runtime ─────────────────────────────────────────────────────────────────
 FROM python:3.14-slim AS runner
 
+# CHANGE THIS to your Django project folder name for new projects
+ENV WSGI_APP="nescom.wsgi:application"
+
 # Install runtime dependencies for Postgres & Wagtail image processing
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libpq5 \
@@ -79,6 +82,5 @@ HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
     CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/').read()" || exit 1
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "--workers", "3", \
-     "--access-logfile", "-", "--error-logfile", "-", \
-     "nescom.wsgi:application"]
+# Using the WSGI_APP environment variable dynamically
+CMD ["sh", "-c", "gunicorn --bind 0.0.0.0:8000 --workers 3 --access-logfile - --error-logfile - ${WSGI_APP}"]

@@ -1,5 +1,7 @@
+{% load static wagtailsettings_tags %}
+{% get_settings %}
 <!DOCTYPE html>
-<html lang="es" data-theme="nescom-light" class="h-full">
+<html lang="es" data-theme="theme-light" class="h-full">
   <head>
     <script>
       (function() {
@@ -9,52 +11,65 @@
           if (parts.length === 2) return parts.pop().split(';').shift();
         }
 
-        const savedTheme = getCookie('nescom_theme');
+        const savedTheme = getCookie('site_theme');
         const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         
-        const activeTheme = savedTheme || (systemPrefersDark ? 'nescom-dark' : 'nescom-light');
+        const activeTheme = savedTheme || (systemPrefersDark ? 'theme-dark' : 'theme-light');
         document.documentElement.setAttribute('data-theme', activeTheme);
       })();
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    {% load static %}
+    
+    <title>
+      {% block title %}
+        {% if page.seo_title %}
+          {{ page.seo_title }}
+        {% elif page.title %}
+          {{ page.title }} — {{ settings.home.ConfiguracionSitio.nombre_sitio|default:"Mi Sitio" }}
+        {% else %}
+          {{ settings.home.ConfiguracionSitio.nombre_sitio|default:"Mi Sitio" }} {% if settings.home.ConfiguracionSitio.sufijo_titulo %} — {{ settings.home.ConfiguracionSitio.sufijo_titulo|default:"" }} {% endif %}
+        {% endif %}
+      {% endblock %}
+    </title>
+    
+    {% block extra_seo %}{% endblock %}
+
     <link rel="icon" type="image/svg+xml" href="{% static 'favicon/favicon.svg' %}" />
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}" />
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}" />
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}" />
     <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}" />
     <link rel="stylesheet" href="{% static 'css/src/output.css' %}" />
-    <title>
-      {% block title %}
-        NesCom — Agregamos valor a su comunicación
-      {% endblock %}
-    </title>
+    
+    {% block extra_css %}{% endblock %}
   </head>
-    <body class="min-h-full flex flex-col">
-      {% include "components/header.html" %}
-        <main class="flex grow flex-col">
-          {% block content %}
+  <body class="min-h-full flex flex-col bg-base-100 text-base-content antialiased">
+    {% include "components/header.html" %}
+    
+    <main class="flex grow flex-col">
+      {% block content %}
+      {% endblock %}
+    </main>
+    
+    {% include "components/footer.html" %}
 
-          {% endblock %}
-        </main>
-      {% include "components/footer.html" %}
-      <script>
+    <script>
       document.addEventListener('DOMContentLoaded', () => {
         const toggle = document.getElementById('theme-controller');
         if (!toggle) return;
 
         const currentTheme = document.documentElement.getAttribute('data-theme');
-        
-        toggle.checked = (currentTheme === 'nescom-dark');
+        toggle.checked = (currentTheme === 'theme-dark');
 
         toggle.addEventListener('change', () => {
-          const nextTheme = toggle.checked ? 'nescom-dark' : 'nescom-light';
+          const nextTheme = toggle.checked ? 'theme-dark' : 'theme-light';
           document.documentElement.setAttribute('data-theme', nextTheme);
-          
-          document.cookie = `nescom_theme=${nextTheme}; path=/; max-age=31536000; SameSite=Lax`;
+          document.cookie = `site_theme=${nextTheme}; path=/; max-age=31536000; SameSite=Lax`;
         });
       });
     </script>
-    </body>
+    
+    {% block extra_js %}{% endblock %}
+  </body>
 </html>

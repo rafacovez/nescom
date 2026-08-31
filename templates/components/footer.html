@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags wagtailsettings_tags blog_tags %}
+{% load static wagtailcore_tags wagtailsettings_tags wagtailimages_tags blog_tags %}
 {% get_site_navigation as nav %}
 {% get_settings use_default_site=True %}
 {% now 'Y' as current_year %}
@@ -9,12 +9,16 @@
     
     <aside class="col-span-2 md:col-span-4 lg:col-span-2 flex flex-col gap-4">
       <a href="/" class="flex items-center gap-2 text-2xl font-black tracking-tight text-base-content">
-        <img class="h-8 w-8 object-contain" src="{% static 'images/logo.png' %}" alt="NesCom" />
-        <span>Nes<span class="text-primary">Com</span></span>
+        {% if settings.home.ConfiguracionSitio.logo %}
+          {% image settings.home.ConfiguracionSitio.logo fill-64x64 as logo_img %}
+          <img class="h-8 w-8 object-contain" src="{{ logo_img.url }}" alt="{{ settings.home.ConfiguracionSitio.nombre_sitio|default:'Mi Sitio' }}" />
+        {% else %}
+          <img class="h-8 w-8 object-contain" src="{% static 'images/logo.png' %}" alt="{{ settings.home.ConfiguracionSitio.nombre_sitio|default:'Mi Sitio' }}" />
+        {% endif %}
+        <span>{{ settings.home.ConfiguracionSitio.nombre_sitio|default:"Mi Sitio" }}</span>
       </a>
       <p class="text-sm text-base-content/70 max-w-sm leading-relaxed">
-        NESTEVEZ, Servicios de Comunicación, SRL.<br />
-        Hacemos más efectivas las relaciones entre nuestros clientes y sus asociados.
+        {{ settings.home.ConfiguracionSitio.sufijo_titulo|default:"Breve descripción de la empresa o sitio web." }}
       </p>
     </aside>
     
@@ -56,7 +60,7 @@
     <div class="footer max-w-7xl mx-auto px-10 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
       
       <aside class="items-center grid-flow-col text-xs text-base-content/70 text-center sm:text-left">
-        <p>© 2016 - {{ current_year }} NESTEVEZ, Servicios de Comunicación, SRL. Todos los derechos reservados.</p>
+        <p>© {{ current_year }} {{ settings.home.ConfiguracionSitio.nombre_sitio|default:"Mi Sitio" }}. Todos los derechos reservados.</p>
       </aside>
       
       <nav class="flex items-center gap-4">
@@ -93,5 +97,4 @@
 
     </div>
   </div>
-
 </footer>
