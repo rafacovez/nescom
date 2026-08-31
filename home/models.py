@@ -22,6 +22,13 @@ from home.blocks import (
 @register_setting
 class ConfiguracionSitio(BaseSiteSetting):
     nombre_sitio = models.CharField(max_length=100, verbose_name="Nombre del sitio")
+    blog_share_cta_text = models.CharField(
+        max_length=100,
+        blank=True,
+        default="Compártelo",
+        verbose_name="Texto de llamada a la acción para compartir posts",
+        help_text="Aparecerá en los botones de compartir de todos los artículos del blog.",
+    )
     sufijo_titulo = models.CharField(
         max_length=100,
         blank=True,
@@ -40,6 +47,7 @@ class ConfiguracionSitio(BaseSiteSetting):
         MultiFieldPanel(
             [
                 FieldPanel("nombre_sitio"),
+                FieldPanel("blog_share_cta_text"),
                 FieldPanel("sufijo_titulo"),
                 FieldPanel("logo"),
             ],
