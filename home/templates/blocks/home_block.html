@@ -20,9 +20,9 @@
     </picture>
   {% endif %}
 
-  <div class="absolute inset-0 bg-black/65 z-0"></div>
+  <div class="absolute inset-0 bg-linear-to-t from-black/95 via-black/50 to-black/30 z-0"></div>
   
-  <div class="hero-content relative z-10 w-full flex justify-center text-center text-white px-4 py-24">
+  <div class="hero-content relative z-10 w-full flex justify-center text-center text-white px-4 py-24 mt-16 sm:mt-24">
     <div class="max-w-3xl flex flex-col items-center text-center mx-auto">
       
       <h1 class="mb-6 text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight text-white drop-shadow-md">
@@ -43,5 +43,19 @@
 
     </div>
   </div>
+  
+  {% if value.credito_imagen %}
+    <div class="absolute bottom-3 right-3 z-20">
+      {% if value.enlace_credito %}
+        <a href="{{ value.enlace_credito }}" target="_blank" rel="noopener noreferrer" class="text-[10px] text-white/30 hover:text-white/90 transition-colors duration-300 font-medium tracking-wide drop-shadow-sm pointer-events-auto">
+          {{ value.credito_imagen }}
+        </a>
+      {% else %}
+        <span class="text-[10px] text-white/30 hover:text-white/90 transition-colors duration-300 font-medium tracking-wide drop-shadow-sm cursor-default">
+          {{ value.credito_imagen }}
+        </span>
+      {% endif %}
+    </div>
+  {% endif %}
 
 </section>
