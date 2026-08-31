@@ -20,6 +20,38 @@ from home.blocks import (
 
 
 @register_setting
+class ConfiguracionSitio(BaseSiteSetting):
+    nombre_sitio = models.CharField(max_length=100, verbose_name="Nombre del sitio")
+    sufijo_titulo = models.CharField(
+        max_length=100,
+        blank=True,
+        verbose_name="Eslogan",
+    )
+    logo = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        verbose_name="Logo principal",
+    )
+
+    panels: ClassVar[tuple[FieldPanel, ...]] = (
+        MultiFieldPanel(
+            [
+                FieldPanel("nombre_sitio"),
+                FieldPanel("sufijo_titulo"),
+                FieldPanel("logo"),
+            ],
+            heading="Branding General",
+        ),
+    )
+
+    class Meta:
+        verbose_name = "Configuración Global"
+
+
+@register_setting
 class SocialMediaSettings(BaseSiteSetting):
     x = models.URLField(
         blank=True,
@@ -48,7 +80,7 @@ class SocialMediaSettings(BaseSiteSetting):
                 FieldPanel("youtube"),
                 FieldPanel("linkedin"),
             ],
-            heading="Redes Sociales de Nescom",
+            heading="Redes Sociales",
         ),
     )
 

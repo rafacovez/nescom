@@ -1,13 +1,16 @@
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags wagtailsettings_tags %}
+{% get_settings %}
 
 <article class="card bg-base-100 border border-base-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 rounded-3xl overflow-hidden flex flex-col h-full group">
   
   <figure class="relative aspect-video w-full overflow-hidden bg-primary shrink-0">
-    {% if post.categoria %}
-      <span class="badge badge-neutral bg-black/70 backdrop-blur-md text-white border-white/10 absolute top-3 left-3 z-10 text-xs font-bold pointer-events-none">
-        {{ post.categoria.nombre }}
-      </span>
-    {% endif %}
+    {% with main_category=post.categories.first %}
+      {% if main_category %}
+        <span class="badge badge-neutral bg-black/70 backdrop-blur-md text-white border-white/10 absolute top-3 left-3 z-10 text-xs font-bold pointer-events-none">
+          {{ main_category.nombre }}
+        </span>
+      {% endif %}
+    {% endwith %}
 
     {% if post.portada and post.portada.id %}
       {% image post.portada fill-600x340 format-webp as post_img %}
@@ -69,7 +72,10 @@
             {% endif %}
           </div>
         {% empty %}
-          <span class="text-xs text-base-content/50">NesCom</span>
+          <!-- Generic fallback using Site Settings -->
+          <span class="text-xs font-medium text-base-content/60">
+            {{ settings.home.ConfiguracionSitio.nombre_sitio|default:"Redacción" }}
+          </span>
         {% endfor %}
       </div>
 

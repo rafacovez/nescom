@@ -1,4 +1,4 @@
-{% load static wagtailcore_tags blog_tags %}
+{% load static wagtailcore_tags wagtailimages_tags blog_tags %}
 {% get_site_navigation as nav_data %}
 
 <header class="sticky top-0 z-50 bg-base-100/90 backdrop-blur-md border-b border-base-200">
@@ -35,8 +35,14 @@
       </div>
       
       <a href="/" class="btn btn-ghost gap-2 normal-case text-xl font-black tracking-tight px-2">
-        <img class="h-8 w-8 object-contain" src="{% static 'images/logo.png' %}" alt="NesCom" />
-        <span>Nes<span class="text-primary">Com</span></span>
+        {% if settings.home.ConfiguracionSitio.logo %}
+          {% image settings.home.ConfiguracionSitio.logo fill-64x64 as logo_img %}
+          <img class="h-8 w-8 object-contain" src="{{ logo_img.url }}" alt="{{ settings.home.ConfiguracionSitio.nombre_sitio|default:'Mi Sitio' }}" />
+        {% else %}
+          <img class="h-8 w-8 object-contain" src="{% static 'images/logo.png' %}" alt="{{ settings.home.ConfiguracionSitio.nombre_sitio|default:'Mi Sitio' }}" />
+        {% endif %}
+        
+        <span>{{ settings.home.ConfiguracionSitio.nombre_sitio|default:"Mi Sitio" }}</span>
       </a>
     </div>
     
