@@ -22,7 +22,7 @@
       <nav class="flex flex-col gap-2">
         <h6 class="footer-title opacity-80 text-primary font-bold">{{ blog.title }}</h6>
         <a href="{% pageurl blog %}" class="link link-hover text-sm font-semibold">Todos los artículos</a>
-        {% for cat in nav.categories %}
+        {% for cat in blog.nav_categories %}
           <a href="{% pageurl blog %}?categoria={{ cat.slug }}" class="link link-hover text-sm text-base-content/75">
             {{ cat.nombre }}
           </a>

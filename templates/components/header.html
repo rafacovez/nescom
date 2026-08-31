@@ -56,10 +56,12 @@
                   </a>
                 </li>
                 <div class="divider my-0"></div>
-                {% for cat in nav.categories %}
-                  <a href="{% pageurl blog %}?categoria={{ cat.slug }}" class="link link-hover text-sm text-base-content/75">
-                    {{ cat.nombre }}
-                  </a>
+                {% for cat in blog.nav_categories %}
+                  <li>
+                    <a href="{% pageurl blog %}?categoria={{ cat.slug }}" class="text-sm text-base-content/75">
+                      {{ cat.nombre }}
+                    </a>
+                  </li>
                 {% endfor %}
               </ul>
             </details>
