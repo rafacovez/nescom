@@ -35,6 +35,14 @@ class HomeBlock(blocks.StructBlock):
         required=False,
         help_text="Imagen de portada del bloque de inicio.",
     )
+    credito_imagen = blocks.CharBlock(
+        required=False,
+        max_length=100,
+        help_text="Discreto en la esquina inferior (opcional). Ej: 'Foto por Unsplash'",
+    )
+    enlace_credito = blocks.URLBlock(
+        required=False, help_text="Enlace al portfolio del autor (opcional)."
+    )
     titular = blocks.CharBlock(
         required=True, max_length=150, help_text="Titular del bloque de inicio."
     )

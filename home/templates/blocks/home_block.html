@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
-<section class="hero min-h-screen relative overflow-hidden flex items-center justify-center w-full">
+<section id="hero-section" class="hero min-h-screen relative overflow-hidden flex items-center justify-center w-full">
 
   {% if value.portada %}
     {% image value.portada fill-1920x1080 format-webp as bg_desktop %}
@@ -20,9 +20,9 @@
     </picture>
   {% endif %}
 
-  <div class="absolute inset-0 bg-black/65 z-0"></div>
+  <div class="absolute inset-0 bg-linear-to-t from-black/95 via-black/50 to-black/30 z-0"></div>
   
-  <div class="hero-content relative z-10 w-full flex justify-center text-center text-white px-4 py-24">
+  <div class="hero-content relative z-10 w-full flex justify-center text-center text-white px-4 py-24 mt-16 sm:mt-24">
     <div class="max-w-3xl flex flex-col items-center text-center mx-auto">
       
       <h1 class="mb-6 text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-tight text-white drop-shadow-md">
@@ -34,7 +34,7 @@
           {{ value.subtitular }}
         </p>
       {% endif %}
-
+      
       {% if value.boton %}
         <div class="flex justify-center w-full mt-2">
           {% include_block value.boton %}
@@ -44,4 +44,49 @@
     </div>
   </div>
 
+  {% if value.credito_imagen %}
+    <div class="absolute bottom-3 right-3 z-20">
+      {% if value.enlace_credito %}
+        <a href="{{ value.enlace_credito }}" target="_blank" rel="noopener noreferrer" class="text-[10px] text-white/30 hover:text-white/90 transition-colors duration-300 font-medium tracking-wide drop-shadow-sm pointer-events-auto">
+          {{ value.credito_imagen }}
+        </a>
+      {% else %}
+        <span class="text-[10px] text-white/30 hover:text-white/90 transition-colors duration-300 font-medium tracking-wide drop-shadow-sm cursor-default">
+          {{ value.credito_imagen }}
+        </span>
+      {% endif %}
+    </div>
+  {% endif %}
+
 </section>
+
+{% if value.boton %}
+  <div id="floating-cta" class="fixed bottom-6 right-6 z-50 transition-all duration-500 ease-out translate-y-20 opacity-0 pointer-events-none drop-shadow-2xl">
+    {% include_block value.boton %}
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const heroSection = document.getElementById('hero-section');
+      const floatingCta = document.getElementById('floating-cta');
+
+      if (heroSection && floatingCta) {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) {
+              floatingCta.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+              floatingCta.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+            } else {
+              floatingCta.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+              floatingCta.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+            }
+          });
+        }, { 
+          threshold: 0.1 
+        });
+
+        observer.observe(heroSection);
+      }
+    });
+  </script>
+{% endif %}
