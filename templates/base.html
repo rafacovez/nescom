@@ -1,4 +1,4 @@
-{% load static wagtailsettings_tags %}
+{% load static wagtailsettings_tags wagtailimages_tags %}
 {% get_settings %}
 <!DOCTYPE html>
 <html lang="es" data-theme="theme-light" class="h-full">
@@ -32,6 +32,34 @@
         {% endif %}
       {% endblock %}
     </title>
+    
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="{{ settings.home.ConfiguracionSitio.nombre_sitio|default:'Mi Sitio' }}" />
+    
+    <meta property="og:title" content="{% if page.seo_title %}{{ page.seo_title }}{% elif page.title %}{{ page.title }} — {{ settings.home.ConfiguracionSitio.nombre_sitio|default:'Mi Sitio' }}{% else %}{{ settings.home.ConfiguracionSitio.nombre_sitio|default:'Mi Sitio' }}{% endif %}" />
+    
+    <meta property="og:description" content="{% if page.search_description %}{{ page.search_description }}{% elif page.intro %}{{ page.intro|striptags }}{% else %}{{ settings.home.ConfiguracionSitio.sufijo_titulo|default:'Sitio web oficial' }}{% endif %}" />
+    
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+
+    {% if page.portada %}
+      {% image page.portada fill-1200x630 format-jpeg as og_img %}
+      <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ og_img.url }}" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+    {% elif settings.home.ConfiguracionSitio.logo %}
+      {% image settings.home.ConfiguracionSitio.logo fill-500x500 format-jpeg as logo_og %}
+      <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ logo_og.url }}" />
+    {% endif %}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{% if page.seo_title %}{{ page.seo_title }}{% elif page.title %}{{ page.title }}{% else %}{{ settings.home.ConfiguracionSitio.nombre_sitio|default:'Mi Sitio' }}{% endif %}" />
+    <meta name="twitter:description" content="{% if page.search_description %}{{ page.search_description }}{% elif page.intro %}{{ page.intro|striptags }}{% else %}{{ settings.home.ConfiguracionSitio.sufijo_titulo|default:'Sitio web oficial' }}{% endif %}" />
+    {% if page.portada %}
+      <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ og_img.url }}" />
+    {% elif settings.home.ConfiguracionSitio.logo %}
+      <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ logo_og.url }}" />
+    {% endif %}
     
     {% block extra_seo %}{% endblock %}
 
