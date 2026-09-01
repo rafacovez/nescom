@@ -1,7 +1,7 @@
 from django import template
 
 from blog.models import BlogCategory, BlogIndexPage, BlogPostPage
-from home.models import StandardPage
+from home.models import ContactPage, StandardPage
 
 register = template.Library()
 
@@ -27,12 +27,7 @@ def categories_for_blog(index_page):
 
 @register.simple_tag
 def get_site_navigation():
-    contact_page = (
-        StandardPage.objects.live()
-        .public()
-        .filter(slug__in=["contacto", "contact", "contact-us"])
-        .first()
-    )
+    contact_page = ContactPage.objects.live().public().first()
 
     blogs = list(BlogIndexPage.objects.live().public())
     for blog in blogs:
