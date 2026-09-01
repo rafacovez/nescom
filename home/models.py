@@ -44,6 +44,14 @@ class ConfiguracionSitio(BaseSiteSetting):
         related_name="+",
         verbose_name="Logo principal",
     )
+    imagen_compartir = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        help_text="Imagen por defecto para redes sociales (Ideal: 1200x630px)",
+    )
 
     panels: ClassVar[tuple[FieldPanel, ...]] = (
         MultiFieldPanel(
@@ -52,6 +60,7 @@ class ConfiguracionSitio(BaseSiteSetting):
                 FieldPanel("blog_share_cta_text"),
                 FieldPanel("sufijo_titulo"),
                 FieldPanel("logo"),
+                FieldPanel("imagen_compartir"),
             ],
             heading="Branding General",
         ),

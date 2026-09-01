@@ -43,23 +43,32 @@
     <meta property="og:url" content="{{ request.build_absolute_uri }}" />
 
     {% if page.portada %}
-      {% image page.portada fill-1200x630 format-jpeg as og_img %}
-      <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ og_img.url }}" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-    {% elif settings.home.ConfiguracionSitio.logo %}
-      {% image settings.home.ConfiguracionSitio.logo fill-500x500 format-jpeg as logo_og %}
-      <meta property="og:image" content="{{ request.scheme }}://{{ request.get_host }}{{ logo_og.url }}" />
+      {% image page.portada fill-1200x630 format-jpeg as resolved_img %}
+    {% elif settings.home.ConfiguracionSitio.imagen_compartir %}
+      {% image settings.home.ConfiguracionSitio.imagen_compartir fill-1200x630 format-jpeg as resolved_img %}
+    {% endif %}
+    
+    {% if resolved_img %}
+      {% if 'http' in resolved_img.url %}
+        {% with share_img_url=resolved_img.url %}
+          <meta property="og:image" content="{{ share_img_url }}" />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta name="twitter:image" content="{{ share_img_url }}" />
+        {% endwith %}
+      {% else %}
+        {% with share_img_url=request.scheme|add:"://"|add:request.get_host|add:resolved_img.url %}
+          <meta property="og:image" content="{{ share_img_url }}" />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta name="twitter:image" content="{{ share_img_url }}" />
+        {% endwith %}
+      {% endif %}
     {% endif %}
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{% if page.seo_title %}{{ page.seo_title }}{% elif page.title %}{{ page.title }}{% else %}{{ settings.home.ConfiguracionSitio.nombre_sitio|default:'Mi Sitio' }}{% endif %}" />
     <meta name="twitter:description" content="{% if page.search_description %}{{ page.search_description }}{% elif page.intro %}{{ page.intro|striptags }}{% else %}{{ settings.home.ConfiguracionSitio.sufijo_titulo|default:'Sitio web oficial' }}{% endif %}" />
-    {% if page.portada %}
-      <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ og_img.url }}" />
-    {% elif settings.home.ConfiguracionSitio.logo %}
-      <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ logo_og.url }}" />
-    {% endif %}
     
     {% block extra_seo %}{% endblock %}
 
