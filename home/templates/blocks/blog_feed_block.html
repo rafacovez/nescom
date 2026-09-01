@@ -1,23 +1,45 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
-<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full flex flex-col gap-10">
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full flex flex-col gap-12">
   
   {% if blog_page %}
-    <div class="max-w-3xl w-full text-left flex flex-col gap-4">
-      <h2 class="text-3xl sm:text-5xl font-black text-base-content tracking-tight">
-        <a href="{% pageurl blog_page %}" class="hover:text-primary transition-colors">
-          {{ blog_page.title }}
-        </a>
-      </h2>
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center border-b border-base-200 pb-12">
       
-      {% if blog_page.intro %}
-        <div class="prose prose-lg text-base-content/80">
-          {{ blog_page.intro|richtext }}
+      {% if blog_page.specific.image %}
+        <div class="md:col-span-4 w-full">
+          <div class="aspect-square md:aspect-4/5 w-full rounded-3xl overflow-hidden shadow-lg bg-base-200">
+            {% image blog_page.specific.image fill-600x750 format-webp as header_img %}
+            <img 
+              src="{{ header_img.url }}" 
+              alt="{{ blog_page.title }}"
+              width="{{ header_img.width }}"
+              height="{{ header_img.height }}"
+              loading="lazy"
+              class="w-full h-full object-cover object-center"
+            />
+          </div>
         </div>
+        <div class="md:col-span-8 flex flex-col gap-4 text-left">
+      {% else %}
+        <div class="md:col-span-12 flex flex-col gap-4 text-left">
       {% endif %}
+
+        <h2 class="text-3xl sm:text-5xl font-black text-base-content tracking-tight">
+          <a href="{% pageurl blog_page %}" class="hover:text-primary transition-colors">
+            {{ blog_page.title }}
+          </a>
+        </h2>
+        
+        {% if blog_page.specific.intro %}
+          <div class="prose prose-lg text-base-content/80 font-normal leading-relaxed">
+            {{ blog_page.specific.intro|richtext }}
+          </div>
+        {% endif %}
+
+      </div>
     </div>
   {% endif %}
-
+  
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
     {% for post in articulos %}
       {% include "components/post_card.html" with post=post %}

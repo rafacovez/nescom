@@ -68,24 +68,40 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const heroSection = document.getElementById('hero-section');
+      const contactSection = document.getElementById('contact-section');
       const floatingCta = document.getElementById('floating-cta');
 
       if (heroSection && floatingCta) {
+        let heroVisible = true;
+        let contactVisible = false;
+
+        const updateCtaVisibility = () => {
+          if (!heroVisible && !contactVisible) {
+            floatingCta.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            floatingCta.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+          } else {
+            floatingCta.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            floatingCta.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+          }
+        };
+
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
-            if (!entry.isIntersecting) {
-              floatingCta.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
-              floatingCta.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
-            } else {
-              floatingCta.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
-              floatingCta.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+            if (entry.target === heroSection) {
+              heroVisible = entry.isIntersecting;
+            } else if (entry.target === contactSection) {
+              contactVisible = entry.isIntersecting;
             }
           });
+          updateCtaVisibility();
         }, { 
           threshold: 0.1 
         });
 
         observer.observe(heroSection);
+        if (contactSection) {
+          observer.observe(contactSection);
+        }
       }
     });
   </script>

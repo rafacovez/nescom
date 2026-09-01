@@ -20,15 +20,22 @@
 
     <div class="flex flex-wrap items-center justify-between gap-6 pt-4 border-b border-base-200 pb-6 text-sm text-base-content/70">
       
-      <div class="flex items-center gap-4">
+      <div class="flex flex-wrap items-center gap-6">
         {% for autor in page.autores.all %}
           <div class="flex items-center gap-3">
             <div class="avatar placeholder">
               {% if autor.foto %}
-                <div class="w-10 h-10 rounded-full ring-1 ring-base-300 overflow-hidden">
-                  {% image autor.foto fill-80x80 format-webp as avatar_img %}
-                  <img src="{{ avatar_img.url }}" alt="{{ autor.nombre }}" class="w-full h-full object-cover" />
-                </div>
+                {% if autor.is_logo %}
+                  <div class="w-10 h-10 rounded-xl bg-base-100 flex items-center justify-center overflow-hidden border border-base-300">
+                    {% image autor.foto max-80x80 format-webp as logo_img %}
+                    <img src="{{ logo_img.url }}" alt="{{ autor.nombre }}" class="w-full h-full object-contain p-1" />
+                  </div>
+                {% else %}
+                  <div class="w-10 h-10 rounded-full ring-1 ring-base-300 overflow-hidden">
+                    {% image autor.foto fill-80x80 format-webp as avatar_img %}
+                    <img src="{{ avatar_img.url }}" alt="{{ autor.nombre }}" class="w-full h-full object-cover" />
+                  </div>
+                {% endif %}
               {% else %}
                 <div class="w-10 h-10 rounded-full bg-primary text-primary-content font-bold text-xs flex items-center justify-center">
                   {{ autor.inicial }}
@@ -64,8 +71,7 @@
             {% include "components/source_pill.html" with fuentes=page.fuentes.all %}
           </div>
         {% endif %}
-
-        <!-- TOP SHARE BUTTONS (Discreet header version) -->
+        
         <div class="pl-4 border-l border-base-300 hidden sm:block">
           {% include "components/share_buttons.html" %}
         </div>
@@ -85,7 +91,6 @@
     {{ page.cuerpo|richtext }}
   </div>
   
-  <!-- BOTTOM SECTION: Tags + Prominent Global Settings Share Block -->
   <div class="w-full flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pt-6 border-t border-base-200 mt-4">
     
     {% if page.tags.all %}
@@ -98,7 +103,6 @@
       </div>
     {% endif %}
 
-    <!-- Pulls globally from Site Settings, falls back gracefully if left empty -->
     <div class="self-end md:self-auto bg-base-200/50 p-2 rounded-2xl border border-base-200">
       {% include "components/share_buttons.html" with cta_text=settings.home.ConfiguracionSitio.blog_share_cta_text|default:"¿Te gustó? Compártelo" %}
     </div>

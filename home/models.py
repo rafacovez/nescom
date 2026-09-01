@@ -1,9 +1,10 @@
+import time
 from typing import ClassVar
 
+from django.core.cache import cache
+from django.core.mail import send_mail
 from django.db import models
-from modelcluster.fields import ParentalKey
-from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
-from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from wagtail.fields import RichTextField, StreamField
 from wagtail.models import Page
@@ -17,6 +18,7 @@ from home.blocks import (
     ServicesBlock,
     TestimoniesBlock,
 )
+from home.forms import ContactForm
 
 
 @register_setting
@@ -108,15 +110,7 @@ class StandardPage(Page):
     parent_page_types: ClassVar[tuple[str, ...]] = ("home.HomePage",)
 
 
-class ContactFormField(AbstractFormField):
-    page = ParentalKey(
-        "ContactPage",
-        on_delete=models.CASCADE,
-        related_name="form_fields",
-    )
-
-
-class ContactPage(AbstractEmailForm):
+class ContactPage(Page):
     subtitular = models.CharField(
         max_length=255,
         blank=True,
@@ -131,20 +125,25 @@ class ContactPage(AbstractEmailForm):
         verbose_name="Mensaje de éxito",
         help_text="Mensaje que verá el usuario tras enviar el formulario.",
     )
+    to_address = models.EmailField(
+        blank=True,
+        verbose_name="Correo de destino",
+        help_text="A dónde llegarán las notificaciones de contacto.",
+    )
+    subject = models.CharField(
+        max_length=255,
+        blank=True,
+        default="Nuevo mensaje de contacto desde el sitio web",
+        verbose_name="Asunto del correo",
+    )
 
-    content_panels = AbstractEmailForm.content_panels + [
+    content_panels = Page.content_panels + [
         FieldPanel("subtitular"),
         FieldPanel("intro"),
-        InlinePanel("form_fields", label="Campos del formulario"),
         FieldPanel("mensaje_agradecimiento"),
         MultiFieldPanel(
             [
-                FieldRowPanel(
-                    [
-                        FieldPanel("from_address", classname="col6"),
-                        FieldPanel("to_address", classname="col6"),
-                    ]
-                ),
+                FieldPanel("to_address"),
                 FieldPanel("subject"),
             ],
             heading="Configuración de correo (Notificaciones)",
@@ -152,6 +151,64 @@ class ContactPage(AbstractEmailForm):
     ]
 
     parent_page_types: ClassVar[tuple[str, ...]] = ("home.HomePage",)
+
+    def get_context(self, request):
+        context = super().get_context(request)
+
+        if request.method == "POST":
+            form = ContactForm(request.POST)
+
+            is_spam = False
+
+            if form.is_valid() and form.cleaned_data.get("hp_website"):
+                is_spam = True
+
+            if form.is_valid():
+                try:
+                    token_time = float(form.cleaned_data.get("form_timestamp", 0))
+                    if time.time() - token_time < 3.0:
+                        is_spam = True
+                except (ValueError, TypeError):
+                    is_spam = True
+
+            client_ip = request.META.get("REMOTE_ADDR")
+            rate_limit_key = f"contact_rate_{client_ip}"
+            if cache.get(rate_limit_key):
+                is_spam = True
+            else:
+                cache.set(rate_limit_key, True, timeout=600)
+
+            if form.is_valid() and not is_spam:
+                data = form.cleaned_data
+
+                if self.to_address:
+                    email_body = f"Nombre: {data['nombre']}\nCorreo: {data['email']}\n\nMensaje:\n{data['mensaje']}"
+                    send_mail(
+                        self.subject,
+                        email_body,
+                        None,
+                        [self.to_address],
+                        fail_silently=False,
+                    )
+
+                if data.get("newsletter_opt_in"):
+                    from newsletter.models import (
+                        NewsletterSubscriber,
+                    )
+
+                    NewsletterSubscriber.objects.get_or_create(
+                        email=data["email"], defaults={"nombre": data["nombre"]}
+                    )
+
+                context["submitted"] = True
+                context["form"] = ContactForm(initial={"form_timestamp": time.time()})
+            else:
+                context["form"] = form
+        else:
+            context["form"] = ContactForm(initial={"form_timestamp": time.time()})
+            context["submitted"] = False
+
+        return context
 
 
 class HomePage(Page):

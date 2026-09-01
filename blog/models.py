@@ -41,11 +41,17 @@ class Author(models.Model):
         related_name="+",
         verbose_name="Foto de perfil",
     )
+    is_logo = models.BooleanField(
+        default=False,
+        verbose_name="Es logotipo",
+        help_text="Marcar si esta imagen es un logo institucional en lugar de una foto personal.",
+    )
 
     panels: ClassVar[tuple[FieldPanel, ...]] = (
         FieldPanel("nombre"),
         FieldPanel("cargo"),
         FieldPanel("foto"),
+        FieldPanel("is_logo"),
         FieldPanel("user"),
     )
 
@@ -126,6 +132,15 @@ class BlogPostFuente(Orderable):
 
 class BlogIndexPage(Page):
     intro = RichTextField(blank=True, help_text="Descripción o introducción del blog")
+    image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+        verbose_name="Imagen de presentación",
+        help_text="Imagen cuadrada o vertical (ej. retrato o ilustración) para la cabecera.",
+    )
     allowed_categories = ParentalManyToManyField(
         "blog.BlogCategory",
         blank=True,
@@ -136,6 +151,7 @@ class BlogIndexPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel("intro"),
+        FieldPanel("image"),
         FieldPanel("allowed_categories", widget=forms.CheckboxSelectMultiple),
     ]
 

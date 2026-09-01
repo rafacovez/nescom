@@ -59,24 +59,30 @@
     <div class="flex items-center gap-2">
       <div class="avatar-group -space-x-2.5 rtl:space-x-reverse">
         {% for autor in post.autores.all|slice:":3" %}
-          <div class="avatar placeholder border-2 border-base-100 rounded-full" title="{{ autor.nombre }}">
-            {% if autor.foto %}
-              <div class="w-7 h-7 rounded-full bg-base-300 overflow-hidden">
-                {% image autor.foto fill-60x60 format-webp as avatar_img %}
-                <img src="{{ avatar_img.url }}" alt="{{ autor.nombre }}" class="w-full h-full object-cover" />
-              </div>
-            {% else %}
-              <div class="w-7 h-7 rounded-full bg-primary text-primary-content font-bold text-[11px] flex items-center justify-center">
-                {{ autor.inicial }}
-              </div>
-            {% endif %}
+      <div class="avatar placeholder" title="{{ autor.nombre }}">
+        {% if autor.foto %}
+          {% if autor.is_logo %}
+            <div class="w-7 h-7 rounded-lg bg-base-100 flex items-center justify-center overflow-hidden border border-base-200">
+              {% image autor.foto max-60x60 format-webp as logo_img %}
+              <img src="{{ logo_img.url }}" alt="{{ autor.nombre }}" class="w-full h-full object-contain p-0.5" />
+            </div>
+          {% else %}
+            <div class="w-7 h-7 rounded-full bg-base-300 overflow-hidden border-2 border-base-100">
+              {% image autor.foto fill-60x60 format-webp as avatar_img %}
+              <img src="{{ avatar_img.url }}" alt="{{ autor.nombre }}" class="w-full h-full object-cover" />
+            </div>
+          {% endif %}
+        {% else %}
+          <div class="w-7 h-7 rounded-full bg-primary text-primary-content font-bold text-[11px] flex items-center justify-center">
+            {{ autor.inicial }}
           </div>
-        {% empty %}
-          <!-- Generic fallback using Site Settings -->
-          <span class="text-xs font-medium text-base-content/60">
-            {{ settings.home.ConfiguracionSitio.nombre_sitio|default:"Redacción" }}
-          </span>
-        {% endfor %}
+        {% endif %}
+      </div>
+    {% empty %}
+      <span class="text-xs font-medium text-base-content/60">
+        {{ settings.home.ConfiguracionSitio.nombre_sitio|default:"Redacción" }}
+      </span>
+    {% endfor %}
       </div>
 
       {% if post.autores.count == 1 %}

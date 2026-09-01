@@ -1,5 +1,9 @@
+import time
+
 from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
+
+from home.forms import ContactForm
 
 
 class LinkChoiceBlock(blocks.StreamBlock):
@@ -211,15 +215,23 @@ class TestimoniesBlock(blocks.StructBlock):
 
 
 class HomeContactBlock(blocks.StructBlock):
-    etiqueta = blocks.CharBlock(default="Contacto", max_length=40, required=False)
-    titular = blocks.CharBlock(
-        default="Hablemos de tu próximo proyecto", max_length=120
-    )
-    subtitular = blocks.TextBlock(required=False)
     pagina_contacto = blocks.PageChooserBlock(
+        required=True,
         page_type=["home.ContactPage"],
-        label="Página de Contacto Destino",
+        label="Página de Contacto",
+        help_text="El título y la información se mostrarán automáticamente desde esta página.",
     )
+
+    def get_context(self, value, parent_context=None):
+        context = super().get_context(value, parent_context=parent_context)
+        contact_page = value.get("pagina_contacto")
+        if contact_page:
+            context["contact_page"] = contact_page.specific
+            context["form"] = ContactForm(initial={"form_timestamp": time.time()})
+        else:
+            context["contact_page"] = None
+            context["form"] = None
+        return context
 
     class Meta:
         template = "blocks/home_contact_block.html"
