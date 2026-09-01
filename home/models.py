@@ -1,7 +1,6 @@
 import time
 from typing import ClassVar
 
-from django import forms
 from django.core.cache import cache
 from django.core.mail import send_mail
 from django.db import models
@@ -111,43 +110,6 @@ class StandardPage(Page):
     parent_page_types: ClassVar[tuple[str, ...]] = ("home.HomePage",)
 
 
-class ContactForm(forms.Form):
-    nombre = forms.CharField(
-        max_length=100,
-        widget=forms.TextInput(
-            attrs={"class": "input input-bordered w-full", "placeholder": "Tu nombre"}
-        ),
-        label="Nombre",
-    )
-    email = forms.EmailField(
-        widget=forms.EmailInput(
-            attrs={
-                "class": "input input-bordered w-full",
-                "placeholder": "tu@correo.com",
-            }
-        ),
-        label="Correo electrónico",
-    )
-    mensaje = forms.CharField(
-        widget=forms.Textarea(
-            attrs={
-                "class": "textarea textarea-bordered w-full h-32",
-                "placeholder": "¿En qué podemos ayudarte?",
-            }
-        ),
-        label="Mensaje",
-    )
-
-    hp_website = forms.CharField(
-        required=False,
-        widget=forms.HiddenInput(attrs={"class": "hidden", "autocomplete": "off"}),
-    )
-
-    form_timestamp = forms.CharField(
-        widget=forms.HiddenInput(),
-    )
-
-
 class ContactPage(Page):
     subtitular = models.CharField(
         max_length=255,
@@ -227,6 +189,15 @@ class ContactPage(Page):
                         None,
                         [self.to_address],
                         fail_silently=False,
+                    )
+
+                if data.get("newsletter_opt_in"):
+                    from newsletter.models import (
+                        NewsletterSubscriber,
+                    )
+
+                    NewsletterSubscriber.objects.get_or_create(
+                        email=data["email"], defaults={"nombre": data["nombre"]}
                     )
 
                 context["submitted"] = True

@@ -2,42 +2,40 @@
 {% load wagtailcore_tags %}
 
 {% block content %}
-<div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full flex flex-col gap-8">
+<main class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 w-full flex flex-col gap-12">
 
-  <div class="text-left flex flex-col gap-4">
-    <h1 class="text-4xl sm:text-6xl font-black text-base-content tracking-tight">
+  <header class="flex flex-col gap-4 text-left border-b border-base-200 pb-8">
+    <h1 class="text-4xl sm:text-5xl font-black text-base-content tracking-tight">
       {{ page.title }}
     </h1>
     {% if page.subtitular %}
-      <p class="text-xl text-base-content/75 font-medium">
+      <p class="text-lg text-base-content/70 font-medium leading-relaxed">
         {{ page.subtitular }}
       </p>
     {% endif %}
     {% if page.intro %}
-      <div class="prose prose-lg text-base-content/80">
+      <div class="prose text-base-content/80 text-base">
         {{ page.intro|richtext }}
       </div>
     {% endif %}
-  </div>
-
+  </header>
+  
   {% if submitted %}
-    <div class="alert alert-success shadow-lg rounded-2xl p-6">
-      <div>
-        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-        <div>
-          <h3 class="font-bold text-lg">¡Mensaje enviado con éxito!</h3>
-          <div class="text-sm mt-1">
-            {% if page.mensaje_agradecimiento %}
-              {{ page.mensaje_agradecimiento|richtext }}
-            {% else %}
-              <p>Gracias por contactarnos. Te responderemos lo antes posible.</p>
-            {% endif %}
-          </div>
+    <div class="alert bg-base-200/50 border border-base-300 rounded-2xl p-6 flex items-start gap-4">
+      <svg xmlns="http://www.w3.org/2000/svg" class="stroke-primary shrink-0 h-6 w-6 mt-0.5" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+      <div class="flex flex-col gap-1">
+        <h3 class="font-bold text-base-content">Mensaje enviado correctamente</h3>
+        <div class="text-sm text-base-content/70">
+          {% if page.mensaje_agradecimiento %}
+            {{ page.mensaje_agradecimiento|richtext }}
+          {% else %}
+            <p>Gracias por escribirnos. Te responderemos a la brevedad.</p>
+          {% endif %}
         </div>
       </div>
     </div>
   {% else %}
-    <form method="POST" class="flex flex-col gap-6 bg-base-100 border border-base-200 p-8 rounded-3xl shadow-sm">
+    <form method="POST" class="flex flex-col gap-6">
       {% csrf_token %}
       
       <div style="display:none;" aria-hidden="true">
@@ -48,27 +46,34 @@
 
       {% for field in form %}
         {% if field.name != "hp_website" and field.name != "form_timestamp" %}
-          <div class="form-control w-full">
-            <label class="label font-semibold text-sm text-base-content/80" for="{{ field.id_for_label }}">
-              {{ field.label }}
-            </label>
-            {{ field }}
-            {% if field.errors %}
-              <label class="label">
-                <span class="label-text-alt text-error font-medium">{{ field.errors.0 }}</span>
+          {% if field.field.widget.input_type == 'checkbox' %}
+            <div class="form-control pt-2">
+              <label class="label cursor-pointer justify-start gap-3 p-0 w-fit">
+                {{ field }}
+                <span class="label-text text-xs text-base-content/60 font-medium select-none">{{ field.label }}</span>
               </label>
-            {% endif %}
-          </div>
+            </div>
+          {% else %}
+            <div class="form-control w-full flex flex-col gap-1.5">
+              <label class="text-xs font-bold uppercase tracking-wider text-base-content/60" for="{{ field.id_for_label }}">
+                {{ field.label }}
+              </label>
+              {{ field }}
+              {% if field.errors %}
+                <span class="text-xs text-error font-medium mt-1">{{ field.errors.0 }}</span>
+              {% endif %}
+            </div>
+          {% endif %}
         {% endif %}
       {% endfor %}
-
-      <div class="pt-4">
-        <button type="submit" class="btn btn-primary w-full sm:w-auto px-8 rounded-xl font-bold">
+      
+      <div class="pt-4 border-t border-base-200 mt-2">
+        <button type="submit" class="btn btn-primary w-full rounded-xl font-bold tracking-wide shadow-sm hover:shadow transition-all">
           Enviar mensaje
         </button>
       </div>
     </form>
   {% endif %}
 
-</div>
+</main>
 {% endblock %}

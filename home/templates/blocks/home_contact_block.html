@@ -1,9 +1,9 @@
 {% load wagtailcore_tags %}
 
-<section class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full flex flex-col gap-8">
+<section id="contact-section" class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full flex flex-col gap-8">
   
   {% if contact_page %}
-    <div class="text-left flex flex-col gap-4">
+    <div class="text-left flex flex-col gap-4 border-b border-base-200 pb-8">
       <h2 class="text-3xl sm:text-5xl font-black text-base-content tracking-tight">
         <a href="{% pageurl contact_page %}" class="hover:text-primary transition-colors">
           {{ contact_page.title }}
@@ -11,21 +11,34 @@
       </h2>
       
       {% if contact_page.subtitular %}
-        <p class="text-xl text-base-content/75 font-medium">
+        <p class="text-lg text-base-content/70 font-medium leading-relaxed">
           {{ contact_page.subtitular }}
         </p>
       {% endif %}
       
       {% if contact_page.intro %}
-        <div class="prose prose-lg text-base-content/80">
+        <div class="prose text-base-content/80 text-base">
           {{ contact_page.intro|richtext }}
         </div>
       {% endif %}
     </div>
 
-    <!-- Render the secure contact form pointing to the contact page action -->
-    {% if form %}
-      <form method="POST" action="{% pageurl contact_page %}" class="flex flex-col gap-6 bg-base-100 border border-base-200 p-8 rounded-3xl shadow-sm">
+    {% if submitted %}
+      <div class="alert bg-base-200/50 border border-base-300 rounded-2xl p-6 flex items-start gap-4">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-primary shrink-0 h-6 w-6 mt-0.5" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <div class="flex flex-col gap-1">
+          <h3 class="font-bold text-base-content">Mensaje enviado correctamente</h3>
+          <div class="text-sm text-base-content/70">
+            {% if contact_page.mensaje_agradecimiento %}
+              {{ contact_page.mensaje_agradecimiento|richtext }}
+            {% else %}
+              <p>Gracias por escribirnos. Te responderemos a la brevedad.</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <form method="POST" action="{% pageurl contact_page %}" class="flex flex-col gap-6">
         {% csrf_token %}
         
         <div style="display:none;" aria-hidden="true">
@@ -36,22 +49,29 @@
 
         {% for field in form %}
           {% if field.name != "hp_website" and field.name != "form_timestamp" %}
-            <div class="form-control w-full">
-              <label class="label font-semibold text-sm text-base-content/80" for="{{ field.id_for_label }}">
-                {{ field.label }}
-              </label>
-              {{ field }}
-              {% if field.errors %}
-                <label class="label">
-                  <span class="label-text-alt text-error font-medium">{{ field.errors.0 }}</span>
+            {% if field.field.widget.input_type == 'checkbox' %}
+              <div class="form-control pt-2">
+                <label class="label cursor-pointer justify-start gap-3 p-0 w-fit">
+                  {{ field }}
+                  <span class="label-text text-xs text-base-content/60 font-medium select-none">{{ field.label }}</span>
                 </label>
-              {% endif %}
-            </div>
+              </div>
+            {% else %}
+              <div class="form-control w-full flex flex-col gap-1.5">
+                <label class="text-xs font-bold uppercase tracking-wider text-base-content/60" for="{{ field.id_for_label }}">
+                  {{ field.label }}
+                </label>
+                {{ field }}
+                {% if field.errors %}
+                  <span class="text-xs text-error font-medium mt-1">{{ field.errors.0 }}</span>
+                {% endif %}
+              </div>
+            {% endif %}
           {% endif %}
         {% endfor %}
 
-        <div class="pt-4">
-          <button type="submit" class="btn btn-primary w-full sm:w-auto px-8 rounded-xl font-bold">
+        <div class="pt-4 border-t border-base-200 mt-2">
+          <button type="submit" class="btn btn-primary w-full rounded-xl font-bold tracking-wide shadow-sm hover:shadow transition-all">
             Enviar mensaje
           </button>
         </div>

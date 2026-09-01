@@ -219,7 +219,7 @@ class HomeContactBlock(blocks.StructBlock):
         required=True,
         page_type=["home.ContactPage"],
         label="Página de Contacto",
-        help_text="El título, subtítulo e información se mostrarán automáticamente desde esta página de contacto.",
+        help_text="El título y la información se mostrarán automáticamente desde esta página.",
     )
 
     def get_context(self, value, parent_context=None):
@@ -227,7 +227,6 @@ class HomeContactBlock(blocks.StructBlock):
         contact_page = value.get("pagina_contacto")
         if contact_page:
             context["contact_page"] = contact_page.specific
-            # Instantiate a fresh form for the homepage section block
             context["form"] = ContactForm(initial={"form_timestamp": time.time()})
         else:
             context["contact_page"] = None
