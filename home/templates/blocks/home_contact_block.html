@@ -1,7 +1,6 @@
 {% load wagtailcore_tags %}
 
 <section id="contact-section" class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16 w-full flex flex-col gap-8">
-  
   {% if contact_page %}
     <div class="text-left flex flex-col gap-4 border-b border-base-200 pb-8">
       <h2 class="text-3xl sm:text-5xl font-black text-base-content tracking-tight">
@@ -9,13 +8,11 @@
           {{ contact_page.title }}
         </a>
       </h2>
-      
       {% if contact_page.subtitular %}
         <p class="text-lg text-base-content/70 font-medium leading-relaxed">
           {{ contact_page.subtitular }}
         </p>
       {% endif %}
-      
       {% if contact_page.intro %}
         <div class="prose text-base-content/80 text-base">
           {{ contact_page.intro|richtext }}
@@ -38,44 +35,7 @@
         </div>
       </div>
     {% else %}
-      <form method="POST" action="{% pageurl contact_page %}" class="flex flex-col gap-6">
-        {% csrf_token %}
-        
-        <div style="display:none;" aria-hidden="true">
-          {{ form.hp_website }}
-        </div>
-        
-        {{ form.form_timestamp }}
-
-        {% for field in form %}
-          {% if field.name != "hp_website" and field.name != "form_timestamp" %}
-            {% if field.field.widget.input_type == 'checkbox' %}
-              <div class="form-control pt-2">
-                <label class="label cursor-pointer justify-start gap-3 p-0 w-fit">
-                  {{ field }}
-                  <span class="label-text text-xs text-base-content/60 font-medium select-none">{{ field.label }}</span>
-                </label>
-              </div>
-            {% else %}
-              <div class="form-control w-full flex flex-col gap-1.5">
-                <label class="text-xs font-bold uppercase tracking-wider text-base-content/60" for="{{ field.id_for_label }}">
-                  {{ field.label }}
-                </label>
-                {{ field }}
-                {% if field.errors %}
-                  <span class="text-xs text-error font-medium mt-1">{{ field.errors.0 }}</span>
-                {% endif %}
-              </div>
-            {% endif %}
-          {% endif %}
-        {% endfor %}
-
-        <div class="pt-4 border-t border-base-200 mt-2">
-          <button type="submit" class="btn btn-primary w-full rounded-xl font-bold tracking-wide shadow-sm hover:shadow transition-all">
-            Enviar mensaje
-          </button>
-        </div>
-      </form>
+      {% include "components/contact_form.html" with form=form turnstile_site_key=turnstile_site_key form_action=contact_page.url %}
     {% endif %}
 
   {% else %}

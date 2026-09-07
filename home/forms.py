@@ -42,7 +42,14 @@ class ContactForm(forms.Form):
 
     hp_website = forms.CharField(
         required=False,
-        widget=forms.HiddenInput(attrs={"class": "hidden", "autocomplete": "off"}),
+        label="",
+        widget=forms.TextInput(
+            attrs={
+                "autocomplete": "off",
+                "tabindex": "-1",
+                "aria-hidden": "true",
+            }
+        ),
     )
 
     form_timestamp = forms.CharField(

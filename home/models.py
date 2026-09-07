@@ -1,6 +1,9 @@
+import logging
 import time
 from typing import ClassVar
 
+import requests
+from django.conf import settings
 from django.core.cache import cache
 from django.core.mail import send_mail
 from django.db import models
@@ -19,6 +22,26 @@ from home.blocks import (
     TestimoniesBlock,
 )
 from home.forms import ContactForm
+
+logger = logging.getLogger(__name__)
+
+
+def verify_turnstile(token, remote_ip):
+    if not token:
+        return False
+    try:
+        resp = requests.post(
+            "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+            data={
+                "secret": settings.TURNSTILE_SECRET_KEY,
+                "response": token,
+                "remoteip": remote_ip,
+            },
+            timeout=5,
+        )
+        return resp.json().get("success", False)
+    except requests.RequestException:
+        return False
 
 
 @register_setting
@@ -163,29 +186,50 @@ class ContactPage(Page):
 
     def get_context(self, request):
         context = super().get_context(request)
+        context["turnstile_site_key"] = settings.TURNSTILE_SITE_KEY
 
         if request.method == "POST":
             form = ContactForm(request.POST)
-
             is_spam = False
 
             if form.is_valid() and form.cleaned_data.get("hp_website"):
                 is_spam = True
+                logger.warning("contact form: honeypot tripped")
 
             if form.is_valid():
                 try:
                     token_time = float(form.cleaned_data.get("form_timestamp", 0))
                     if time.time() - token_time < 3.0:
                         is_spam = True
+                        logger.warning("contact form: timestamp too fast")
                 except (ValueError, TypeError):
                     is_spam = True
+                    logger.warning("contact form: bad timestamp")
 
             client_ip = request.META.get("REMOTE_ADDR")
             rate_limit_key = f"contact_rate_{client_ip}"
             if cache.get(rate_limit_key):
                 is_spam = True
+                logger.warning("contact form: rate limited")
             else:
                 cache.set(rate_limit_key, True, timeout=600)
+
+            turnstile_token = request.POST.get("cf-turnstile-response")
+            if not verify_turnstile(turnstile_token, client_ip):
+                is_spam = True
+                logger.warning(
+                    "contact form: turnstile failed, token=%r", turnstile_token
+                )
+
+            if not form.is_valid():
+                logger.warning("contact form: form invalid, errors=%s", form.errors)
+
+            logger.warning(
+                "contact form debug — REMOTE_ADDR=%s XFF=%s CF-Connecting-IP=%s",
+                request.META.get("REMOTE_ADDR"),
+                request.META.get("HTTP_X_FORWARDED_FOR"),
+                request.META.get("HTTP_CF_CONNECTING_IP"),
+            )
 
             if form.is_valid() and not is_spam:
                 data = form.cleaned_data
@@ -201,9 +245,7 @@ class ContactPage(Page):
                     )
 
                 if data.get("newsletter_opt_in"):
-                    from newsletter.models import (
-                        NewsletterSubscriber,
-                    )
+                    from newsletter.models import NewsletterSubscriber
 
                     NewsletterSubscriber.objects.get_or_create(
                         email=data["email"], defaults={"nombre": data["nombre"]}

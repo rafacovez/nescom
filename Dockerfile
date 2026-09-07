@@ -72,6 +72,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 RUN printf '#!/bin/sh\n\
 set -e\n\
 python manage.py migrate --noinput\n\
+python manage.py createcachetable\n\
 exec "$@"\n' > /entrypoint.sh && chmod +x /entrypoint.sh
 
 USER appuser

@@ -18,6 +18,7 @@
         document.documentElement.setAttribute('data-theme', activeTheme);
       })();
     </script>
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
@@ -69,6 +70,8 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="{% if page.seo_title %}{{ page.seo_title }}{% elif page.title %}{{ page.title }}{% else %}{{ settings.home.ConfiguracionSitio.nombre_sitio|default:'Mi Sitio' }}{% endif %}" />
     <meta name="twitter:description" content="{% if page.search_description %}{{ page.search_description }}{% elif page.intro %}{{ page.intro|striptags }}{% else %}{{ settings.home.ConfiguracionSitio.sufijo_titulo|default:'Sitio web oficial' }}{% endif %}" />
+    
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     
     {% block extra_seo %}{% endblock %}
 

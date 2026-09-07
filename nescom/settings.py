@@ -45,6 +45,10 @@ if env("SECURE_PROXY_SSL_HEADER", default=None):
     SECURE_PROXY_SSL_HEADER = env.tuple("SECURE_PROXY_SSL_HEADER")
 
 
+TURNSTILE_SITE_KEY = env("TURNSTILE_SITE_KEY", default="")
+TURNSTILE_SECRET_KEY = env("TURNSTILE_SECRET_KEY", default="")
+
+
 # ─── Application definition ───────────────────────────────────────────────────
 
 INSTALLED_APPS = [
@@ -251,3 +255,13 @@ DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default="webmaster@localhost")
 # ─── Default primary key field type ───────────────────────────────────────────
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# ─── Cache ───────────────────────────────────────────
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+        "LOCATION": "django_cache_table",
+    }
+}

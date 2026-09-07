@@ -1,5 +1,6 @@
 import time
 
+from django.conf import settings
 from wagtail import blocks
 from wagtail.images.blocks import ImageChooserBlock
 
@@ -224,7 +225,11 @@ class HomeContactBlock(blocks.StructBlock):
 
     def get_context(self, value, parent_context=None):
         context = super().get_context(value, parent_context=parent_context)
+
+        context["turnstile_site_key"] = settings.TURNSTILE_SITE_KEY
+
         contact_page = value.get("pagina_contacto")
+
         if contact_page:
             context["contact_page"] = contact_page.specific
             context["form"] = ContactForm(initial={"form_timestamp": time.time()})
