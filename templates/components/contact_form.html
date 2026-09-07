@@ -38,7 +38,13 @@
     {% endif %}
   {% endfor %}
 
-  <div class="cf-turnstile" data-sitekey="{{ turnstile_site_key }}"></div>
+  <script>
+    document.querySelectorAll('.cf-turnstile').forEach(function (el) {
+      var siteTheme = document.documentElement.getAttribute('data-theme');
+      el.setAttribute('data-theme', siteTheme === 'dark' ? 'dark' : 'light');
+    });
+  </script>
+  <div class="cf-turnstile" data-sitekey="{{ turnstile_site_key }}" data-language="es"></div>
 
   <div class="pt-4 border-t border-base-200 mt-2">
     <button type="submit" class="btn btn-primary w-full rounded-xl font-bold tracking-wide shadow-sm hover:shadow transition-all">
